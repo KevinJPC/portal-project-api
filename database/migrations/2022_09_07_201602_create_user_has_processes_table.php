@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('user_has_processes', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->integer('process_id');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('process_id')->constrained()->onDelete('cascade');
             $table->integer('status');
             $table->string('activity');
             $table->timestamps();

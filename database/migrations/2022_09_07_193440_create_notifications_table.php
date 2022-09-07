@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
             $table->string('description');
-            $table->integer('user_has_process_id');
+            $table->foreignId('user_has_process_id')->constrained('user_has_process_id')->onDelete('cascade');
             $table->timestamps();
         });
     }

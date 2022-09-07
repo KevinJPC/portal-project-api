@@ -10,8 +10,8 @@ class Process extends Model
     use HasFactory;
 
     protected $fillable = [
-        'seOID',
-        'seName',
+        'se_oid',
+        'se_name',
         'name',
         'visible',
         'state',

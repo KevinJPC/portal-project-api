@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('processes', function (Blueprint $table) {
             $table->id();
-            $table->string('seOID');
-            $table->string('seName');
+            $table->string('se_oid');
+            $table->string('se_name');
             $table->string('name');
             $table->integer('visible');
             $table->string('state');

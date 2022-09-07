@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('rol_has_processes', function (Blueprint $table) {
             $table->id();
-            $table->integer('rol_id');
-            $table->integer('process_id');
+            $table->foreignId('rol_id')->constrained('roles')->onDelete('cascade');
+            $table->foreignId('process_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
