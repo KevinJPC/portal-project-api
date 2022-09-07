@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('rol_has_processes', function (Blueprint $table) {
+        Schema::create('roles_has_processes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('rol_id')->constrained('roles')->onDelete('cascade');
             $table->foreignId('process_id')->constrained()->onDelete('cascade');
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rol_has_processes');
+        Schema::dropIfExists('roles_has_processes');
     }
 };
