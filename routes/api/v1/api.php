@@ -18,4 +18,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/test', function(){
+    return "hola";
+});
+Route::prefix('/roles')->group(base_path('routes/api/v1/roleRoutes.php'));
 // Route::prefix('/')->group(base_path('routes/api/v1/Routes.php'));
