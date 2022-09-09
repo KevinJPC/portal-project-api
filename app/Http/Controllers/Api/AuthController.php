@@ -47,7 +47,7 @@ class AuthController extends Controller
             200
           );
 
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             return response()->json([
                 'success'=> false,
                 'message' => $exception->getMessage(),
@@ -88,7 +88,7 @@ class AuthController extends Controller
             ]
             ], 200);
 
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             return response()->json([
                 'success'=> false,
                 'message' => $exception->getMessage(),
