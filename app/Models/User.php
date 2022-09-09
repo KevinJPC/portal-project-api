@@ -23,6 +23,11 @@ class User extends Authenticatable
         'first_last_name',
         'second_last_name',
         'email',
+        'dni',
+        'first_last_name',
+        'second_last_name',
+        'role_id',
+        'state',
         'password',
         'state',
     ];
