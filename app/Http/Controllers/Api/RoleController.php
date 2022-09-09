@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\Role\CreateRoleRequest;
+use App\Http\Requests\Role\ModifyRoleRequest;
 use App\Models\Role;
 use Exception;
 use Illuminate\Http\Request;
+use App\Http\Requests\Role\RoleRequest;
 
 class RoleController extends Controller
 {
@@ -16,14 +19,10 @@ class RoleController extends Controller
      * edit para mostrar
      */
 
-    public function store(Request $request)
+    public function Create(CreateRoleRequest $request)
     {
         try {
-            $request->validate([
-                'name' => 'required|min:5',
-                'description',
-                'state' => 'required',
-            ]);
+            $validated = $request->validated();
 
             $role = new Role();
             $role->name = $request->name;
@@ -34,13 +33,13 @@ class RoleController extends Controller
             response()->json([
                 "success" => true,
                 "message" => "Role created successfull",
-                "data" => ["role" => $role]
+                "data" => ["role" => $role],200
             ]);
         } catch (Exception $exception) {
             response()->json([
                 "success" => false,
                 "message" => $exception->getMessage(),
-            ]);
+            ],400);
         }
     }
 
@@ -50,12 +49,12 @@ class RoleController extends Controller
             $role = Role::all();
             response()->json([
                 'role'=>$role
-            ]);
+            ],200);
         } catch (Exception $exception) {
             response()->json([
                 "success" => false,
                 "message" => $exception->getMessage(),
-            ]);
+            ],400);
         }
     }
 
@@ -71,12 +70,12 @@ class RoleController extends Controller
                 "success" => true,
                 "message" => "Rol eliminado correctamente",
                 "data" => ["role" => $role]
-            ]);
+            ],200);
         } catch (Exception $exception) {
             response()->json([
                 "success" => false,
                 "message" => $exception->getMessage(),
-            ]);
+            ],400);
         }
     }
 
@@ -84,24 +83,20 @@ class RoleController extends Controller
     {
         try {
             $role = Role::find($id);
-            
+            response() -> json(["role"=>$role],200);
         } catch (Exception $exception) {
             response()->json([
                 "success" => false,
                 "message" => $exception->getMessage(),
-            ]);
+            ],400);
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(ModifyRoleRequest $request, $id)
     {
 
         try {
-            $request->validate([
-                'name' => 'required|min:5',
-                'description',
-                'state' => 'required',
-            ]);
+            $validated = $request->validated();
 
             $role = Role::find($id);
 
@@ -115,12 +110,12 @@ class RoleController extends Controller
                 "success" => true,
                 "message" => "Role modified successfull",
                 "data" => ["role" => $role]
-            ]);
+            ],200);
         } catch (Exception $exception) {
             response()->json([
                 "success" => false,
                 "message" => $exception->getMessage(),
-            ]);
+            ],400);
         }
     }
 }
