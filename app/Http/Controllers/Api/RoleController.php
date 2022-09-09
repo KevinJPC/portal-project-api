@@ -80,10 +80,11 @@ class RoleController extends Controller
         }
     }
 
-    public function show($id)
+    public function get($id)
     {
         try {
             $role = Role::find($id);
+            
         } catch (Exception $exception) {
             response()->json([
                 "success" => false,
