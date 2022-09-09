@@ -2,8 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\UpdatePasswordController;
-use App\Http\Controllers\Api\EditUserController;
+use App\Http\Controllers\Api\UserController;
 
-Route::post('/updatepassword', [UpdatePasswordController::class, 'updatePassword']);
-Route::post('/edituser', [EditUserController::class, 'editUser']);
+Route::post('/updatepassword', [UserController::class, 'updatePassword']);
+Route::post('/updateuser', [UserController::class, 'updateUser']);
