@@ -4,6 +4,28 @@
     "colName": "portal",
     "created": "2022-09-07T17:07:56.901Z",
     "sortNum": 10000,
-    "folders": []
+    "folders": [
+      {
+        "_id": "423a3123-ea8e-4bd8-93b9-64ea4c72dced",
+        "name": "Auth",
+        "containerId": "",
+        "created": "2022-09-08T18:54:39.473Z",
+        "sortNum": 10000
+      }
+    ],
+    "settings": {
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "tests": [],
+      "envId": "849c078d-271f-4e0a-a7f6-19b6b3112e69"
+    }
   }
 ]

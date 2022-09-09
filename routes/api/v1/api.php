@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // Route::prefix('/')->group(base_path('routes/api/v1/Routes.php'));
+
+Route::prefix('/auth')->group(base_path('routes/api/v1/authRoutes.php'));
+
