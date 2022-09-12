@@ -133,7 +133,6 @@ class RoleController extends Controller
  * 
  * @param Role role The role object that you want to get.
  */
-
     public function getRole(Role $role)
     {
         try {
@@ -155,7 +154,6 @@ class RoleController extends Controller
      */
     public function updateRole(ModifyRoleRequest $request, Role $role)
     {
-
         try {
             $role = Role::find($role->id);
             $role->name = $request->name;
