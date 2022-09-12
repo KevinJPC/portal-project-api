@@ -39,8 +39,11 @@ class RoleshasProcessesController extends Controller
                 "message" => "RoleHasProcesses created successfull",
                 "data" => ["role" => $rolehasprocesses], 200
             ]);
-        } catch (\Throwable $th) {
-            //throw $th;
+        } catch (Exception $exception) {
+            response()->json([
+                "success" => false,
+                "message" => $exception->getMessage(),
+            ], 400);
         }
     }
 }
