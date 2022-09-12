@@ -44,7 +44,7 @@ class RoleController extends Controller
         }
     }
 
-    public function index(Request $request)
+    public function index()
     {
         try {
             $role = Role::all();
@@ -64,7 +64,7 @@ class RoleController extends Controller
     {
 
         try {
-            $roles = DB::table('role')->where('role_id', $role->id);
+            $roles = DB::table('users')->where('role_id', $role->id);
 
             if (empty($roles)) {
                 Role::where('id', $role->id)
