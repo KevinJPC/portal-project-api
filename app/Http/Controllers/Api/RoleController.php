@@ -7,6 +7,7 @@ use App\Http\Requests\Role\ModifyRoleRequest;
 use App\Models\Role;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Role\RoleRequest;
 
 class RoleController extends Controller
@@ -22,7 +23,7 @@ class RoleController extends Controller
     public function Create(CreateRoleRequest $request)
     {
         try {
-            $validated = $request->validated();
+
 
             $role = new Role();
             $role->name = $request->name;
@@ -33,13 +34,13 @@ class RoleController extends Controller
             response()->json([
                 "success" => true,
                 "message" => "Role created successfull",
-                "data" => ["role" => $role],200
+                "data" => ["role" => $role], 200
             ]);
         } catch (Exception $exception) {
             response()->json([
                 "success" => false,
                 "message" => $exception->getMessage(),
-            ],400);
+            ], 400);
         }
     }
 
@@ -48,47 +49,69 @@ class RoleController extends Controller
         try {
             $role = Role::all();
             response()->json([
-                'role'=>$role
-            ],200);
+                'role' => $role
+            ], 200);
         } catch (Exception $exception) {
             response()->json([
                 "success" => false,
                 "message" => $exception->getMessage(),
-            ],400);
+            ], 400);
         }
     }
 
 
-    public function destroy($id, $request)
+    public function destroy(Role $role, $request)
     {
 
         try {
-            $role = Role::find($id);
-            $role->state = $request->state;
-            $role->save();
-            response()->json([
-                "success" => true,
-                "message" => "Rol eliminado correctamente",
-                "data" => ["role" => $role]
-            ],200);
+            $roles = DB::table('role')->where('role_id', $role->id);
+
+            if (empty($roles)) {
+                Role::where('id', $role->id)
+                    ->update([
+                        'state' => 'I'
+                    ]);
+                $role->state = $request->state;
+                $role->save();
+                response()->json([
+                    "success" => true,
+                    "message" => "Rol eliminado correctamente",
+                    "data" => ["role" => $role]
+                ], 200);
+            } else {
+                response()->json([
+                    "success" => false,
+                    "message" => "Existen uniones entre este rol y algún usuario",
+                ], 400);
+            }
         } catch (Exception $exception) {
             response()->json([
                 "success" => false,
                 "message" => $exception->getMessage(),
-            ],400);
+            ], 400);
         }
     }
+
+
+    public function validationRoleUser($role)
+    {
+    }
+
+
+
+
+
 
     public function get($id)
     {
         try {
             $role = Role::find($id);
-            response() -> json(["role"=>$role],200);
+            response()->json(["role" => $role], 200);
         } catch (Exception $exception) {
             response()->json([
                 "success" => false,
                 "message" => $exception->getMessage(),
-            ],400);
+            ], 400);
         }
     }
 
@@ -96,11 +119,7 @@ class RoleController extends Controller
     {
 
         try {
-            $validated = $request->validated();
-
             $role = Role::find($id);
-
-
             $role->name = $request->name;
             $role->description = $request->description;
             $role->state = $request->state;
@@ -110,12 +129,12 @@ class RoleController extends Controller
                 "success" => true,
                 "message" => "Role modified successfull",
                 "data" => ["role" => $role]
-            ],200);
+            ], 200);
         } catch (Exception $exception) {
             response()->json([
                 "success" => false,
                 "message" => $exception->getMessage(),
-            ],400);
+            ], 400);
         }
     }
 }

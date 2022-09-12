@@ -7,8 +7,10 @@ use App\Http\Controllers\Api\Controller;
 
 //Route::post('/', [RoleController::class , 'store']);
 
-Route::post('create/', [RoleController::class, 'store']);
-Route::get('roles/', [RoleController::class, 'index']);
-Route::get('show/{$id}', [RoleController::class, 'show']);
-Route::delete('delete/{$id}', [RoleController::class, 'destroy']);
-Route::patch('update/{$id}', [RoleController::class, 'update']);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/', [RoleController::class, 'store']);
+    Route::get('/', [RoleController::class, 'index']);
+    Route::get('/{role:id}', [RoleController::class, 'show']);
+    Route::delete('/{role:id}', [RoleController::class, 'destroy']);
+    Route::patch('/{role:id}', [RoleController::class, 'update']);
+});
