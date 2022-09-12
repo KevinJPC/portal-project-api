@@ -27,12 +27,13 @@ class RoleController extends Controller
             $role->description = $request->description;
             $role->state = $request->state;
             $role->save();
-
-            response()->json([
+            
+            return response()->json([
                 "success" => true,
-                "message" => "Role created successfull",
-                "data" => ["role" => $role], 200
-            ]);
+                "message" => "Rol creado correctamente",
+                "data" => ["role" => $role]
+            ],200);
+
         } catch (Exception $exception) {
             response()->json([
                 "success" => false,
@@ -44,15 +45,39 @@ class RoleController extends Controller
   /**
    * It returns all the roles in the database.
    */
-    public function getAllRoles()
+    public function getInactiveRoles()
     {
         try {
-            $role = Role::all();
-            response()->json([
-                'role' => $role
+            $roles = DB::table('roles')
+            ->where('state', 'I')
+            ->latest()
+            ->paginate(10);
+            return response()->json([
+                'roles' => $roles
             ], 200);
         } catch (Exception $exception) {
-            response()->json([
+            return response()->json([
+                "success" => false,
+                "message" => $exception->getMessage(),
+            ], 400);
+        }
+    }
+
+
+    public function getActiveRoles()
+    {
+        try {
+
+            $roles = DB::table('roles')
+            ->where('state', 'A')
+            ->latest()
+            ->paginate(10);
+
+            return response()->json([
+                'roles' => $roles
+            ], 200);
+        } catch (Exception $exception) {
+            return response()->json([
                 "success" => false,
                 "message" => $exception->getMessage(),
             ], 400);
@@ -70,27 +95,24 @@ class RoleController extends Controller
     {
 
         try {
-            $roles = DB::table('users')->where('role_id', $role->id)->get();
-
-            if (empty($roles)) {
-                Role::where('id', $role->id)
-                    ->update([
-                        'state' => 'I'
-                    ]);
+            $hasUsers = DB::table('users')->where('role_id', $role->id)->first();
+            //dd($hasUsers);
+            if (!$hasUsers) {
+                $role -> state='I';
                 $role->save();
-                response()->json([
+                return response()->json([
                     "success" => true,
-                    "message" => "Rol Desactivado correctamente",
+                    "message" => "Rol desactivado correctamente",
                     "data" => ["role" => $role]
                 ], 200);
             } else {
-                response()->json([
+                return response()->json([
                     "success" => false,
-                    "message" => "Existen uniones entre este rol y algún usuario",
+                    "message" => "Este rol tiene usuarios asignados",
                 ], 400);
             }
         } catch (Exception $exception) {
-            response()->json([
+            return response()->json([
                 "success" => false,
                 "message" => $exception->getMessage(),
             ], 400);
@@ -106,18 +128,15 @@ class RoleController extends Controller
     public function activateRole(Role $role)
     {
         try {
-            Role::where('id', $role->id)
-                ->update([
-                    'state' => 'A'
-                ]);
+            $role -> state='A';
             $role->save();
-            response()->json([
+            return response()->json([
                 "success" => true,
                 "message" => "Rol Activado correctamente",
                 "data" => ["role" => $role]
             ], 200);
         } catch (Exception $exception) {
-            response()->json([
+            return response()->json([
                 "success" => false,
                 "message" => $exception->getMessage(),
             ], 400);
@@ -137,9 +156,9 @@ class RoleController extends Controller
     {
         try {
             $role = Role::find($role->id);
-            response()->json(["role" => $role], 200);
+            return response()->json(["role" => $role], 200);
         } catch (Exception $exception) {
-            response()->json([
+            return response()->json([
                 "success" => false,
                 "message" => $exception->getMessage(),
             ], 400);
@@ -161,13 +180,13 @@ class RoleController extends Controller
             $role->state = $request->state;
             $role->save();
 
-            response()->json([
+            return response()->json([
                 "success" => true,
-                "message" => "Role modified successfull",
+                "message" => "Rol modificado correctamente",
                 "data" => ["role" => $role]
             ], 200);
         } catch (Exception $exception) {
-            response()->json([
+            return response()->json([
                 "success" => false,
                 "message" => $exception->getMessage(),
             ], 400);
