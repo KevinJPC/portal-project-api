@@ -19,7 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::prefix('/')->group(base_path('routes/api/v1/Routes.php'));
+Route::prefix('/roles')->group(base_path('routes/api/v1/roleRoutes.php'));
 
 Route::prefix('/auth')->group(base_path('routes/api/v1/authRoutes.php'));
 

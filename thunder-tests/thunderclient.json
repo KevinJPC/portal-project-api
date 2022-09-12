@@ -1,5 +1,48 @@
 [
   {
+    "_id": "7eaa92da-4ebd-41c2-8f90-2357c04f29ef",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "57155924-dd15-463b-a596-1e436a9958f0",
+    "name": "createRole",
+    "url": "http://127.0.0.1:8000/api/v1/roles",
+    "method": "POST",
+    "sortNum": 30000,
+    "created": "2022-09-08T17:02:32.795Z",
+    "modified": "2022-09-12T21:37:33.326Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"Proveedor\",\n  \"description\": \"Rol del proveedor\",\n  \"state\": \"A\"\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "396875f0-401f-4f7c-9f29-63012ac38691",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "57155924-dd15-463b-a596-1e436a9958f0",
+    "name": "getInactivateRoles",
+    "url": "http://127.0.0.1:8000/api/v1/roles/inactives?page=2",
+    "method": "GET",
+    "sortNum": 50000,
+    "created": "2022-09-08T17:53:33.505Z",
+    "modified": "2022-09-12T22:27:42.011Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "page",
+        "value": "2",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
     "_id": "cc006b65-011d-4753-ab93-f429596a6907",
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "423a3123-ea8e-4bd8-93b9-64ea4c72dced",
@@ -8,7 +51,7 @@
     "method": "POST",
     "sortNum": 20000,
     "created": "2022-09-08T18:54:51.258Z",
-    "modified": "2022-09-09T15:23:25.211Z",
+    "modified": "2022-09-12T21:30:57.963Z",
     "headers": [],
     "params": [],
     "body": {
@@ -16,7 +59,14 @@
       "raw": "{\n  \"name\": \"Kevin\",\n  \"dni\": \"604680943\",\n  \"first_last_name\": \"Pitti\",\n  \"second_last_name\": \"Castro\",\n  \"email\": \"kepc08@gmail.com\",\n  \"password\": \"Kevin1234.\",\n  \"password_confirmation\": \"Kevin1234.\",\n  \"role_id\": 1\n}",
       "form": []
     },
-    "tests": []
+    "tests": [
+      {
+        "type": "set-env-var",
+        "custom": "json.data.token",
+        "action": "setto",
+        "value": "{{token}}"
+      }
+    ]
   },
   {
     "_id": "3b687fd8-c846-4535-b4aa-d56dc1ef7c00",
@@ -46,6 +96,53 @@
     ]
   },
   {
+    "_id": "4bae33e3-9aa8-4701-95d7-ad5aa4a840fc",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "57155924-dd15-463b-a596-1e436a9958f0",
+    "name": "updateRole",
+    "url": "http://127.0.0.1:8000/api/v1/roles/6",
+    "method": "PATCH",
+    "sortNum": 60000,
+    "created": "2022-09-08T19:41:07.913Z",
+    "modified": "2022-09-12T21:46:19.436Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \n  \"name\": \"Proveedor\",\n  \"description\": \"Rol del proveedor del comercio\",\n  \"state\": \"A\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "b198bd22-3600-449f-a562-b1a4c9fb7388",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "57155924-dd15-463b-a596-1e436a9958f0",
+    "name": "inactivateRole",
+    "url": "http://127.0.0.1:8000/api/v1/roles/6/inactivate",
+    "method": "PATCH",
+    "sortNum": 70000,
+    "created": "2022-09-08T19:50:22.894Z",
+    "modified": "2022-09-12T21:57:30.508Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "0195952d-daf0-4d94-b2fc-1b65567fb5ff",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "57155924-dd15-463b-a596-1e436a9958f0",
+    "name": "activeteRole",
+    "url": "http://127.0.0.1:8000/api/v1/roles/6/activate",
+    "method": "PATCH",
+    "sortNum": 80000,
+    "created": "2022-09-08T20:50:09.283Z",
+    "modified": "2022-09-12T22:00:00.687Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
     "_id": "a4ec52e3-720a-4319-b41b-b2b567c52443",
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "423a3123-ea8e-4bd8-93b9-64ea4c72dced",
@@ -54,7 +151,7 @@
     "method": "POST",
     "sortNum": 40000,
     "created": "2022-09-08T22:19:28.544Z",
-    "modified": "2022-09-09T14:22:18.486Z",
+    "modified": "2022-09-12T21:32:35.378Z",
     "headers": [],
     "params": [],
     "body": {
@@ -62,6 +159,33 @@
       "raw": "{\n  \"email\": \"kepc08@gmail.com\",\n  \"password\": \"Kevin1234.\"\n}",
       "form": []
     },
+    "tests": [
+      {
+        "type": "set-env-var",
+        "custom": "json.data.token",
+        "action": "setto",
+        "value": "{{token}}"
+      }
+    ]
+  },
+  {
+    "_id": "aaaaf065-df93-4b95-8039-599acacd2a0c",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "57155924-dd15-463b-a596-1e436a9958f0",
+    "name": "getActivateRoles",
+    "url": "http://127.0.0.1:8000/api/v1/roles/actives?page=2",
+    "method": "GET",
+    "sortNum": 55000,
+    "created": "2022-09-12T22:24:01.695Z",
+    "modified": "2022-09-12T22:27:17.877Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "page",
+        "value": "2",
+        "isPath": false
+      }
+    ],
     "tests": []
   }
 ]

@@ -5,7 +5,7 @@
     "default": true,
     "sortNum": 20000,
     "created": "2022-09-08T20:44:44.222Z",
-    "modified": "2022-09-09T13:47:12.125Z",
+    "modified": "2022-09-12T21:32:35.376Z",
     "data": [
       {
         "name": "xsrf-token",
@@ -14,6 +14,10 @@
       {
         "name": "laravel_session",
         "value": "eyJpdiI6IlVwUzBWZkk3Qk1YbWp6QXJINlJEaWc9PSIsInZhbHVlIjoiSTlFOWw2dG10NlR6TUtFeEFlRTYrVzZiK0tvdTlaME5ZVUZlY0JHYURhQ29mWWUrTVVYRU1WWWZMQ09ZL2dMTjIyTTNLQVg0SHVyQllpYnZlcnprVGlYY01MclFRcWdnL2Z2d2NaMzhLR3lHM01LRnBuREhHVTdYMVJ6OEpybmkiLCJtYWMiOiJmZWNlYTE0MzI1MTE2YzFkY2QyMzliN2NiZjU5MTBlMGQ1ZWY5NjJlNWQ2ZTRkODkzNmIyNmMzNGJhNDhiZjhhIiwidGFnIjoiIn0%3D"
+      },
+      {
+        "name": "token",
+        "value": "2|bI3sFdz91tjWq3fTeSyiFIjPBcPqK7bMVAHFvqtY"
       }
     ]
   }
