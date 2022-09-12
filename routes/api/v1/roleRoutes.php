@@ -3,14 +3,14 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\RoleController;
-use App\Http\Controllers\Api\Controller;
 
-//Route::post('/', [RoleController::class , 'store']);
+/* A group of routes that are protected by the `auth:sanctum` middleware. */
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/', [RoleController::class, 'store']);
-    Route::get('/', [RoleController::class, 'index']);
-    Route::get('/{role:id}', [RoleController::class, 'show']);
-    Route::delete('/{role:id}', [RoleController::class, 'destroy']);
+    Route::post('/', [RoleController::class, 'createRole']);
+    Route::get('/', [RoleController::class, 'getAllRoles']);
+    Route::get('/{role:id}', [RoleController::class, 'getRole']);
+    Route::patch('/{role:id}/inactivate', [RoleController::class, 'inactivateRole']);
     Route::patch('/{role:id}', [RoleController::class, 'update']);
+    Route::patch('/{role:id}/activate', [RoleController::class, 'activateRole']);
 });

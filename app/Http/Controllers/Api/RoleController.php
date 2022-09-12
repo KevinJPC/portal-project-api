@@ -6,21 +6,18 @@ use App\Http\Requests\Role\CreateRoleRequest;
 use App\Http\Requests\Role\ModifyRoleRequest;
 use App\Models\Role;
 use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\Role\RoleRequest;
 
 class RoleController extends Controller
 {
-    /**
-     * Index para mostrar
-     * store para guardar
-     * update para actualizar
-     * destroy para eliminar
-     * edit para mostrar
-     */
+    
 
-    public function Create(CreateRoleRequest $request)
+   /**
+    * It creates a new role.
+    * 
+    * @param CreateRoleRequest request The request object.
+    */
+    public function createRole(CreateRoleRequest $request)
     {
         try {
 
@@ -44,7 +41,10 @@ class RoleController extends Controller
         }
     }
 
-    public function index()
+  /**
+   * It returns all the roles in the database.
+   */
+    public function getAllRoles()
     {
         try {
             $role = Role::all();
@@ -60,22 +60,27 @@ class RoleController extends Controller
     }
 
 
-    public function destroy(Role $role, $request)
+    /**
+     * A function that allows you to delete a role, but it is not completely deleted, it is
+     * deactivated.
+     * 
+     * @param Role role The role to be deleted.
+     */
+    public function inactivateRole(Role $role)
     {
 
         try {
-            $roles = DB::table('users')->where('role_id', $role->id);
+            $roles = DB::table('users')->where('role_id', $role->id)->get();
 
             if (empty($roles)) {
                 Role::where('id', $role->id)
                     ->update([
                         'state' => 'I'
                     ]);
-                $role->state = $request->state;
                 $role->save();
                 response()->json([
                     "success" => true,
-                    "message" => "Rol eliminado correctamente",
+                    "message" => "Rol Desactivado correctamente",
                     "data" => ["role" => $role]
                 ], 200);
             } else {
@@ -93,19 +98,46 @@ class RoleController extends Controller
     }
 
 
-    public function validationRoleUser($role)
+    /**
+     * It activates a role.
+     * 
+     * @param Role role The role to be activated.
+     */
+    public function activateRole(Role $role)
     {
+        try {
+            Role::where('id', $role->id)
+                ->update([
+                    'state' => 'A'
+                ]);
+            $role->save();
+            response()->json([
+                "success" => true,
+                "message" => "Rol Activado correctamente",
+                "data" => ["role" => $role]
+            ], 200);
+        } catch (Exception $exception) {
+            response()->json([
+                "success" => false,
+                "message" => $exception->getMessage(),
+            ], 400);
+        }
     }
 
 
 
 
 
+/**
+ * It gets a role from the database
+ * 
+ * @param Role role The role object that you want to get.
+ */
 
-    public function get($id)
+    public function getRole(Role $role)
     {
         try {
-            $role = Role::find($id);
+            $role = Role::find($role->id);
             response()->json(["role" => $role], 200);
         } catch (Exception $exception) {
             response()->json([
@@ -115,11 +147,17 @@ class RoleController extends Controller
         }
     }
 
-    public function update(ModifyRoleRequest $request, $id)
+    /**
+     * It takes a ModifyRoleRequest object and a Role object as parameters, and returns a JSON response
+     * 
+     * @param ModifyRoleRequest request The request object.
+     * @param Role role The role object that was passed in the route.
+     */
+    public function updateRole(ModifyRoleRequest $request, Role $role)
     {
 
         try {
-            $role = Role::find($id);
+            $role = Role::find($role->id);
             $role->name = $request->name;
             $role->description = $request->description;
             $role->state = $request->state;
