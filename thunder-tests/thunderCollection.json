@@ -24,6 +24,36 @@
         "containerId": "",
         "created": "2022-09-13T20:07:11.762Z",
         "sortNum": 20000
+
+      },{
+        "_id": "837f7af7-ce0d-4fce-a664-eceeb3f40389",
+        "name": "User",
+        "containerId": "",
+        "created": "2022-09-09T16:25:32.752Z",
+        "sortNum": 20000,
+        "settings": {
+          "headers": [],
+          "auth": {
+            "type": "bearer",
+            "bearer": "{{token}}"
+          },
+          "tests": []
+        }
+      },
+      {
+        "_id": "e9097677-d9ee-4d1e-bed5-105e3b0271d2",
+        "name": "Admin",
+        "containerId": "",
+        "created": "2022-09-12T15:21:15.554Z",
+        "sortNum": 30000,
+        "settings": {
+          "headers": [],
+          "auth": {
+            "type": "bearer",
+            "bearer": "{{token}}"
+          },
+          "tests": []
+        }
       }
     ],
     "settings": {
