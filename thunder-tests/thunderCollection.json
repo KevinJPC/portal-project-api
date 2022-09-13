@@ -6,6 +6,12 @@
     "sortNum": 10000,
     "folders": [
       {
+        "_id": "57155924-dd15-463b-a596-1e436a9958f0",
+        "name": "Role",
+        "containerId": "",
+        "created": "2022-09-08T17:02:10.417Z"
+      },
+      {
         "_id": "423a3123-ea8e-4bd8-93b9-64ea4c72dced",
         "name": "Auth",
         "containerId": "",
@@ -54,6 +60,10 @@
           "value": "application/json"
         }
       ],
+      "auth": {
+        "type": "bearer",
+        "bearer": "{{token}}"
+      },
       "tests": [],
       "envId": "849c078d-271f-4e0a-a7f6-19b6b3112e69"
     }

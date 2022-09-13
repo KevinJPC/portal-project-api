@@ -80,11 +80,11 @@
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "e9097677-d9ee-4d1e-bed5-105e3b0271d2",
     "name": "InactivateAdmin",
-    "url": "http://localhost:8000/api/v1/admin/4/inactivate",
+    "url": "http://localhost:8000/api/v1/admin/7/inactivate",
     "method": "PATCH",
     "sortNum": 30000,
     "created": "2022-09-09T23:31:42.339Z",
-    "modified": "2022-09-13T16:30:10.655Z",
+    "modified": "2022-09-13T22:09:07.378Z",
     "headers": [],
     "params": [],
     "auth": {
@@ -146,11 +146,11 @@
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "e9097677-d9ee-4d1e-bed5-105e3b0271d2",
     "name": "ActivateAdmin",
-    "url": "http://localhost:8000/api/v1/admin/4/activate",
+    "url": "http://localhost:8000/api/v1/admin/7/activate",
     "method": "PATCH",
     "sortNum": 40000,
     "created": "2022-09-10T04:00:05.612Z",
-    "modified": "2022-09-13T16:29:56.567Z",
+    "modified": "2022-09-13T22:09:19.973Z",
     "headers": [],
     "params": [],
     "auth": {
@@ -209,12 +209,12 @@
     "method": "PATCH",
     "sortNum": 120000,
     "created": "2022-09-13T16:16:26.903Z",
-    "modified": "2022-09-13T20:16:34.272Z",
+    "modified": "2022-09-13T22:08:29.336Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Pablo\",\n  \"first_last_name\": \"Lopez\",\n  \"second_last_name\": \"Cascante\",\n  \"email\": \"Pablo1234@gmail.com\"\n}",
+      "raw": "{\n  \"name\": \"Pablo\",\n  \"first_last_name\": \"Lopez\",\n  \"second_last_name\": \"Cascante\",\n  \"email\": \"Pablo123456@gmail.com\"\n}",
       "form": []
     },
     "auth": {
@@ -232,12 +232,12 @@
     "method": "PATCH",
     "sortNum": 130000,
     "created": "2022-09-13T18:20:18.259Z",
-    "modified": "2022-09-13T20:28:59.649Z",
+    "modified": "2022-09-13T22:07:21.597Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Kevin\",\n  \"first_last_name\": \"Ptti\",\n  \"second_last_name\": \"Castro\",\n  \"email\": \"kevin1234@gmail.com\"\n}",
+      "raw": "{\n  \"name\": \"Kevin\",\n  \"first_last_name\": \"Ptti\",\n  \"second_last_name\": \"Castro\",\n  \"email\": \"kevin123456@gmail.com\"\n}",
       "form": []
     },
     "auth": {
@@ -255,12 +255,12 @@
     "method": "PATCH",
     "sortNum": 140000,
     "created": "2022-09-13T18:20:54.740Z",
-    "modified": "2022-09-13T20:26:56.005Z",
+    "modified": "2022-09-13T22:08:05.926Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"old_password\": \"Kevin1234.\",\n  \"new_password\": \"Kevin123456.\",\n  \"new_password_confirmation\": \"Kevin123456.\"\n}",
+      "raw": "{\n  \"old_password\": \"Kevin123456.\",\n  \"new_password\": \"Kevin1234567.\",\n  \"new_password_confirmation\": \"Kevin1234567.\"\n}",
       "form": []
     },
     "auth": {
