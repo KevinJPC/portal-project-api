@@ -14,6 +14,13 @@ use App\Http\Requests\Admin\RegisterAdminRequest;
 class AdminController extends Controller
 {
 
+    /**
+     * It creates a new user with the role of admin.
+     * 
+     * @param RegisterAdminRequest request The request object.
+     * 
+     * @return A JSON object 
+     */
     public function registerAdmin(RegisterAdminRequest $request) {
         try {
 
@@ -51,6 +58,14 @@ class AdminController extends Controller
         }
     }
 
+    /**
+     * It updates the user's data in the database
+     * 
+     * @param User user The user object that is being updated.
+     * @param UpdateUserRequest request The request object.
+     * 
+     * @return A JSON response with the success of the operation and a message.
+     */
     public function updateAdmin(User $user, UpdateUserRequest $request) {
         try {
             
