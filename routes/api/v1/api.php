@@ -23,4 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('/auth')->group(base_path('routes/api/v1/authRoutes.php'));
 
-Route::prefix('/user')->group(base_path('routes/api/v1/userRoutes.php'));
+Route::prefix('/users')->group(base_path('routes/api/v1/userRoutes.php'));
+
+Route::prefix('/admin')->group(base_path('routes/api/v1/adminRoutes.php'));
