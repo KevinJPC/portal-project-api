@@ -95,4 +95,8 @@ class AuthController extends Controller
             ], 400);
         }
     }
+
+    public function logout(Request $request) {
+        
+    }
 }
