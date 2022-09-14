@@ -24,7 +24,6 @@ class RoleHasProcesCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'role_id' => 'required',
             'process_id' => 'required'
         ];
     }

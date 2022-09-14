@@ -31,15 +31,17 @@ class RoleshasProcessesController extends Controller
         }
     }
 
-    public function createRolehasProcesses(RoleHasProcesCreateRequest $request)
+    public function createRolehasProcesses($array, $idProcess)
     {
         try {
-            $rolehasprocesses = new RolesHasProcess();
-            foreach ($request as $rolehasprocesses) {
-                $rolehasprocesses->role_id=$request->id;
-                $rolehasprocesses->process_id=$request->$process_id;
-            }
-            $rolehasprocesses->save();
+            
+           for ($i=0; $i < count($array); $i++) { 
+                $rolehasprocesses = new RolesHasProcess();
+                $rolehasprocesses->role_id=$array[$i];
+                $rolehasprocesses->process_id=$idProcess;
+                $rolehasprocesses->save();
+           }
+            
             return response()->json([
                 "success" => true,
                 "message" => "RoleHasProcesses created successfull",
