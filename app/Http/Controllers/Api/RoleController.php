@@ -143,15 +143,11 @@ class RoleController extends Controller
         }
     }
 
-
-
-
-
-/**
- * It gets a role from the database
- * 
- * @param Role role The role object that you want to get.
- */
+    /**
+     * It gets a role from the database
+     * 
+     * @param Role role The role object that you want to get.
+     */
     public function getRole(Role $role)
     {
         try {

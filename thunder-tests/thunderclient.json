@@ -268,5 +268,123 @@
       "bearer": "{{token}}"
     },
     "tests": []
+  },
+  {
+    "_id": "8531af37-765d-4d84-a9c7-c8222052e154",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "8874a6ff-705d-46e5-8d85-9d5b9ad5dfe6",
+    "name": "RegisterProcess",
+    "url": "http://localhost:8000/api/v1/processes/register",
+    "method": "POST",
+    "sortNum": 150000,
+    "created": "2022-09-14T17:38:39.635Z",
+    "modified": "2022-09-14T22:23:22.784Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"se_oid\": \"SeOid0176627\",\n  \"se_name\": \"Proceso de solicitud de proveedor 2\",\n  \"name\": \"Proceso portal 3\",\n  \"visible\": true\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "1dc09237-f118-4161-9c94-7642dd904d84",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "8874a6ff-705d-46e5-8d85-9d5b9ad5dfe6",
+    "name": "UpdateProcess",
+    "url": "http://localhost:8000/api/v1/processes/2",
+    "method": "PATCH",
+    "sortNum": 160000,
+    "created": "2022-09-14T17:41:02.000Z",
+    "modified": "2022-09-14T22:44:01.035Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"Proceso portal 2.0\",\n  \"visible\": false\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "6f150af4-905d-4214-994b-e97e0662cd75",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "8874a6ff-705d-46e5-8d85-9d5b9ad5dfe6",
+    "name": "GetInactiveProcesses",
+    "url": "http://localhost:8000/api/v1/processes/inactives",
+    "method": "GET",
+    "sortNum": 160000,
+    "created": "2022-09-14T18:22:30.731Z",
+    "modified": "2022-09-14T18:25:43.611Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "0e9aff70-9cc7-46b8-9c6e-a58d7c382022",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "8874a6ff-705d-46e5-8d85-9d5b9ad5dfe6",
+    "name": "GetActiveProcesses",
+    "url": "http://localhost:8000/api/v1/processes/actives",
+    "method": "GET",
+    "sortNum": 170000,
+    "created": "2022-09-14T18:22:41.380Z",
+    "modified": "2022-09-14T18:25:31.604Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "6f181331-806a-4e3e-952b-859460bc6fa9",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "8874a6ff-705d-46e5-8d85-9d5b9ad5dfe6",
+    "name": "InactivateProcess",
+    "url": "http://localhost:8000/api/v1/processes/1/inactivate",
+    "method": "PATCH",
+    "sortNum": 180000,
+    "created": "2022-09-14T18:24:02.489Z",
+    "modified": "2022-09-14T22:36:51.482Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "d022f7d5-5354-4217-83b7-c1eaec1db421",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "8874a6ff-705d-46e5-8d85-9d5b9ad5dfe6",
+    "name": "ActivateProcess",
+    "url": "http://localhost:8000/api/v1/processes/1/activate",
+    "method": "PATCH",
+    "sortNum": 190000,
+    "created": "2022-09-14T18:24:13.533Z",
+    "modified": "2022-09-14T22:44:30.254Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
   }
 ]
