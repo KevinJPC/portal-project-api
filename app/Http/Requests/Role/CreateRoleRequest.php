@@ -26,7 +26,6 @@ class CreateRoleRequest extends FormRequest
         return [
             'name' => 'required|min:5',
             'description',
-            'state' => 'required',
         ];
     }
 }

@@ -13,7 +13,7 @@ class RoleHasProcesCreateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,8 +24,7 @@ class RoleHasProcesCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'role_id' => 'required',
-            'process_id' => 'required',
+            'process_id' => 'required'
         ];
     }
 }
