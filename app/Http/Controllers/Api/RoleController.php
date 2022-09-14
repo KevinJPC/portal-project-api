@@ -8,6 +8,8 @@ use App\Models\Role;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\RolesHasProcess;
+
 class RoleController extends Controller
 {
     
@@ -17,22 +19,21 @@ class RoleController extends Controller
     * 
     * @param CreateRoleRequest request The request object.
     */
-    public function createRole(CreateRoleRequest $request)
+    public function createRole(CreateRoleRequest $request )
     {
         try {
-
+                
 
             $role = new Role();
             $role->name = $request->name;
             $role->description = $request->description;
-            $role->state = $request->state;
+            $role->state = 'A';
             $role->save();
             
             return response()->json([
                 "success" => true,
                 "message" => "Rol creado correctamente",
-                "data" => ["role" => $role]
-            ],200);
+                "data" => ["role" => $role]], 200);
 
         } catch (Exception $exception) {
             response()->json([
@@ -42,9 +43,12 @@ class RoleController extends Controller
         }
     }
 
-  /**
-   * It returns all the roles in the database.
-   */
+
+    /**
+     * It gets all the inactive roles from the database and returns them in a paginated format
+     * 
+     * @return A JSON response with the roles and a status code.
+     */
     public function getInactiveRoles()
     {
         try {
@@ -64,15 +68,32 @@ class RoleController extends Controller
     }
 
 
+    /**
+     * It returns a paginated list of all the roles in the database that have a state of A.
+     * 
+     * @return A JSON object with the following structure:
+     * ```
+     * {
+     *     "roles": {
+     *         "current_page": 1,
+     *         "data": [
+     *             {
+     *                 "id": 1,
+     *                 "name": "Administrador",
+     *                 "description": "Administrador del sistema",
+     *                 "state": "A",
+     *                 "created_
+     */
     public function getActiveRoles()
     {
         try {
 
             $roles = DB::table('roles')
+            //->join('roles_has_processes','roles.id','=','role_id')
             ->where('state', 'A')
             ->latest()
             ->paginate(10);
-
+            
             return response()->json([
                 'roles' => $roles
             ], 200);
