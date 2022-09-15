@@ -63,6 +63,9 @@ class ProcessController extends Controller
                     'name' => $request->name,
                     'visible' => $request->visible,
                 ]);
+
+                $role_has_processes = new RoleshasProcessesController();
+                $role_has_processes->modifyRolehasProcesses($request->roles, $process->id);
     
                 return response()->json(
                     [

@@ -396,12 +396,12 @@
     "method": "POST",
     "sortNum": 150000,
     "created": "2022-09-14T17:38:39.635Z",
-    "modified": "2022-09-15T16:03:42.015Z",
+    "modified": "2022-09-15T16:21:30.337Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"se_oid\": \"Seoid93859\",\n  \"se_name\": \"Revision de pedido bancario\",\n  \"name\": \"Proceso portal 8\",\n  \"visible\": false,\n  \"roles\": [1, 2, 3]\n}",
+      "raw": "{\n  \"se_oid\": \"Seoid93859\",\n  \"se_name\": \"Revision de pedido bancario\",\n  \"name\": \"Proceso portal 4\",\n  \"visible\": false,\n  \"roles\": [1, 2, 3]\n}",
       "form": []
     },
     "auth": {
@@ -415,16 +415,16 @@
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "8874a6ff-705d-46e5-8d85-9d5b9ad5dfe6",
     "name": "UpdateProcess",
-    "url": "http://localhost:8000/api/v1/processes/2",
+    "url": "http://localhost:8000/api/v1/processes/22",
     "method": "PATCH",
     "sortNum": 160000,
     "created": "2022-09-14T17:41:02.000Z",
-    "modified": "2022-09-14T22:44:01.035Z",
+    "modified": "2022-09-15T16:22:09.250Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Proceso portal 2.0\",\n  \"visible\": false\n}",
+      "raw": "{\n  \"name\": \"Proceso portal 4.0\",\n  \"visible\": false,\n  \"roles\": [1, 2]\n}",
       "form": []
     },
     "auth": {
