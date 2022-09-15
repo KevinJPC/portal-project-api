@@ -10,7 +10,6 @@ use App\Models\Role;
 
 class RoleshasProcessesController extends Controller
 {
-
     /**
      * It returns all the rolehasprocesses in the database.
      */
@@ -31,17 +30,9 @@ class RoleshasProcessesController extends Controller
         }
     }
 
-
-
-
-
-
-
    /**
     * I'm trying to create a new rolehasprocesses with the data that I'm receiving from the frontend,
     * but I'm getting an error that says: 
-    * 
-    * 
     * I'm not sure what I'm doing wrong, I've tried to create the rolehasprocesses with the same data
     * that I'm receiving from the frontend, but I'm getting the same error
     * 
@@ -74,7 +65,6 @@ class RoleshasProcessesController extends Controller
         }
     }
 
-
    /**
     * It gets all the roles that have access to a specific process
     * 
@@ -103,8 +93,6 @@ class RoleshasProcessesController extends Controller
 
 
     }
-
-
 
    /**
     * I have a table called roles_has_processes, which has two columns: role_id and process_id. I want
@@ -143,12 +131,13 @@ class RoleshasProcessesController extends Controller
                 for ($i=0; $i < count($array); $i++) { 
                     for ($j=0; $j < count($arraynow); $j++) { 
                         if ($array[$i] == $arraynow[$j]) {
+                            
                             unset($arraynow[$j]);
                         }
                     }
                 }
                 for ($i=0; $i < count($arraynow); $i++) { 
-                    RolesHasProcess::where('role_id',$arraynow)->delete();
+                    RolesHasProcess::where('role_id',$arraynow[$i])->delete();
                 }
                 return response()->json([
                 "success" => true,
