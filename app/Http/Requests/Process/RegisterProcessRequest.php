@@ -24,7 +24,9 @@ class RegisterProcessRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:10|unique:processes',
+            'se_oid' => 'required',
+            'se_name' => 'required',
+            'name' => 'required|min:10',
             'visible' => 'required',
         ];
     }

@@ -34,8 +34,8 @@ class RoleshasProcessesController extends Controller
     public function createRolehasProcesses($array, $idProcess)
     {
         try {
-            
-           for ($i=0; $i < count($array); $i++) { 
+
+           for ($i=0; $i <= count($array); $i++) {
                 $rolehasprocesses = new RolesHasProcess();
                 $rolehasprocesses->role_id=$array[$i];
                 $rolehasprocesses->process_id=$idProcess;

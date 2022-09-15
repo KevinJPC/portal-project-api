@@ -8,10 +8,17 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Process\RegisterProcessRequest;
 use App\Http\Requests\Process\UpdateProcessRequest;
+use App\Http\Controllers\Api\RoleshasProcessesController;
 
 class ProcessController extends Controller
 {
 
+    /**
+     * It creates a new process and create a new instance of the RoleshasProcessesController 
+     * and calling the createRolehasProcesses method
+     * 
+     * @param RegisterProcessRequest request The request object.
+     */
     public function registerProcess(RegisterProcessRequest $request){
         try {
             
@@ -20,8 +27,12 @@ class ProcessController extends Controller
                 'se_name' => $request->se_name,
                 'name' => $request->name,
                 'visible' => $request->visible,
-                'state' => 'A'
+                 'state' => 'A'
             ]);
+
+
+            $role_has_processes = new RoleshasProcessesController();
+            $role_has_processes->createRolehasProcesses($request->roles, $process->id);
 
             return response()->json(
                 [
@@ -70,6 +81,11 @@ class ProcessController extends Controller
         }
     }
 
+    /**
+     * It returns a paginated list of all active processes
+     * 
+     * @return A list of active processes
+     */
     public function getActiveProcesses(){
         try {
 
@@ -92,6 +108,11 @@ class ProcessController extends Controller
         }
     }
 
+    /**
+     * It returns a paginated list of inactive processes
+     * 
+     * @return A list of inactive processes
+     */
     public function getInactiveProcesses(){
         try {
 
@@ -113,6 +134,13 @@ class ProcessController extends Controller
         }
     }
 
+    /**
+     * It updates the state of a process to 'I' (inactive)
+     * 
+     * @param Process process The process to be inactivated
+     * 
+     * @return A response with a success message and a 200 status code.
+     */
     public function inactivateProcess(Process $process){
         try {            
 
@@ -134,6 +162,13 @@ class ProcessController extends Controller
         }
     }
 
+    /**
+     * It updates the state of a process to 'A' (active)
+     * 
+     * @param Process process The process to be inactivated
+     * 
+     * @return A response with a success message and a 200 status code.
+     */
     public function activateProcess(Process $process){
         try {
 
