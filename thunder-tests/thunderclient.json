@@ -419,12 +419,12 @@
     "method": "PATCH",
     "sortNum": 160000,
     "created": "2022-09-14T17:41:02.000Z",
-    "modified": "2022-09-15T16:22:09.250Z",
+    "modified": "2022-09-15T16:25:02.501Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Proceso portal 4.0\",\n  \"visible\": false,\n  \"roles\": [1, 2]\n}",
+      "raw": "{\n  \"name\": \"Proceso portal 4.1\",\n  \"visible\": false,\n  \"roles\": [1, 2]\n}",
       "form": []
     },
     "auth": {

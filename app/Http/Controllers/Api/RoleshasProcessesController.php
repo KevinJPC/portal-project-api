@@ -122,9 +122,9 @@ class RoleshasProcessesController extends Controller
                 }
 
                 return response()->json([
-                "success" => true,
-                "message" => "Roles agregados correctamente",
-                "data" => ["RoleHasProcesses" => $rolehasprocesses]
+                    "success" => true,
+                    "message" => "Roles agregados correctamente",
+                    "data" => ["RoleHasProcesses" => $rolehasprocesses]
             ],200);
 
             }else{
@@ -138,7 +138,7 @@ class RoleshasProcessesController extends Controller
                 }
 
                 for ($i=0; $i < count($arraynow); $i++) { 
-                    RolesHasProcess::where('role_id',$arraynow)->delete();
+                    RolesHasProcess::where('role_id', $arraynow[$i])->delete();
                 }
 
                 return response()->json([
