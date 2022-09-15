@@ -31,6 +31,25 @@ class RoleshasProcessesController extends Controller
         }
     }
 
+
+
+
+
+
+
+   /**
+    * I'm trying to create a new rolehasprocesses with the data that I'm receiving from the frontend,
+    * but I'm getting an error that says: 
+    * 
+    * 
+    * I'm not sure what I'm doing wrong, I've tried to create the rolehasprocesses with the same data
+    * that I'm receiving from the frontend, but I'm getting the same error
+    * 
+    * @param array [1,2,3]
+    * @param idProcess The id of the process that is being created
+    * 
+    * @return The response is a JSON object with the following structure:
+    */
     public function createRolehasProcesses($array, $idProcess)
     {
         try {
@@ -44,8 +63,8 @@ class RoleshasProcessesController extends Controller
             
             return response()->json([
                 "success" => true,
-                "message" => "RoleHasProcesses created successfull",
-                "data" => ["role" => $rolehasprocesses]
+                "message" => "Roles creados correctamente",
+                "data" => ["RoleHasProcesses" => $rolehasprocesses]
             ],200);
         } catch (Exception $exception) {
             response()->json([
@@ -56,11 +75,18 @@ class RoleshasProcessesController extends Controller
     }
 
 
-    public function getRoleHasProcesses(Role $role)
+   /**
+    * It gets all the roles that have access to a specific process
+    * 
+    * @param Process process The process object that is being passed in.
+    * 
+    * @return a json response.
+    */
+    public function getRoleHasProcesses(Process $process)
     {
         try {
             $rolehasprocesses = DB::table('roles_has_processes')
-            ->where('role_id','=',$role->id)
+            ->where('process_id','=',$process->id)
             ->latest()
             ->paginate(10);
             return response()->json([
@@ -76,5 +102,69 @@ class RoleshasProcessesController extends Controller
 
 
 
+    }
+
+
+
+   /**
+    * I have a table called roles_has_processes, which has two columns: role_id and process_id. I want
+    * to compare the values of the column role_id with an array that I receive from the frontend, and
+    * if the values of the array are less than the values of the column, I want to add the values of
+    * the array to the column, and if the values of the array are more than the values of the column, I
+    * want to delete the values of the column that are not in the array
+    * 
+    * @param array the array of roles that the user has selected
+    * @param idProcess The id of the process
+    * 
+    * @return a JSON response.
+    */
+    public function modifyRolehasProcesses($array, $idProcess)
+    {
+        try {
+            $arraynow = DB::table('roles_has_processes')
+            ->select('role_id')
+            ->where('process_id','=',$process->id);
+
+            if (count($array) < count($arraynow)) {
+                for ($i=count($array); $i < count($arraynow); $i++) { 
+                    $rolehasprocesses = new RolesHasProcess();
+                    $rolehasprocesses->role_id=$array[$i];
+                    $rolehasprocesses->process_id=$idProcess;
+                    $rolehasprocesses->save();
+                }
+
+                return response()->json([
+                "success" => true,
+                "message" => "Roles agregados correctamente",
+                "data" => ["RoleHasProcesses" => $rolehasprocesses]
+            ],200);
+            }else{
+                //$arraydelete = [];
+                for ($i=0; $i < count($array); $i++) { 
+                    for ($j=0; $j < count($arraynow); $j++) { 
+                        if ($array[$i] == $arraynow[$j]) {
+                            unset($arraynow[$j]);
+                        }
+                    }
+                }
+                for ($i=0; $i < count($arraynow); $i++) { 
+                    RolesHasProcess::where('role_id',$arraynow)->delete();
+                }
+                return response()->json([
+                "success" => true,
+                "message" => "Roles eliminados correctamente",
+                "data" => ["RoleHasProcesses" => $rolehasprocesses]
+            ],200);
+            }
+
+           
+            
+            
+        } catch (Exception $exception) {
+            response()->json([
+                "success" => false,
+                "message" => $exception->getMessage(),
+            ], 400);
+        }
     }
 }
