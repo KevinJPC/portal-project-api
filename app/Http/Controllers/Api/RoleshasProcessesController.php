@@ -30,22 +30,20 @@ class RoleshasProcessesController extends Controller
         }
     }
 
-   /**
-    * I'm trying to create a new rolehasprocesses with the data that I'm receiving from the frontend,
-    * but I'm getting an error that says: 
-    * I'm not sure what I'm doing wrong, I've tried to create the rolehasprocesses with the same data
-    * that I'm receiving from the frontend, but I'm getting the same error
-    * 
-    * @param array [1,2,3]
-    * @param idProcess The id of the process that is being created
-    * 
-    * @return The response is a JSON object with the following structure:
-    */
+    /**
+     * I'm trying to create a new row in the table "role_has_processes" for each element in the array
+     * 
+     * 
+     * @param array 
+     * @param idProcess 
+     * 
+     * @return The response is a JSON object
+     */
     public function createRolehasProcesses($array, $idProcess)
     {
         try {
-            
-           for ($i=0; $i < count($array); $i++) { 
+
+           for ($i=0; $i <= count($array); $i++) {
                 $rolehasprocesses = new RolesHasProcess();
                 $rolehasprocesses->role_id=$array[$i];
                 $rolehasprocesses->process_id=$idProcess;
@@ -122,10 +120,11 @@ class RoleshasProcessesController extends Controller
                 }
 
                 return response()->json([
-                "success" => true,
-                "message" => "Roles agregados correctamente",
-                "data" => ["RoleHasProcesses" => $rolehasprocesses]
+                    "success" => true,
+                    "message" => "Roles agregados correctamente",
+                    "data" => ["RoleHasProcesses" => $rolehasprocesses]
             ],200);
+
             }else{
                 //$arraydelete = [];
                 for ($i=0; $i < count($array); $i++) { 
@@ -136,13 +135,15 @@ class RoleshasProcessesController extends Controller
                         }
                     }
                 }
+
                 for ($i=0; $i < count($arraynow); $i++) { 
-                    RolesHasProcess::where('role_id',$arraynow[$i])->delete();
+                    RolesHasProcess::where('role_id', $arraynow[$i])->delete();
                 }
+
                 return response()->json([
-                "success" => true,
-                "message" => "Roles eliminados correctamente",
-                "data" => ["RoleHasProcesses" => $rolehasprocesses]
+                    "success" => true,
+                    "message" => "Roles eliminados correctamente",
+                    "data" => ["RoleHasProcesses" => $rolehasprocesses]
             ],200);
             }
 

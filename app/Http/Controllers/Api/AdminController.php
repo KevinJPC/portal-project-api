@@ -8,8 +8,8 @@ use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Requests\Admin\RegisterAdminRequest;
+use App\Http\Requests\User\UpdateUserRequest;
 
 class AdminController extends Controller
 {
