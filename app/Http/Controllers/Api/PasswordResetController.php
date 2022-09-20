@@ -13,6 +13,13 @@ use App\Http\Requests\PasswordReset\ForgotPasswordRequest;
 
 class PasswordResetController extends Controller
 {
+    /**
+     * It sends a reset link to the user's email address
+     * 
+     * @param ForgotPasswordRequest request The request object.
+     * 
+     * @return A JSON response with a success boolean and a message string.
+     */
     public function forgotPassword(ForgotPasswordRequest $request){
         $status = Password::sendResetLink(
             $request->only('email')
@@ -31,6 +38,11 @@ class PasswordResetController extends Controller
         ], 400);
     }
 
+    /**
+     * It takes a request, validates it, and then resets the password
+     * 
+     * @param ResetPasswordRequest request The request object.
+     */
     public function resetPassword(ResetPasswordRequest $request){
 
         $status = Password::reset(
