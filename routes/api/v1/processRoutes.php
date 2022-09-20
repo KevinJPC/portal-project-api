@@ -3,9 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProcessController;
 
-Route::middleware('auth:sanctum')->get('/visibles', [ProcessController::class, 'getVisiblesProcesses']);
+Route::middleware('auth:api')->get('/visibles', [ProcessController::class, 'getVisiblesProcesses']);
 
-Route::middleware('auth:sanctum')->group(function(){
+Route::middleware('auth:api')->group(function(){
 
     Route::post('/register', [ProcessController::class, 'registerProcess']);
     Route::patch('/{process:id}', [ProcessController::class, 'updateProcess']);

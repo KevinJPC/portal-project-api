@@ -67,32 +67,12 @@
       "type": "bearer",
       "bearer": "{{token}}"
     },
-    "tests": []
-  },
-  {
-    "_id": "3b687fd8-c846-4535-b4aa-d56dc1ef7c00",
-    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
-    "containerId": "",
-    "name": "Session",
-    "url": "http://localhost:8000/sanctum/csrf-cookie",
-    "method": "GET",
-    "sortNum": 20000,
-    "created": "2022-09-08T19:36:39.917Z",
-    "modified": "2022-09-08T20:45:26.027Z",
-    "headers": [],
-    "params": [],
     "tests": [
       {
         "type": "set-env-var",
-        "custom": "cookie.xsrf-token",
+        "custom": "json.data.token",
         "action": "setto",
-        "value": "{{xsrf-token}}"
-      },
-      {
-        "type": "set-env-var",
-        "custom": "cookie.xsrf-token",
-        "action": "setto",
-        "value": "{{laravel_session}}"
+        "value": "{{token}}"
       }
     ]
   },
@@ -105,16 +85,22 @@
     "method": "POST",
     "sortNum": 40000,
     "created": "2022-09-08T22:19:28.544Z",
-    "modified": "2022-09-14T23:01:42.487Z",
-    "headers": [],
+    "modified": "2022-09-17T00:41:16.933Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "application/json"
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      }
+    ],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"email\": \"kevin123456@gmail.com\",\n  \"password\": \"Kevin1234567.\"\n}",
+      "raw": "{\n  \"email\": \"kepc08@gmail.com\",\n  \"password\": \"Kevin777.\"\n}",
       "form": []
-    },
-    "auth": {
-      "type": "bearer"
     },
     "tests": [
       {
@@ -174,7 +160,7 @@
     "method": "GET",
     "sortNum": 20000,
     "created": "2022-09-09T23:49:18.724Z",
-    "modified": "2022-09-12T22:28:01.966Z",
+    "modified": "2022-09-20T15:19:12.811Z",
     "headers": [],
     "params": [
       {
@@ -185,7 +171,7 @@
     ],
     "auth": {
       "type": "bearer",
-      "bearer": "3|wPjM7oYrdeYXkMLbKiUe6TSWhCO1z5pp8A2E3fpk"
+      "bearer": "{{token}}"
     },
     "tests": []
   },
@@ -255,11 +241,11 @@
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "837f7af7-ce0d-4fce-a664-eceeb3f40389",
     "name": "GetUserById",
-    "url": "http://localhost:8000/api/v1/users/3",
+    "url": "http://localhost:8000/api/v1/users/2",
     "method": "GET",
     "sortNum": 10000,
     "created": "2022-09-13T16:15:18.935Z",
-    "modified": "2022-09-13T20:18:12.264Z",
+    "modified": "2022-09-20T15:20:54.677Z",
     "headers": [],
     "params": [],
     "auth": {
@@ -292,6 +278,33 @@
     "tests": []
   },
   {
+    "_id": "16452c04-c6a8-4dd4-9950-0b7d13a78e85",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "423a3123-ea8e-4bd8-93b9-64ea4c72dced",
+    "name": "Logout",
+    "url": "http://localhost:8000/api/v1/auth/logout",
+    "method": "POST",
+    "sortNum": 50000,
+    "created": "2022-09-13T17:27:59.799Z",
+    "modified": "2022-09-15T23:19:36.614Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "application/json"
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      }
+    ],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
     "_id": "dc73e445-9dfe-4b12-834a-ab0bb2a24262",
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "837f7af7-ce0d-4fce-a664-eceeb3f40389",
@@ -300,12 +313,12 @@
     "method": "PATCH",
     "sortNum": 130000,
     "created": "2022-09-13T18:20:18.259Z",
-    "modified": "2022-09-13T22:07:21.597Z",
+    "modified": "2022-09-20T15:21:10.643Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Kevin\",\n  \"first_last_name\": \"Ptti\",\n  \"second_last_name\": \"Castro\",\n  \"email\": \"kevin123456@gmail.com\"\n}",
+      "raw": "{\n  \"name\": \"Kevin Josue\",\n  \"first_last_name\": \"Ptti\",\n  \"second_last_name\": \"Castro\",\n  \"email\": \"kevin123456@gmail.com\"\n}",
       "form": []
     },
     "auth": {
@@ -323,12 +336,12 @@
     "method": "PATCH",
     "sortNum": 140000,
     "created": "2022-09-13T18:20:54.740Z",
-    "modified": "2022-09-13T22:08:05.926Z",
+    "modified": "2022-09-20T15:29:27.346Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"old_password\": \"Kevin123456.\",\n  \"new_password\": \"Kevin1234567.\",\n  \"new_password_confirmation\": \"Kevin1234567.\"\n}",
+      "raw": "{\n  \"old_password\": \"Kevin7777.\",\n  \"password\": \"Kevin123.\",\n  \"password_confirmation\": \"Kevin123.\"\n}",
       "form": []
     },
     "auth": {
@@ -524,6 +537,34 @@
     "tests": []
   },
   {
+    "_id": "80f211ea-c8f1-4f14-a25e-1caf7a4b3dae",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "b8f23e6b-b848-467e-9531-b19306dc7529",
+    "name": "ForgotPassword",
+    "url": "http://localhost:8000/api/v1/password/forgot",
+    "method": "POST",
+    "sortNum": 90000,
+    "created": "2022-09-15T23:20:07.814Z",
+    "modified": "2022-09-20T15:30:28.753Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "application/json"
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"email\": \"kevin123456@gmail.com\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
     "_id": "b3b401ef-0921-47cc-907c-ddd3855320b5",
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "b0c2eb15-146d-4f11-984a-ba0758093d34",
@@ -581,5 +622,43 @@
       "bearer": "{{token}}"
     },
     "tests": []
+  },
+  {
+    "_id": "ab9a5867-9246-431d-a1a5-f1894a275efb",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "b8f23e6b-b848-467e-9531-b19306dc7529",
+    "name": "ResetPassword",
+    "url": "http://localhost:8000/api/v1/password/reset",
+    "method": "POST",
+    "sortNum": 100000,
+    "created": "2022-09-16T22:52:34.684Z",
+    "modified": "2022-09-20T15:32:29.330Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "application/json"
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"token\": \"ef031defbc2dde2564c5f6f116ab2ee9a8e2f8b72ccc6a69aef9c27a33335f41\",\n  \"email\": \"kevin123456@gmail.com\",\n  \"password\": \"Kevin777.\",\n  \"password_confirmation\": \"Kevin777.\"\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer"
+    },
+    "tests": [
+      {
+        "type": "set-env-var",
+        "custom": "json.data.token",
+        "action": "setto",
+        "value": "{{token}}"
+      }
+    ]
   }
 ]

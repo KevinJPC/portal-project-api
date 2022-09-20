@@ -34,8 +34,7 @@ class RegisterAdminRequest extends FormRequest
           'password' => [
             'required',
             'confirmed',
-            Password::min(8),
-            new IsValidPassword(),
+            Password::defaults(),
           ],
         ];
       
