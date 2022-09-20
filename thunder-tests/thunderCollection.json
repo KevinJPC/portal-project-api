@@ -19,13 +19,6 @@
         "sortNum": 10000
       },
       {
-        "_id": "13415fe4-5eff-47c6-b543-6a2aa142ffbd",
-        "name": "RolesHasProcesses",
-        "containerId": "",
-        "created": "2022-09-13T20:07:11.762Z",
-        "sortNum": 20000
-
-      },{
         "_id": "837f7af7-ce0d-4fce-a664-eceeb3f40389",
         "name": "User",
         "containerId": "",
@@ -56,6 +49,13 @@
         }
       },
       {
+        "_id": "13415fe4-5eff-47c6-b543-6a2aa142ffbd",
+        "name": "RolesHasProcesses",
+        "containerId": "",
+        "created": "2022-09-13T20:07:11.762Z",
+        "sortNum": 20000
+      },
+      {
         "_id": "8874a6ff-705d-46e5-8d85-9d5b9ad5dfe6",
         "name": "Process",
         "containerId": "",
@@ -69,6 +69,13 @@
           },
           "tests": []
         }
+      },
+      {
+        "_id": "b0c2eb15-146d-4f11-984a-ba0758093d34",
+        "name": "UserHasProcess",
+        "containerId": "",
+        "created": "2022-09-15T23:24:33.271Z",
+        "sortNum": 50000
       }
     ],
     "settings": {
