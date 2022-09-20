@@ -18,16 +18,24 @@ use App\Http\Controllers\Api\ProcessController;
 
 Route::prefix('/roles')->group(base_path('routes/api/v1/roleRoutes.php'));
 
-Route::prefix('/roleHasProcesses')->group(base_path('routes/api/v1/roleHasProcesses.php'));
+Route::prefix('/roleHasProcesses')->group(
+    base_path('routes/api/v1/roleHasProcesses.php'),
+);
 
 Route::prefix('/auth')->group(base_path('routes/api/v1/authRoutes.php'));
 
-Route::prefix('/password')->group(base_path('routes/api/v1/passwordResetRoutes.php'));
+Route::prefix('/password')->group(
+    base_path('routes/api/v1/passwordResetRoutes.php'),
+);
 
 Route::prefix('/users')->group(base_path('routes/api/v1/userRoutes.php'));
 
 Route::prefix('/admin')->group(base_path('routes/api/v1/adminRoutes.php'));
 
-Route::prefix('/processes')->group(base_path('routes/api/v1/processRoutes.php'));
+Route::prefix('/processes')->group(
+    base_path('routes/api/v1/processRoutes.php'),
+);
 
-Route::prefix('/user-has-process')->group(base_path('routes/api/v1/userHasProcessRoutes.php'));
+Route::prefix('/user-has-process')->group(
+    base_path('routes/api/v1/userHasProcessRoutes.php'),
+);

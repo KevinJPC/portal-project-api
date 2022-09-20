@@ -25,7 +25,7 @@ class LoginRequest extends FormRequest
     {
         $rules = [
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
         ];
 
         return $rules;

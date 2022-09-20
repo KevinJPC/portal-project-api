@@ -16,10 +16,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        /* 
-        * Running the command `php artisan passport:purge` every day. 
-        * This command purge revoked and expired tokens and auth codes...
-        */
+        /*
+         * Running the command `php artisan passport:purge` every day.
+         * This command purge revoked and expired tokens and auth codes...
+         */
         $schedule->command('passport:purge')->daily();
     }
 
@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

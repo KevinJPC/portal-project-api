@@ -15,59 +15,77 @@ class PasswordResetController extends Controller
 {
     /**
      * It sends a reset link to the user's email address
-     * 
+     *
      * @param ForgotPasswordRequest request The request object.
-     * 
+     *
      * @return A JSON response with a success boolean and a message string.
      */
-    public function forgotPassword(ForgotPasswordRequest $request){
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
+    public function forgotPassword(ForgotPasswordRequest $request)
+    {
+        $status = Password::sendResetLink($request->only('email'));
 
-        if($status === Password::RESET_LINK_SENT){
-            return response()->json([
-                'success' => true,
-                'message' => __($status),
-            ], 200);
+        if ($status === Password::RESET_LINK_SENT) {
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => __($status),
+                ],
+                200,
+            );
         }
 
-        return response()->json([
-            'success' => false,
-            'message' => __($status)
-        ], 400);
+        return response()->json(
+            [
+                'success' => false,
+                'message' => __($status),
+            ],
+            400,
+        );
     }
 
     /**
      * It takes a request, validates it, and then resets the password
-     * 
+     *
      * @param ResetPasswordRequest request The request object.
      */
-    public function resetPassword(ResetPasswordRequest $request){
-
+    public function resetPassword(ResetPasswordRequest $request)
+    {
         $status = Password::reset(
-            $request->only('email', 'password', 'password_confirmation', 'token'),
+            $request->only(
+                'email',
+                'password',
+                'password_confirmation',
+                'token',
+            ),
             function ($user, $password) {
-                $user->forceFill([
-                    'password' => Hash::make($password)
-                ])->save();
+                $user
+                    ->forceFill([
+                        'password' => Hash::make($password),
+                    ])
+                    ->save();
 
                 $user->tokens()->delete();
-     
+
                 event(new PasswordReset($user));
-            }
+            },
         );
 
-        if($status === Password::PASSWORD_RESET){
-            return response()->json([
-                'success' => true,
-                'message' => __($status)
-            ], 200);
+        if ($status === Password::PASSWORD_RESET) {
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => __($status),
+                ],
+                200,
+            );
         }
 
-        return response()->json([
-            'success' => false,
-            'message' => [__($status)]
-        ], 400);
+        return response()->json(
+            [
+                'success' => false,
+                'message' => [__($status)],
+            ],
+            400,
+        );
     }
 }

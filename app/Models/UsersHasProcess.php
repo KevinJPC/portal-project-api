@@ -9,10 +9,5 @@ class UsersHasProcess extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'user_id',
-        'process_id',
-        'status',
-        'activity',
-    ];
+    protected $fillable = ['user_id', 'process_id', 'status', 'activity'];
 }

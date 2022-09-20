@@ -34,10 +34,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token'];
 
     /**
      * The attributes that should be cast.
@@ -51,7 +48,12 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $baseUrl = 'https://spa.test';
-        $url = $baseUrl.'/reset-password?token='.$token.'&email='.$this->email;
+        $url =
+            $baseUrl .
+            '/reset-password?token=' .
+            $token .
+            '&email=' .
+            $this->email;
 
         $this->notify(new ResetPasswordNotification($url, $this->name));
     }

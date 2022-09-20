@@ -24,21 +24,17 @@ class RegisterRequest extends FormRequest
      */
     public function rules()
     {
-      // Need pass the attribute password_confirmation
-      $rules = [
-        'name' => 'required',
-        'first_last_name' => 'required',
-        'second_last_name' => 'required',
-        'dni' => 'required',
-        'role_id' => 'required',
-        'email' => 'required|unique:users|email',
-        'password' => [
-          'required',
-          'confirmed',
-          Password::defaults(),
-        ],
-      ];
-  
-      return $rules;
+        // Need pass the attribute password_confirmation
+        $rules = [
+            'name' => 'required',
+            'first_last_name' => 'required',
+            'second_last_name' => 'required',
+            'dni' => 'required',
+            'role_id' => 'required',
+            'email' => 'required|unique:users|email',
+            'password' => ['required', 'confirmed', Password::defaults()],
+        ];
+
+        return $rules;
     }
 }

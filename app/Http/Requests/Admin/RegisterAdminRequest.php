@@ -25,19 +25,15 @@ class RegisterAdminRequest extends FormRequest
      */
     public function rules()
     {
-      $rules = [
-          'name' => 'required',
-          'first_last_name' => 'required',
-          'second_last_name' => 'required',
-          'dni' => 'required',
-          'email' => 'required|unique:users|email',
-          'password' => [
-            'required',
-            'confirmed',
-            Password::defaults(),
-          ],
+        $rules = [
+            'name' => 'required',
+            'first_last_name' => 'required',
+            'second_last_name' => 'required',
+            'dni' => 'required',
+            'email' => 'required|unique:users|email',
+            'password' => ['required', 'confirmed', Password::defaults()],
         ];
-      
-      return $rules;
+
+        return $rules;
     }
 }

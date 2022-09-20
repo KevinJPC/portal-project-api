@@ -9,8 +9,5 @@ class RolesHasProcess extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'role_id',
-        'process_id',
-    ];
+    protected $fillable = ['role_id', 'process_id'];
 }
