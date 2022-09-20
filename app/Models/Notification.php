@@ -12,8 +12,5 @@ class Notification extends Model
     /* Telling Laravel to use the pgsql connection instead of the default mysql connection. */
     protected $connection = 'pgsql';
 
-    protected $fillable = [
-        'description',
-        'users_has_process_id',
-    ];
+    protected $fillable = ['description', 'users_has_process_id'];
 }

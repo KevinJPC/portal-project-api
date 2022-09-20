@@ -11,12 +11,6 @@ class Process extends Model
 
     /* Telling Laravel to use the pgsql connection instead of the default mysql connection. */
     protected $connection = 'pgsql';
-    
-    protected $fillable = [
-        'se_oid',
-        'se_name',
-        'name',
-        'visible',
-        'state',
-    ];
+
+    protected $fillable = ['se_oid', 'se_name', 'name', 'visible', 'state'];
 }

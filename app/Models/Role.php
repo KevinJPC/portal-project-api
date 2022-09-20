@@ -12,10 +12,5 @@ class Role extends Model
     /* Telling Laravel to use the pgsql connection instead of the default mysql connection. */
     protected $connection = 'pgsql';
 
-    protected $fillable = [
-        'name',
-        'description',
-        'state',
-    ];
-
+    protected $fillable = ['name', 'description', 'state'];
 }

@@ -1,0 +1,7 @@
+{
+    "phpVersion": "8.0",
+    "singleQuote": true,
+    "trailingCommaPHP": true,
+    "printWidth": 80,
+    "endOfLine": "lf"
+}
