@@ -1,0 +1,9 @@
+{
+    "[php]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "thunder-client.saveToWorkspace": true,
+    "prettier.configPath": ".prettierrc",
+    "prettier.ignorePath": ".prettierignore"
+}
