@@ -7,8 +7,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/register', [RoleshasProcessesController::class, 'createRolehasProcesses']);
     Route::get('/allRoles', [RoleshasProcessesController::class, 'allRolesHasProcesses']);
-    Route::get('/{role:id}/getRole', [RoleshasProcessesController::class, 'getRoleHasProcesses']);
-    //Route::post('/', [RolesHasProcess::class, 'createRolehasProcesses']);
-    //Route::post('/', [RolesHasProcess::class, 'createRolehasProcesses']);
+    Route::get('/{process:id}/getRole', [RoleshasProcessesController::class, 'getRoleHasProcesses']);
+    Route::get('/modify', [RoleshasProcessesController::class, 'modifyRolehasProcesses']);
+    //Route::post('/', [RoleshasProcessesController::class, 'createRolehasProcesses']);
 
 });

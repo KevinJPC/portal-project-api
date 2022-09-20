@@ -21,7 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('/roles')->group(base_path('routes/api/v1/roleRoutes.php'));
 
-Route::prefix('/roleHasProcesses')->group(base_path('routes/api/v1/roleHasProcesses.php'));
+Route::prefix('/roles-has-process')->group(base_path('routes/api/v1/roles-has-process.php'));
 
 Route::prefix('/auth')->group(base_path('routes/api/v1/authRoutes.php'));
 

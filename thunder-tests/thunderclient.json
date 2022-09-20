@@ -55,12 +55,12 @@
     "method": "POST",
     "sortNum": 20000,
     "created": "2022-09-08T18:54:51.258Z",
-    "modified": "2022-09-12T21:58:10.201Z",
+    "modified": "2022-09-15T16:32:54.310Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Karla\",\n  \"dni\": \"609440138\",\n  \"first_last_name\": \"Lopez\",\n  \"second_last_name\": \"Solorzano\",\n  \"email\": \"Karla123@gmail.com\",\n  \"password\": \"Karla1234.\",\n  \"password_confirmation\": \"Karla1234.\",\n  \"role_id\": 2\n}",
+      "raw": "{\n  \"name\": \"Antony\",\n  \"dni\": \"604610390\",\n  \"first_last_name\": \"Torres\",\n  \"second_last_name\": \"López\",\n  \"email\": \"rt026000@gmail.com\",\n  \"password\": \"Tony2106.\",\n  \"password_confirmation\": \"Tony2106.\",\n  \"role_id\": 2\n}",
       "form": []
     },
     "auth": {
@@ -105,12 +105,12 @@
     "method": "POST",
     "sortNum": 40000,
     "created": "2022-09-08T22:19:28.544Z",
-    "modified": "2022-09-14T23:01:42.487Z",
+    "modified": "2022-09-15T16:33:08.350Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"email\": \"kevin123456@gmail.com\",\n  \"password\": \"Kevin1234567.\"\n}",
+      "raw": "{\n  \"email\": \"rt026000@gmail.com\",\n  \"password\": \"Tony2106.\"\n}",
       "form": []
     },
     "auth": {
@@ -365,13 +365,17 @@
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "13415fe4-5eff-47c6-b543-6a2aa142ffbd",
     "name": "getRolesHasProcesses",
-    "url": "http://127.0.0.1:8000/api/v1/roleHasProcesses/8/getRole",
+    "url": "http://127.0.0.1:8000/api/v1/roles-has-process/5/getRole",
     "method": "GET",
     "sortNum": 100000,
     "created": "2022-09-13T22:33:12.545Z",
-    "modified": "2022-09-14T19:26:52.253Z",
+    "modified": "2022-09-20T20:36:57.472Z",
     "headers": [],
     "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
     "tests": []
   },
   {
@@ -415,16 +419,16 @@
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "8874a6ff-705d-46e5-8d85-9d5b9ad5dfe6",
     "name": "UpdateProcess",
-    "url": "http://localhost:8000/api/v1/processes/22",
+    "url": "http://localhost:8000/api/v1/processes/5",
     "method": "PATCH",
     "sortNum": 160000,
     "created": "2022-09-14T17:41:02.000Z",
-    "modified": "2022-09-15T16:25:02.501Z",
+    "modified": "2022-09-20T20:38:36.777Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Proceso portal 4.1\",\n  \"visible\": false,\n  \"roles\": [1, 2]\n}",
+      "raw": "{\n  \"name\": \"Proceso portal 4.48796\",\n  \"visible\": false,\n  \"roles\": [5, 8, 18, 16, 22, 23]\n}",
       "form": []
     },
     "auth": {
@@ -499,6 +503,29 @@
     "modified": "2022-09-14T22:44:30.254Z",
     "headers": [],
     "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "137f883a-84cb-4918-9fa8-98fdec9bbece",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "13415fe4-5eff-47c6-b543-6a2aa142ffbd",
+    "name": "modifyRolesHasProcesses",
+    "url": "http://127.0.0.1:8000/api/v1/roleHasProcesses/modify",
+    "method": "GET",
+    "sortNum": 200000,
+    "created": "2022-09-20T14:27:53.591Z",
+    "modified": "2022-09-20T14:34:48.283Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"array\" : [16,18,15],\n  \"idProcess\" : 8\n}",
+      "form": []
+    },
     "auth": {
       "type": "bearer",
       "bearer": "{{token}}"
