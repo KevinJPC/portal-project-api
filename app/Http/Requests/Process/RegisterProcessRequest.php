@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\Process;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateUserRequest extends FormRequest
+class RegisterProcessRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,10 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:60',
-            'first_last_name' => 'required|max:60',
-            'second_last_name' => 'required|max:60',
-            'email' => 'required|unique:users|max:60',
+            'se_oid' => 'required',
+            'se_name' => 'required',
+            'name' => 'required|min:10',
+            'visible' => 'required',
         ];
     }
 }

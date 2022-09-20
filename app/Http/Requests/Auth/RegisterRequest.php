@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Auth;
 
-use App\Rules\IsValidPassword;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -36,8 +35,7 @@ class RegisterRequest extends FormRequest
         'password' => [
           'required',
           'confirmed',
-          Password::min(8),
-          new IsValidPassword(),
+          Password::defaults(),
         ],
       ];
   

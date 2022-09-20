@@ -1,5 +1,52 @@
 [
   {
+    "_id": "7eaa92da-4ebd-41c2-8f90-2357c04f29ef",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "57155924-dd15-463b-a596-1e436a9958f0",
+    "name": "createRole",
+    "url": "http://127.0.0.1:8000/api/v1/roles",
+    "method": "POST",
+    "sortNum": 30000,
+    "created": "2022-09-08T17:02:32.795Z",
+    "modified": "2022-09-13T22:23:48.956Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"Raros\",\n  \"description\": \"Rol del contratista\"\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "396875f0-401f-4f7c-9f29-63012ac38691",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "57155924-dd15-463b-a596-1e436a9958f0",
+    "name": "getInactivateRoles",
+    "url": "http://127.0.0.1:8000/api/v1/roles/inactives?page=2",
+    "method": "GET",
+    "sortNum": 50000,
+    "created": "2022-09-08T17:53:33.505Z",
+    "modified": "2022-09-13T22:21:46.898Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "page",
+        "value": "2",
+        "isPath": false
+      }
+    ],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
     "_id": "cc006b65-011d-4753-ab93-f429596a6907",
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "423a3123-ea8e-4bd8-93b9-64ea4c72dced",
@@ -8,12 +55,12 @@
     "method": "POST",
     "sortNum": 20000,
     "created": "2022-09-08T18:54:51.258Z",
-    "modified": "2022-09-14T22:24:26.348Z",
+    "modified": "2022-09-12T21:58:10.201Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Kevin\",\n  \"dni\": \"604680943\",\n  \"first_last_name\": \"Pitti\",\n  \"second_last_name\": \"Castro\",\n  \"email\": \"kepc08@gmail.com\",\n  \"password\": \"Kevin1234.\",\n  \"password_confirmation\": \"Kevin1234.\",\n  \"role_id\": 1\n}",
+      "raw": "{\n  \"name\": \"Karla\",\n  \"dni\": \"609440138\",\n  \"first_last_name\": \"Lopez\",\n  \"second_last_name\": \"Solorzano\",\n  \"email\": \"Karla123@gmail.com\",\n  \"password\": \"Karla1234.\",\n  \"password_confirmation\": \"Karla1234.\",\n  \"role_id\": 2\n}",
       "form": []
     },
     "auth": {
@@ -26,33 +73,6 @@
         "custom": "json.data.token",
         "action": "setto",
         "value": "{{token}}"
-      }
-    ]
-  },
-  {
-    "_id": "3b687fd8-c846-4535-b4aa-d56dc1ef7c00",
-    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
-    "containerId": "",
-    "name": "Session",
-    "url": "http://localhost:8000/sanctum/csrf-cookie",
-    "method": "GET",
-    "sortNum": 20000,
-    "created": "2022-09-08T19:36:39.917Z",
-    "modified": "2022-09-08T20:45:26.027Z",
-    "headers": [],
-    "params": [],
-    "tests": [
-      {
-        "type": "set-env-var",
-        "custom": "cookie.xsrf-token",
-        "action": "setto",
-        "value": "{{xsrf-token}}"
-      },
-      {
-        "type": "set-env-var",
-        "custom": "cookie.xsrf-token",
-        "action": "setto",
-        "value": "{{laravel_session}}"
       }
     ]
   },
@@ -92,6 +112,172 @@
     ]
   },
   {
+    "containerId": "e9097677-d9ee-4d1e-bed5-105e3b0271d2",
+    "name": "InactivateAdmin",
+    "url": "http://localhost:8000/api/v1/admin/7/inactivate",
+    "method": "PATCH",
+    "sortNum": 30000,
+    "created": "2022-09-09T23:31:42.339Z",
+    "modified": "2022-09-13T22:09:07.378Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "1f47259a-8a93-4128-9a9f-1548710139d3",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "e9097677-d9ee-4d1e-bed5-105e3b0271d2",
+    "name": "ListActives",
+    "url": "http://localhost:8000/api/v1/admin/actives?page=1",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2022-09-09T23:45:55.673Z",
+    "modified": "2022-09-12T22:27:49.322Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "page",
+        "value": "1",
+        "isPath": false
+      }
+    ],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "c6a3e4cb-8054-41c0-b1a2-ff2e07fc2402",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "e9097677-d9ee-4d1e-bed5-105e3b0271d2",
+    "name": "ListInactives",
+    "url": "http://localhost:8000/api/v1/admin/inactives?page=1",
+    "method": "GET",
+    "sortNum": 20000,
+    "created": "2022-09-09T23:49:18.724Z",
+    "modified": "2022-09-20T15:19:12.811Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "page",
+        "value": "1",
+        "isPath": false
+      }
+    ],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "75ddad56-376b-4e4b-aafa-c4b0aadc2511",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "e9097677-d9ee-4d1e-bed5-105e3b0271d2",
+    "name": "ActivateAdmin",
+    "url": "http://localhost:8000/api/v1/admin/7/activate",
+    "method": "PATCH",
+    "sortNum": 40000,
+    "created": "2022-09-10T04:00:05.612Z",
+    "modified": "2022-09-13T22:09:19.973Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "f10a9f5e-1b70-4150-8fe5-f54a2e5e3bb0",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "e9097677-d9ee-4d1e-bed5-105e3b0271d2",
+    "name": "RegisterAdmin",
+    "url": "http://localhost:8000/api/v1/admin/register",
+    "method": "POST",
+    "sortNum": 110000,
+    "created": "2022-09-12T17:48:10.454Z",
+    "modified": "2022-09-13T18:02:34.888Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"Pablo\",\n  \"dni\": \"609440138\",\n  \"first_last_name\": \"Lopez\",\n  \"second_last_name\": \"Cordoba\",\n  \"email\": \"Pablo123@gmail.com\",\n  \"password\": \"Pablo1234.\",\n  \"password_confirmation\": \"Pablo1234.\"\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "ca2e3e9c-3fb0-427c-8d7a-9732e49231eb",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "57155924-dd15-463b-a596-1e436a9958f0",
+    "name": "getActivateRoles",
+    "url": "http://127.0.0.1:8000/api/v1/roles/actives?page=1",
+    "method": "GET",
+    "sortNum": 55000,
+    "created": "2022-09-12T22:24:01.695Z",
+    "modified": "2022-09-14T15:17:01.745Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "page",
+        "value": "1",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "f1107c47-b037-49e9-8cac-c2582694a2f8",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "837f7af7-ce0d-4fce-a664-eceeb3f40389",
+    "name": "GetUserById",
+    "url": "http://localhost:8000/api/v1/users/2",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2022-09-13T16:15:18.935Z",
+    "modified": "2022-09-20T15:20:54.677Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "9691adb5-ce03-4163-9e28-128d2205a844",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "e9097677-d9ee-4d1e-bed5-105e3b0271d2",
+    "name": "UpdateAdmin",
+    "url": "http://localhost:8000/api/v1/admin/8",
+    "method": "PATCH",
+    "sortNum": 120000,
+    "created": "2022-09-13T16:16:26.903Z",
+    "modified": "2022-09-13T22:08:29.336Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"Pablo\",\n  \"first_last_name\": \"Lopez\",\n  \"second_last_name\": \"Cascante\",\n  \"email\": \"Pablo123456@gmail.com\"\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
     "_id": "16452c04-c6a8-4dd4-9950-0b7d13a78e85",
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "423a3123-ea8e-4bd8-93b9-64ea4c72dced",
@@ -119,25 +305,230 @@
     "tests": []
   },
   {
-    "_id": "63a2dfe9-7172-431e-ac55-8154eb5cfbfc",
+    "_id": "dc73e445-9dfe-4b12-834a-ab0bb2a24262",
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
-    "containerId": "423a3123-ea8e-4bd8-93b9-64ea4c72dced",
-    "name": "User",
-    "url": "http://localhost:8000/api/v1/auth/user",
+    "containerId": "837f7af7-ce0d-4fce-a664-eceeb3f40389",
+    "name": "UpdateUserProfile",
+    "url": "http://localhost:8000/api/v1/users/",
+    "method": "PATCH",
+    "sortNum": 130000,
+    "created": "2022-09-13T18:20:18.259Z",
+    "modified": "2022-09-20T15:21:10.643Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"Kevin Josue\",\n  \"first_last_name\": \"Ptti\",\n  \"second_last_name\": \"Castro\",\n  \"email\": \"kevin123456@gmail.com\"\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "32deba58-f691-4da7-a366-2205b5fe5e5b",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "837f7af7-ce0d-4fce-a664-eceeb3f40389",
+    "name": "UpdateUserPassword",
+    "url": "http://localhost:8000/api/v1/users/update-password",
+    "method": "PATCH",
+    "sortNum": 140000,
+    "created": "2022-09-13T18:20:54.740Z",
+    "modified": "2022-09-20T15:29:27.346Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"old_password\": \"Kevin7777.\",\n  \"password\": \"Kevin123.\",\n  \"password_confirmation\": \"Kevin123.\"\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "477a4740-c6b7-4bfa-846f-deb234c23e64",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "13415fe4-5eff-47c6-b543-6a2aa142ffbd",
+    "name": "createRolehasProcesses",
+    "url": "http://127.0.0.1:8000/api/v1/roleHasProcesses/register",
+    "method": "POST",
+    "sortNum": 90000,
+    "created": "2022-09-13T20:07:30.057Z",
+    "modified": "2022-09-14T20:01:43.111Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"array\" : [16,18,15],\n  \"idProcess\" : 8\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "7b4782aa-9733-4dfe-85fb-cc7aadd8a8f6",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "13415fe4-5eff-47c6-b543-6a2aa142ffbd",
+    "name": "getRolesHasProcesses",
+    "url": "http://127.0.0.1:8000/api/v1/roleHasProcesses/8/getRole",
     "method": "GET",
-    "sortNum": 60000,
-    "created": "2022-09-15T17:32:08.892Z",
-    "modified": "2022-09-15T19:30:55.786Z",
-    "headers": [
-      {
-        "name": "Accept",
-        "value": "application/json"
-      },
-      {
-        "name": "Content-Type",
-        "value": "application/json"
-      }
-    ],
+    "sortNum": 100000,
+    "created": "2022-09-13T22:33:12.545Z",
+    "modified": "2022-09-14T19:26:52.253Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "d1a5a642-8180-4d13-81ed-366f21e39df2",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "13415fe4-5eff-47c6-b543-6a2aa142ffbd",
+    "name": "allRolesHasProcesses",
+    "url": "http://127.0.0.1:8000/api/v1/roleHasProcesses/allRoles",
+    "method": "GET",
+    "sortNum": 110000,
+    "created": "2022-09-13T22:50:17.931Z",
+    "modified": "2022-09-13T22:50:32.089Z",
+    "headers": [],
+    "params": []
+  },
+  {
+    "_id": "8531af37-765d-4d84-a9c7-c8222052e154",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "8874a6ff-705d-46e5-8d85-9d5b9ad5dfe6",
+    "name": "RegisterProcess",
+    "url": "http://localhost:8000/api/v1/processes/register",
+    "method": "POST",
+    "sortNum": 150000,
+    "created": "2022-09-14T17:38:39.635Z",
+    "modified": "2022-09-16T17:55:48.046Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"se_oid\": \"Seoid93859\",\n  \"se_name\": \"Revision de pedido bancario\",\n  \"name\": \"Proceso portal 4\",\n  \"visible\": 1,\n  \"roles\": [1, 2, 3]\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "1dc09237-f118-4161-9c94-7642dd904d84",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "8874a6ff-705d-46e5-8d85-9d5b9ad5dfe6",
+    "name": "UpdateProcess",
+    "url": "http://localhost:8000/api/v1/processes/22",
+    "method": "PATCH",
+    "sortNum": 160000,
+    "created": "2022-09-14T17:41:02.000Z",
+    "modified": "2022-09-16T22:21:43.679Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"Proceso portal 4.3\",\n  \"visible\": 1,\n  \"roles\": [1, 2]\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "6f150af4-905d-4214-994b-e97e0662cd75",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "8874a6ff-705d-46e5-8d85-9d5b9ad5dfe6",
+    "name": "GetInactiveProcesses",
+    "url": "http://localhost:8000/api/v1/processes/inactives",
+    "method": "GET",
+    "sortNum": 160000,
+    "created": "2022-09-14T18:22:30.731Z",
+    "modified": "2022-09-14T18:25:43.611Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "0e9aff70-9cc7-46b8-9c6e-a58d7c382022",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "8874a6ff-705d-46e5-8d85-9d5b9ad5dfe6",
+    "name": "GetActiveProcesses",
+    "url": "http://localhost:8000/api/v1/processes/actives",
+    "method": "GET",
+    "sortNum": 170000,
+    "created": "2022-09-14T18:22:41.380Z",
+    "modified": "2022-09-14T18:25:31.604Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "6f181331-806a-4e3e-952b-859460bc6fa9",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "8874a6ff-705d-46e5-8d85-9d5b9ad5dfe6",
+    "name": "InactivateProcess",
+    "url": "http://localhost:8000/api/v1/processes/1/inactivate",
+    "method": "PATCH",
+    "sortNum": 180000,
+    "created": "2022-09-14T18:24:02.489Z",
+    "modified": "2022-09-14T22:36:51.482Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "d022f7d5-5354-4217-83b7-c1eaec1db421",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "8874a6ff-705d-46e5-8d85-9d5b9ad5dfe6",
+    "name": "ActivateProcess",
+    "url": "http://localhost:8000/api/v1/processes/1/activate",
+    "method": "PATCH",
+    "sortNum": 190000,
+    "created": "2022-09-14T18:24:13.533Z",
+    "modified": "2022-09-14T22:44:30.254Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "1c4780da-b588-4451-b7c9-ca79ded75be2",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "8874a6ff-705d-46e5-8d85-9d5b9ad5dfe6",
+    "name": "GetProcessById",
+    "url": "http://localhost:8000/api/v1/processes/1",
+    "method": "GET",
+    "sortNum": 200000,
+    "created": "2022-09-15T21:33:43.474Z",
+    "modified": "2022-09-15T21:34:00.031Z",
+    "headers": [],
     "params": [],
     "auth": {
       "type": "bearer",
@@ -154,7 +545,7 @@
     "method": "POST",
     "sortNum": 90000,
     "created": "2022-09-15T23:20:07.814Z",
-    "modified": "2022-09-16T22:53:36.370Z",
+    "modified": "2022-09-20T15:30:28.753Z",
     "headers": [
       {
         "name": "Accept",
@@ -168,8 +559,67 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"email\": \"kepc08@gmail.com\"\n}",
+      "raw": "{\n  \"email\": \"kevin123456@gmail.com\"\n}",
       "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "b3b401ef-0921-47cc-907c-ddd3855320b5",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "b0c2eb15-146d-4f11-984a-ba0758093d34",
+    "name": "StartProcess",
+    "url": "http://localhost:8000/api/v1/user-has-process/1",
+    "method": "POST",
+    "sortNum": 210000,
+    "created": "2022-09-15T23:28:20.704Z",
+    "modified": "2022-09-16T21:17:19.802Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"status\": 1,\n  \"activity\": \"actividad 7\"\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "d8e90420-1927-4e18-9ba1-e3377a3c878c",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "b0c2eb15-146d-4f11-984a-ba0758093d34",
+    "name": "GetUserProcess",
+    "url": "http://localhost:8000/api/v1/user-has-process/insiders",
+    "method": "GET",
+    "sortNum": 230000,
+    "created": "2022-09-15T23:31:22.884Z",
+    "modified": "2022-09-15T23:31:34.566Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "d96be397-fb3a-47e8-b62a-557d65c528ef",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "8874a6ff-705d-46e5-8d85-9d5b9ad5dfe6",
+    "name": "GetVisiblesProcesses",
+    "url": "http://localhost:8000/api/v1/processes/visibles",
+    "method": "GET",
+    "sortNum": 250000,
+    "created": "2022-09-16T21:52:26.902Z",
+    "modified": "2022-09-16T22:02:45.702Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
     },
     "tests": []
   },
@@ -182,7 +632,7 @@
     "method": "POST",
     "sortNum": 100000,
     "created": "2022-09-16T22:52:34.684Z",
-    "modified": "2022-09-17T00:30:04.548Z",
+    "modified": "2022-09-20T15:32:29.330Z",
     "headers": [
       {
         "name": "Accept",
@@ -196,9 +646,19 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"token\": \"dd3304a7c0496ded59e4a6141a6363a7ef1b50e0f1b45edb671b65063d509595\",\n  \"email\": \"kepc08@gmail.com\",\n  \"password\": \"Kevin777.\",\n  \"password_confirmation\": \"Kevin777.\"\n}",
+      "raw": "{\n  \"token\": \"ef031defbc2dde2564c5f6f116ab2ee9a8e2f8b72ccc6a69aef9c27a33335f41\",\n  \"email\": \"kevin123456@gmail.com\",\n  \"password\": \"Kevin777.\",\n  \"password_confirmation\": \"Kevin777.\"\n}",
       "form": []
     },
-    "tests": []
+    "auth": {
+      "type": "bearer"
+    },
+    "tests": [
+      {
+        "type": "set-env-var",
+        "custom": "json.data.token",
+        "action": "setto",
+        "value": "{{token}}"
+      }
+    ]
   }
 ]

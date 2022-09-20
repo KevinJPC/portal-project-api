@@ -6,6 +6,12 @@
     "sortNum": 10000,
     "folders": [
       {
+        "_id": "57155924-dd15-463b-a596-1e436a9958f0",
+        "name": "Role",
+        "containerId": "",
+        "created": "2022-09-08T17:02:10.417Z"
+      },
+      {
         "_id": "423a3123-ea8e-4bd8-93b9-64ea4c72dced",
         "name": "Auth",
         "containerId": "",
@@ -18,6 +24,65 @@
         "containerId": "",
         "created": "2022-09-16T22:52:18.700Z",
         "sortNum": 20000
+      },
+      {
+        "_id": "837f7af7-ce0d-4fce-a664-eceeb3f40389",
+        "name": "User",
+        "containerId": "",
+        "created": "2022-09-09T16:25:32.752Z",
+        "sortNum": 20000,
+        "settings": {
+          "headers": [],
+          "auth": {
+            "type": "bearer",
+            "bearer": "{{token}}"
+          },
+          "tests": []
+        }
+      },
+      {
+        "_id": "e9097677-d9ee-4d1e-bed5-105e3b0271d2",
+        "name": "Admin",
+        "containerId": "",
+        "created": "2022-09-12T15:21:15.554Z",
+        "sortNum": 30000,
+        "settings": {
+          "headers": [],
+          "auth": {
+            "type": "bearer",
+            "bearer": "{{token}}"
+          },
+          "tests": []
+        }
+      },
+      {
+        "_id": "13415fe4-5eff-47c6-b543-6a2aa142ffbd",
+        "name": "RolesHasProcesses",
+        "containerId": "",
+        "created": "2022-09-13T20:07:11.762Z",
+        "sortNum": 20000
+      },
+      {
+        "_id": "8874a6ff-705d-46e5-8d85-9d5b9ad5dfe6",
+        "name": "Process",
+        "containerId": "",
+        "created": "2022-09-14T16:35:45.116Z",
+        "sortNum": 40000,
+        "settings": {
+          "headers": [],
+          "auth": {
+            "type": "bearer",
+            "bearer": "{{token}}"
+          },
+          "tests": []
+        }
+      },
+      {
+        "_id": "b0c2eb15-146d-4f11-984a-ba0758093d34",
+        "name": "UserHasProcess",
+        "containerId": "",
+        "created": "2022-09-15T23:24:33.271Z",
+        "sortNum": 50000
       }
     ],
     "settings": {
@@ -31,6 +96,10 @@
           "value": "application/json"
         }
       ],
+      "auth": {
+        "type": "bearer",
+        "bearer": "{{token}}"
+      },
       "tests": [],
       "envId": "849c078d-271f-4e0a-a7f6-19b6b3112e69"
     }
