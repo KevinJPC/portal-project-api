@@ -101,12 +101,10 @@ class AdminController extends Controller
     public function getActiveAdmins(){
         try {
 
-            $current_user_id = Auth::user()->id;
-
             $active_users = DB::table('users')
             ->select('users.id', 'users.name', 'users.dni', 'users.first_last_name', 
                 'users.second_last_name','users.email', 'users.created_at', 'users.updated_at')
-            ->where('users.id', '!=', $current_user_id)
+            ->where('users.id', '!=', Auth::user()->id)
             ->join('roles', function($join){
                 $join->on('users.role_id', '=', 'roles.id')
                 ->where('roles.name','LIKE','Admin%');

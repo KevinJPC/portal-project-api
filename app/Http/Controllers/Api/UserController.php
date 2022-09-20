@@ -22,13 +22,11 @@ class UserController extends Controller
      */
     public function updateUser(UpdateUserRequest $request)
     {
-        $current_user = Auth::user();
-        $user_id = $current_user->id;
 
         try {
-            if (User::where('id', $user_id)->exists()) {
+            if (User::where('id', Auth::user()->id)->exists()) {
 
-                User::where('id', $user_id)
+                User::where('id', Auth::user()->id)
                 ->update([
                     'name' => $request->name,
                     'first_last_name' => $request->first_last_name,
