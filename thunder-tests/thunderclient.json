@@ -55,12 +55,12 @@
     "method": "POST",
     "sortNum": 20000,
     "created": "2022-09-08T18:54:51.258Z",
-    "modified": "2022-09-12T21:58:10.201Z",
+    "modified": "2022-09-20T16:00:59.006Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Karla\",\n  \"dni\": \"609440138\",\n  \"first_last_name\": \"Lopez\",\n  \"second_last_name\": \"Solorzano\",\n  \"email\": \"Karla123@gmail.com\",\n  \"password\": \"Karla1234.\",\n  \"password_confirmation\": \"Karla1234.\",\n  \"role_id\": 2\n}",
+      "raw": "{\n  \"name\": \" Kevin\",\n  \"dni\": \"609440138\",\n  \"first_last_name\": \"Lopez\",\n  \"second_last_name\": \"Cespedes\",\n  \"email\": \"Kevin123@gmail.com\",\n  \"password\": \"Kevin1234.\",\n  \"password_confirmation\": \"Kevin1234.\",\n  \"role_id\": 1\n}",
       "form": []
     },
     "auth": {
@@ -85,7 +85,7 @@
     "method": "POST",
     "sortNum": 40000,
     "created": "2022-09-08T22:19:28.544Z",
-    "modified": "2022-09-17T00:41:16.933Z",
+    "modified": "2022-09-20T16:06:04.929Z",
     "headers": [
       {
         "name": "Accept",
@@ -99,7 +99,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"email\": \"kepc08@gmail.com\",\n  \"password\": \"Kevin777.\"\n}",
+      "raw": "{\n  \"email\": \"Kevin123@gmail.com\",\n  \"password\": \"Kevin1234.\"\n}",
       "form": []
     },
     "tests": [
