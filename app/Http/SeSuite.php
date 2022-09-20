@@ -2,6 +2,8 @@
 
 // Server domain or server ip
 
+use SoapClient;
+
 $server = "test.createc-la.net";
 
  
