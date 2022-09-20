@@ -9,10 +9,8 @@ class Role extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name',
-        'description',
-        'state',
-    ];
+    /* Telling Laravel to use the pgsql connection instead of the default mysql connection. */
+    protected $connection = 'pgsql';
 
+    protected $fillable = ['name', 'description', 'state'];
 }

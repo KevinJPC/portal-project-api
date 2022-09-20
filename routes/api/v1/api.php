@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ProcessController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,18 +16,24 @@ use App\Http\Controllers\Api\AuthController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::prefix('/roles')->group(base_path('routes/api/v1/roleRoutes.php'));
 
 Route::prefix('/roles-has-process')->group(base_path('routes/api/v1/roles-has-process.php'));
 
 Route::prefix('/auth')->group(base_path('routes/api/v1/authRoutes.php'));
 
+Route::prefix('/password')->group(
+    base_path('routes/api/v1/passwordResetRoutes.php'),
+);
+
 Route::prefix('/users')->group(base_path('routes/api/v1/userRoutes.php'));
 
 Route::prefix('/admin')->group(base_path('routes/api/v1/adminRoutes.php'));
 
-Route::prefix('/processes')->group(base_path('routes/api/v1/processRoutes.php'));
+Route::prefix('/processes')->group(
+    base_path('routes/api/v1/processRoutes.php'),
+);
+
+Route::prefix('/user-has-process')->group(
+    base_path('routes/api/v1/userHasProcessRoutes.php'),
+);

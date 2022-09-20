@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests\Auth;
 
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginAuthRequest extends FormRequest
+class RegisterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +24,15 @@ class LoginAuthRequest extends FormRequest
      */
     public function rules()
     {
+        // Need pass the attribute password_confirmation
         $rules = [
-            'email' => 'required|email',
-            'password' => 'required'
+            'name' => 'required',
+            'first_last_name' => 'required',
+            'second_last_name' => 'required',
+            'dni' => 'required',
+            'role_id' => 'required',
+            'email' => 'required|unique:users|email',
+            'password' => ['required', 'confirmed', Password::defaults()],
         ];
 
         return $rules;

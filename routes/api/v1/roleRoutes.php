@@ -6,12 +6,18 @@ use App\Http\Controllers\Api\RoleController;
 
 /* A group of routes that are protected by the `auth:sanctum` middleware. */
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('auth:api')->group(function () {
     Route::post('/', [RoleController::class, 'createRole']);
     Route::get('/inactives', [RoleController::class, 'getInactiveRoles']);
     Route::get('/actives', [RoleController::class, 'getActiveRoles']);
     Route::get('/{role:id}', [RoleController::class, 'getRole']);
-    Route::patch('/{role:id}/inactivate', [RoleController::class, 'inactivateRole']);
+    Route::patch('/{role:id}/inactivate', [
+        RoleController::class,
+        'inactivateRole',
+    ]);
     Route::patch('/{role:id}', [RoleController::class, 'updateRole']);
-    Route::patch('/{role:id}/activate', [RoleController::class, 'activateRole']);
+    Route::patch('/{role:id}/activate', [
+        RoleController::class,
+        'activateRole',
+    ]);
 });

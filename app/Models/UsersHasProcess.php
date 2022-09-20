@@ -9,10 +9,8 @@ class UsersHasProcess extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'user_id',
-        'process_id',
-        'status',
-        'activity',
-    ];
+    /* Telling Laravel to use the pgsql connection instead of the default mysql connection. */
+    protected $connection = 'pgsql';
+
+    protected $fillable = ['user_id', 'process_id', 'status', 'activity'];
 }
