@@ -5,15 +5,23 @@
     "default": true,
     "sortNum": 20000,
     "created": "2022-09-08T20:44:44.222Z",
-    "modified": "2022-09-09T13:47:12.125Z",
+    "modified": "2022-09-17T00:41:16.930Z",
     "data": [
       {
         "name": "xsrf-token",
-        "value": "eyJpdiI6IlVwUzBWZkk3Qk1YbWp6QXJINlJEaWc9PSIsInZhbHVlIjoiSTlFOWw2dG10NlR6TUtFeEFlRTYrVzZiK0tvdTlaME5ZVUZlY0JHYURhQ29mWWUrTVVYRU1WWWZMQ09ZL2dMTjIyTTNLQVg0SHVyQllpYnZlcnprVGlYY01MclFRcWdnL2Z2d2NaMzhLR3lHM01LRnBuREhHVTdYMVJ6OEpybmkiLCJtYWMiOiJmZWNlYTE0MzI1MTE2YzFkY2QyMzliN2NiZjU5MTBlMGQ1ZWY5NjJlNWQ2ZTRkODkzNmIyNmMzNGJhNDhiZjhhIiwidGFnIjoiIn0%3D"
+        "value": "cookies.xsrf-token"
       },
       {
         "name": "laravel_session",
         "value": "eyJpdiI6IlVwUzBWZkk3Qk1YbWp6QXJINlJEaWc9PSIsInZhbHVlIjoiSTlFOWw2dG10NlR6TUtFeEFlRTYrVzZiK0tvdTlaME5ZVUZlY0JHYURhQ29mWWUrTVVYRU1WWWZMQ09ZL2dMTjIyTTNLQVg0SHVyQllpYnZlcnprVGlYY01MclFRcWdnL2Z2d2NaMzhLR3lHM01LRnBuREhHVTdYMVJ6OEpybmkiLCJtYWMiOiJmZWNlYTE0MzI1MTE2YzFkY2QyMzliN2NiZjU5MTBlMGQ1ZWY5NjJlNWQ2ZTRkODkzNmIyNmMzNGJhNDhiZjhhIiwidGFnIjoiIn0%3D"
+      },
+      {
+        "name": "token",
+        "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NzQ1ZDQyNy1kODNiLTQ4ZmMtYWIwNy1hNjNlZDA5NzZhZjciLCJqdGkiOiJlOTliOTA0ZWFjNWY0ZWEyMmQ0NDU3OTFiZjExM2M2NDFkMGY4NDk5YzRjNWJmZTgwNjA3NjNmNWYyNTQ0Mzc0YTA4NDZiYWM2YmRiZmM4MyIsImlhdCI6MTY2MzM3NTI3Ni44OTM4MjEsIm5iZiI6MTY2MzM3NTI3Ni44OTM4MjMsImV4cCI6MTY2MzQ2MTY3Ni44ODU1NzQsInN1YiI6IjIiLCJzY29wZXMiOltdfQ.woziqw0oe-8TDvGUej9tMZcx0l3Dcl3kQMGQAg2NCqSJaDkYmim37c01-xMF9MhJRRwh92PIi0MJ2lfJzmGIW4To7hSp-YP6cQkqgDAOP9INZ_kZ3m4FR5VS0N9zlKoTKySBB2OM06BthveAg0oxEXQDASy7qCsePGvj_kncq9HooX--sLaNKBoNRet90NreMkNeTfeOZJsuYSMfoDa303jRzZDCJJlSqJl9tdkZn6_dOGC_dv5NJH6PJwK4QlLn28q05qiFuPrbKCgjukBvKUMkLL3TGxROjKhQ79DKezyjp3KlqKVTrnv4FagqnKDSfLlOIiQG6u3vlnEtNlaHUA8YYZ2WPHcaJ5Qii4AbxUxMEODZAx471b8L8qaZJeix3UFX49tF9aibqzLW5N3_t55PZhQXrIp2K3seuvhQopljwFq3g6WcoeLSYAZEmKiiAsuamkIj0nH6eXhURzx2O56_WCgAIokGuZdgUwNo_9Ih3N_Wjbmkb2yzAHeKvpdzz75M3eTYmSxHXXf3TITT1lVImvgtpGBbePx18lGt5cYo5O-kuOC79tGZJTuZ7xUdEVv9mh1wRkUSiiWFXuGe2MmnAslxJpTHEFlZjmtCFHqH7iBefbryz_bhVlv-fClF4LPwdztjmHZf72AcGozlpSoGpCvXcHgwjjEv0wzoO-c"
+      },
+      {
+        "name": "xsrf",
+        "value": "cookies.xsrf-token"
       }
     ]
   }

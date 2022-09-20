@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Api\Controller;
-use App\Http\Requests\Auth\LoginAuthRequest;
-use App\Http\Requests\Auth\RegisterAuthRequest;
+use App\Http\Requests\Auth\LoginRequest;
+use Illuminate\Support\Facades\Password;
+use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Requests\Auth\ForgotPasswordRequest;
 
 class AuthController extends Controller
 {
@@ -18,7 +20,7 @@ class AuthController extends Controller
      * 
      * @param RegisterAuthRequest request The request object.
      */
-    public function register(RegisterAuthRequest $request) {
+    public function register(RegisterRequest $request) {
 
     try {
 
@@ -33,7 +35,7 @@ class AuthController extends Controller
             'role_id' => $request->role_id,
         ]);
 
-        $token = $user->createToken('auth_token')->plainTextToken;
+        $token = $user->createToken('auth_token')->accessToken;
         
         return response()->json(
             [
@@ -42,6 +44,7 @@ class AuthController extends Controller
               'data' => [
                 'user' => $user,
                 'token' => $token,
+                'token_type' => 'Bearer',
               ],
             ],
             200
@@ -64,7 +67,7 @@ class AuthController extends Controller
      * 
      * @param LoginAuthRequest request The request object.
      */
-    public function login(LoginAuthRequest $request)
+    public function login(LoginRequest $request)
     {
 
     try{
@@ -76,15 +79,16 @@ class AuthController extends Controller
                 'message' => 'Correo electrónico o contraseña incorrecta',
                 ], 201);
         }
-
-        $token = Auth::user()->createToken('auth_token')->plainTextToken;
+        $user = Auth::user();
+        $token = $user->createToken('auth_token')->accessToken;
  
         return response()->json([
             'success' => true, 
             'message' => 'Sesión iniciada exitosamente',
             'data' => [
-                'user' => Auth::user(),
+                'user' => $user,
                 'token' => $token,
+                'token_type' => 'Bearer',
             ]
             ], 200);
 
@@ -96,7 +100,28 @@ class AuthController extends Controller
         }
     }
 
+    /**
+     * It revokes the token of the user that is currently logged in.
+     * 
+     * @param Request request The request object.
+     */
     public function logout(Request $request) {
-        
+        try{
+            
+            Auth::user()->token()->revoke();
+
+            return response()->json([
+                'success' => true, 
+                'message' => 'Sesión cerrada exitosamente',
+                ], 200);
+
+        }catch(\Expection $exception){
+            return response()->json([
+                'success'=> false,
+                'message' => $exception->getMessage(),
+            ], 400);
+        }
     }
+    
+
 }

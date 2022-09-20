@@ -8,7 +8,7 @@
     "method": "POST",
     "sortNum": 20000,
     "created": "2022-09-08T18:54:51.258Z",
-    "modified": "2022-09-09T15:23:25.211Z",
+    "modified": "2022-09-14T22:24:26.348Z",
     "headers": [],
     "params": [],
     "body": {
@@ -16,7 +16,18 @@
       "raw": "{\n  \"name\": \"Kevin\",\n  \"dni\": \"604680943\",\n  \"first_last_name\": \"Pitti\",\n  \"second_last_name\": \"Castro\",\n  \"email\": \"kepc08@gmail.com\",\n  \"password\": \"Kevin1234.\",\n  \"password_confirmation\": \"Kevin1234.\",\n  \"role_id\": 1\n}",
       "form": []
     },
-    "tests": []
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": [
+      {
+        "type": "set-env-var",
+        "custom": "json.data.token",
+        "action": "setto",
+        "value": "{{token}}"
+      }
+    ]
   },
   {
     "_id": "3b687fd8-c846-4535-b4aa-d56dc1ef7c00",
@@ -54,12 +65,138 @@
     "method": "POST",
     "sortNum": 40000,
     "created": "2022-09-08T22:19:28.544Z",
-    "modified": "2022-09-09T14:22:18.486Z",
-    "headers": [],
+    "modified": "2022-09-17T00:41:16.933Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "application/json"
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      }
+    ],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"email\": \"kepc08@gmail.com\",\n  \"password\": \"Kevin1234.\"\n}",
+      "raw": "{\n  \"email\": \"kepc08@gmail.com\",\n  \"password\": \"Kevin777.\"\n}",
+      "form": []
+    },
+    "tests": [
+      {
+        "type": "set-env-var",
+        "custom": "json.data.token",
+        "action": "setto",
+        "value": "{{token}}"
+      }
+    ]
+  },
+  {
+    "_id": "16452c04-c6a8-4dd4-9950-0b7d13a78e85",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "423a3123-ea8e-4bd8-93b9-64ea4c72dced",
+    "name": "Logout",
+    "url": "http://localhost:8000/api/v1/auth/logout",
+    "method": "POST",
+    "sortNum": 50000,
+    "created": "2022-09-13T17:27:59.799Z",
+    "modified": "2022-09-15T23:19:36.614Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "application/json"
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      }
+    ],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "63a2dfe9-7172-431e-ac55-8154eb5cfbfc",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "423a3123-ea8e-4bd8-93b9-64ea4c72dced",
+    "name": "User",
+    "url": "http://localhost:8000/api/v1/auth/user",
+    "method": "GET",
+    "sortNum": 60000,
+    "created": "2022-09-15T17:32:08.892Z",
+    "modified": "2022-09-15T19:30:55.786Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "application/json"
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      }
+    ],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "80f211ea-c8f1-4f14-a25e-1caf7a4b3dae",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "b8f23e6b-b848-467e-9531-b19306dc7529",
+    "name": "ForgotPassword",
+    "url": "http://localhost:8000/api/v1/password/forgot",
+    "method": "POST",
+    "sortNum": 90000,
+    "created": "2022-09-15T23:20:07.814Z",
+    "modified": "2022-09-16T22:53:36.370Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "application/json"
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"email\": \"kepc08@gmail.com\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "ab9a5867-9246-431d-a1a5-f1894a275efb",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "b8f23e6b-b848-467e-9531-b19306dc7529",
+    "name": "ResetPassword",
+    "url": "http://localhost:8000/api/v1/password/reset",
+    "method": "POST",
+    "sortNum": 100000,
+    "created": "2022-09-16T22:52:34.684Z",
+    "modified": "2022-09-17T00:30:04.548Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "application/json"
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"token\": \"dd3304a7c0496ded59e4a6141a6363a7ef1b50e0f1b45edb671b65063d509595\",\n  \"email\": \"kepc08@gmail.com\",\n  \"password\": \"Kevin777.\",\n  \"password_confirmation\": \"Kevin777.\"\n}",
       "form": []
     },
     "tests": []
