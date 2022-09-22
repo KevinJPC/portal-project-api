@@ -11,7 +11,7 @@ class AdminSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
+     * It creates a user with the role of admin.
      * @return void
      */
     public function run()
