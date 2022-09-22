@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ProcessController;
+use App\Http\Controllers\Api\SeSuiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +38,5 @@ Route::prefix('/processes')->group(
 Route::prefix('/user-has-process')->group(
     base_path('routes/api/v1/userHasProcessRoutes.php'),
 );
+
+Route::get('/sesuite/test-ws', [SeSuiteController::class, 'testWs']);

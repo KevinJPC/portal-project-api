@@ -675,5 +675,19 @@
     "sortNum": 200000,
     "created": "2022-09-20T14:27:53.591Z",
     "modified": "2022-09-20T14:34:48.283Z"
+  },
+  {
+    "_id": "45eb70d1-e0cc-44b2-a4b1-130a6a1a9356",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "dbe8383e-a8bc-4249-8b26-4c0cc60b671e",
+    "name": "test-ws",
+    "url": "http://localhost:8000/api/v1/sesuite/test-ws",
+    "method": "GET",
+    "sortNum": 260000,
+    "created": "2022-09-21T21:36:04.480Z",
+    "modified": "2022-09-22T16:08:40.456Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]
