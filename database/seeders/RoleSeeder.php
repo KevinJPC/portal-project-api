@@ -9,6 +9,7 @@ class RoleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     * It creates a new admin role in the database.
      *
      * @return void
      */
