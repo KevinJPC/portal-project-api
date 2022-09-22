@@ -523,11 +523,11 @@
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "8874a6ff-705d-46e5-8d85-9d5b9ad5dfe6",
     "name": "GetProcessById",
-    "url": "http://localhost:8000/api/v1/processes/1",
+    "url": "http://localhost:8000/api/v1/processes/PO000001.2022.015",
     "method": "GET",
     "sortNum": 200000,
     "created": "2022-09-15T21:33:43.474Z",
-    "modified": "2022-09-15T21:34:00.031Z",
+    "modified": "2022-09-21T16:49:35.361Z",
     "headers": [],
     "params": [],
     "auth": {
@@ -660,5 +660,19 @@
         "value": "{{token}}"
       }
     ]
+  },
+  {
+    "_id": "fe51882d-c109-4b23-a1fa-6441d0bd6f9e",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "6690bef7-b2ea-4e77-bded-51af0021ec10",
+    "name": "GetSESuiteProcesses",
+    "url": "http://localhost:8000/api/v1/sesuite/processes",
+    "method": "GET",
+    "sortNum": 260000,
+    "created": "2022-09-20T20:37:28.235Z",
+    "modified": "2022-09-20T20:38:34.361Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]

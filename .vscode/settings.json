@@ -5,5 +5,8 @@
     },
     "thunder-client.saveToWorkspace": true,
     "prettier.configPath": ".prettierrc",
-    "prettier.ignorePath": ".prettierignore"
+    "prettier.ignorePath": ".prettierignore",
+    "editor.quickSuggestions": {
+        "other": "inline"
+    }
 }

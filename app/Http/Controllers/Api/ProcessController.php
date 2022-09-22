@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Process;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\Process\RegisterProcessRequest;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Process\UpdateProcessRequest;
+use App\Http\Requests\Process\RegisterProcessRequest;
 use App\Http\Controllers\Api\RoleshasProcessesController;
 
 class ProcessController extends Controller
