@@ -31,4 +31,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'soap' => [
+        'server' => env('SOAP_SERVER'),
+        'token' => env('SOAP_TOKEN'),
+    ]
+
 ];
