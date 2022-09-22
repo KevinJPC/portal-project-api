@@ -19,13 +19,6 @@
         "sortNum": 10000
       },
       {
-        "_id": "b8f23e6b-b848-467e-9531-b19306dc7529",
-        "name": "PasswordReset",
-        "containerId": "",
-        "created": "2022-09-16T22:52:18.700Z",
-        "sortNum": 20000
-      },
-      {
         "_id": "837f7af7-ce0d-4fce-a664-eceeb3f40389",
         "name": "User",
         "containerId": "",
@@ -83,6 +76,20 @@
         "containerId": "",
         "created": "2022-09-15T23:24:33.271Z",
         "sortNum": 50000
+      },
+      {
+        "_id": "b8f23e6b-b848-467e-9531-b19306dc7529",
+        "name": "PasswordReset",
+        "containerId": "",
+        "created": "2022-09-16T22:52:18.700Z",
+        "sortNum": 20000
+      },
+      {
+        "_id": "dbe8383e-a8bc-4249-8b26-4c0cc60b671e",
+        "name": "sesuite",
+        "containerId": "",
+        "created": "2022-09-21T21:35:31.585Z",
+        "sortNum": 60000
       }
     ],
     "settings": {
