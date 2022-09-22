@@ -8,12 +8,12 @@
     "method": "POST",
     "sortNum": 30000,
     "created": "2022-09-08T17:02:32.795Z",
-    "modified": "2022-09-13T22:23:48.956Z",
+    "modified": "2022-09-20T22:20:41.069Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Raros\",\n  \"description\": \"Rol del contratista\"\n}",
+      "raw": "{\n  \"name\": \"Cliente\",\n  \"description\": \"Rol del cliente\"\n}",
       "form": []
     },
     "auth": {
@@ -55,12 +55,12 @@
     "method": "POST",
     "sortNum": 20000,
     "created": "2022-09-08T18:54:51.258Z",
-    "modified": "2022-09-20T16:00:59.006Z",
+    "modified": "2022-09-20T22:20:03.423Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \" Kevin\",\n  \"dni\": \"609440138\",\n  \"first_last_name\": \"Lopez\",\n  \"second_last_name\": \"Cespedes\",\n  \"email\": \"Kevin123@gmail.com\",\n  \"password\": \"Kevin1234.\",\n  \"password_confirmation\": \"Kevin1234.\",\n  \"role_id\": 1\n}",
+      "raw": "{\n  \"name\": \" Antony\",\n  \"dni\": \"604610390\",\n  \"first_last_name\": \"Torres\",\n  \"second_last_name\": \"López\",\n  \"email\": \"rt026000@gmail.com\",\n  \"password\": \"Tony2106.\",\n  \"password_confirmation\": \"Tony2106.\",\n  \"role_id\": 1\n}",
       "form": []
     },
     "auth": {
@@ -85,7 +85,7 @@
     "method": "POST",
     "sortNum": 40000,
     "created": "2022-09-08T22:19:28.544Z",
-    "modified": "2022-09-20T16:06:04.929Z",
+    "modified": "2022-09-20T22:20:25.819Z",
     "headers": [
       {
         "name": "Accept",
@@ -99,7 +99,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"email\": \"Kevin123@gmail.com\",\n  \"password\": \"Kevin1234.\"\n}",
+      "raw": "{\n  \"email\": \"rt026000@gmail.com\",\n  \"password\": \"Tony2106.\"\n}",
       "form": []
     },
     "tests": [
@@ -523,17 +523,6 @@
     "tests": []
   },
   {
-
-    "_id": "137f883a-84cb-4918-9fa8-98fdec9bbece",
-    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
-    "containerId": "13415fe4-5eff-47c6-b543-6a2aa142ffbd",
-    "name": "modifyRolesHasProcesses",
-    "url": "http://127.0.0.1:8000/api/v1/roleHasProcesses/modify",
-    "method": "GET",
-    "sortNum": 200000,
-    "created": "2022-09-20T14:27:53.591Z",
-    "modified": "2022-09-20T14:34:48.283Z"
- },{
     "_id": "1c4780da-b588-4451-b7c9-ca79ded75be2",
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "8874a6ff-705d-46e5-8d85-9d5b9ad5dfe6",
@@ -675,5 +664,16 @@
         "value": "{{token}}"
       }
     ]
+  },
+  {
+    "_id": "137f883a-84cb-4918-9fa8-98fdec9bbece",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "13415fe4-5eff-47c6-b543-6a2aa142ffbd",
+    "name": "modifyRolesHasProcesses",
+    "url": "http://127.0.0.1:8000/api/v1/roleHasProcesses/modify",
+    "method": "GET",
+    "sortNum": 200000,
+    "created": "2022-09-20T14:27:53.591Z",
+    "modified": "2022-09-20T14:34:48.283Z"
   }
 ]
