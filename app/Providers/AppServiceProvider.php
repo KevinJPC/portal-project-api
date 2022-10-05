@@ -24,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        /* Setting the default password rules. */
         Password::defaults(function () {
             $rule = Password::min(8)
                 ->letters()

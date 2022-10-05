@@ -25,7 +25,7 @@ class AdminController extends Controller
         try {
             $role = DB::table('roles')
                 ->select('id')
-                ->where('name', 'LIKE', 'Admin%')
+                ->where('name_slug', '=', 'admin')
                 ->first();
 
             $user = User::create([
@@ -121,7 +121,7 @@ class AdminController extends Controller
                 ->join('roles', function ($join) {
                     $join
                         ->on('users.role_id', '=', 'roles.id')
-                        ->where('roles.name', 'LIKE', 'Admin%');
+                        ->where('roles.name_slug', '=', 'admin');
                 })
                 ->where('users.state', '=', 'A')
                 ->paginate(10);
@@ -168,7 +168,7 @@ class AdminController extends Controller
                 ->join('roles', function ($join) {
                     $join
                         ->on('users.role_id', '=', 'roles.id')
-                        ->where('roles.name', 'LIKE', 'Admin%');
+                        ->where('roles.name_slug', '=', 'admin');
                 })
                 ->where('users.state', '=', 'I')
                 ->paginate(10);

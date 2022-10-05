@@ -22,6 +22,7 @@ class RoleController extends Controller
         try {
             $role = new Role();
             $role->name = $request->name;
+            $role->name_slug = $request->name_slug;
             $role->description = $request->description;
             $role->state = 'A';
             $role->save();
@@ -221,6 +222,7 @@ class RoleController extends Controller
         try {
             $role = Role::find($role->id);
             $role->name = $request->name;
+            $role->name_slug = $request->name_slug;
             $role->description = $request->description;
             $role->state = $request->state;
             $role->save();
