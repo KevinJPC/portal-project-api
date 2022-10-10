@@ -8,7 +8,7 @@
     "method": "POST",
     "sortNum": 30000,
     "created": "2022-09-08T17:02:32.795Z",
-    "modified": "2022-10-07T17:25:33.103Z",
+    "modified": "2022-10-10T20:03:28.144Z",
     "headers": [
       {
         "name": "Accept",
@@ -24,7 +24,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Contratista\",\n  \"name_slug\": \"contratista\",\n  \"description\": \"Rol del contratista\"\n}",
+      "raw": "{\n  \"name\": \"General\",\n  \"name_slug\": \"general\",\n  \"description\": \"Rol general\"\n}",
       "form": []
     },
     "auth": {
@@ -66,12 +66,23 @@
     "method": "POST",
     "sortNum": 20000,
     "created": "2022-09-08T18:54:51.258Z",
-    "modified": "2022-10-07T17:26:56.633Z",
-    "headers": [],
+    "modified": "2022-10-10T20:04:29.715Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \" Kevin\",\n  \"dni\": \"604680943\",\n  \"first_last_name\": \"Pitti\",\n  \"second_last_name\": \"Castro\",\n  \"email\": \"kepc08@gmail.com\",\n  \"password\": \"Kevin123.\",\n  \"password_confirmation\": \"Kevin123.\",\n  \"role_id\": 2\n}",
+      "raw": "{\n  \"name\": \" Karla\",\n  \"dni\": \"604680943\",\n  \"first_last_name\": \"Pitti\",\n  \"second_last_name\": \"Castro\",\n  \"email\": \"Karla@gmail.com\",\n  \"password\": \"Karla123.\",\n  \"password_confirmation\": \"Karla123.\",\n  \"role_id\": 2\n}",
       "form": []
     },
     "auth": {
@@ -96,7 +107,7 @@
     "method": "POST",
     "sortNum": 40000,
     "created": "2022-09-08T22:19:28.544Z",
-    "modified": "2022-10-05T16:47:48.092Z",
+    "modified": "2022-10-10T19:51:14.303Z",
     "headers": [
       {
         "name": "Accept",
