@@ -72,7 +72,6 @@ class AuthController extends Controller
                 return response()->json(
                     [
                         'success' => false,
-                        'test_camel_case' => 'funca?',
                         'message' =>
                             'Correo electrónico o contraseña incorrecta',
                     ],
