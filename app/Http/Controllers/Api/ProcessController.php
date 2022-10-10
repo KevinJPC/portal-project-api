@@ -163,7 +163,7 @@ class ProcessController extends Controller
     public function getInactiveProcesses()
     {
         try {
-            $active_processes = DB::table('processes')
+            $inactive_processes = DB::table('processes')
                 ->where('state', '=', 'I')
                 ->paginate(10);
 
@@ -171,7 +171,7 @@ class ProcessController extends Controller
                 [
                     'success' => true,
                     'data' => [
-                        'active_processes' => $active_processes,
+                        'inactive_processes' => $inactive_processes,
                     ],
                 ],
                 200,
