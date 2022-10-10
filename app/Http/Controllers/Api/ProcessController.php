@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Process;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\Process\RegisterProcessRequest;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Process\UpdateProcessRequest;
+use App\Http\Requests\Process\RegisterProcessRequest;
 use App\Http\Controllers\Api\RoleshasProcessesController;
 
 class ProcessController extends Controller
@@ -166,7 +166,7 @@ class ProcessController extends Controller
     public function getInactiveProcesses()
     {
         try {
-            $active_processes = DB::table('processes')
+            $inactive_processes = DB::table('processes')
                 ->where('state', '=', 'I')
                 ->paginate(10);
 
@@ -174,7 +174,7 @@ class ProcessController extends Controller
                 [
                     'success' => true,
                     'data' => [
-                        'active_processes' => $active_processes,
+                        'inactive_processes' => $inactive_processes,
                     ],
                 ],
                 200,

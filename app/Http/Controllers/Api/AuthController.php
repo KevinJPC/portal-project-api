@@ -42,7 +42,6 @@ class AuthController extends Controller
                     'data' => [
                         'user' => $user,
                         'token' => $token,
-                        'token_type' => 'Bearer',
                     ],
                 ],
                 200,
@@ -76,7 +75,7 @@ class AuthController extends Controller
                         'message' =>
                             'Correo electrónico o contraseña incorrecta',
                     ],
-                    201,
+                    401,
                 );
             }
             $user = Auth::user();
@@ -87,9 +86,14 @@ class AuthController extends Controller
                     'success' => true,
                     'message' => 'Sesión iniciada exitosamente',
                     'data' => [
-                        'user' => $user,
+                        'user' => [
+                            'id' => $user->id,
+                            'name' => $user->name,
+                            'first_last_name' => $user->first_last_name,
+                            'second_last_name' => $user->second_last_name,
+                            'role' => $user->role->name_slug,
+                        ],
                         'token' => $token,
-                        'token_type' => 'Bearer',
                     ],
                 ],
                 200,
@@ -125,6 +129,46 @@ class AuthController extends Controller
                 200,
             );
         } catch (\Expection $exception) {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => $exception->getMessage(),
+                ],
+                400,
+            );
+        }
+    }
+
+    /**
+     * It returns the user's data and the token
+     *
+     * @param Request request The request object.
+     *
+     * @return The user's data and the token.
+     */
+    public function reconnect(Request $request)
+    {
+        try {
+            $user = Auth::user();
+            $token = explode(' ', $request->header('Authorization'))[1];
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'Reconexión exitosa',
+                    'data' => [
+                        'user' => [
+                            'id' => $user->id,
+                            'name' => $user->name,
+                            'first_last_name' => $user->first_last_name,
+                            'second_last_name' => $user->second_last_name,
+                            'role' => $user->role->name_slug,
+                        ],
+                        'token' => $token,
+                    ],
+                ],
+                200,
+            );
+        } catch (\Exception $exception) {
             return response()->json(
                 [
                     'success' => false,
