@@ -10,7 +10,7 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/', [RoleController::class, 'createRole']);
     Route::get('/inactives', [RoleController::class, 'getInactiveRoles']);
     Route::get('/actives', [RoleController::class, 'getActiveRoles']);
-    Route::get('/{role:id}', [RoleController::class, 'getRole']);
+    Route::get('/{role:id}', [RoleController::class, 'getRoleById']);
     Route::patch('/{role:id}/inactivate', [
         RoleController::class,
         'inactivateRole',

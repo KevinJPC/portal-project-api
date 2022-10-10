@@ -95,7 +95,6 @@ class RoleController extends Controller
     {
         try {
             $roles = DB::table('roles')
-                //->join('roles_has_processes','roles.id','=','role_id')
                 ->where('state', 'A')
                 ->latest()
                 ->paginate(10);
@@ -195,11 +194,11 @@ class RoleController extends Controller
      *
      * @param Role role The role object that you want to get.
      */
-    public function getRole(Role $role)
+    public function getRoleById(Role $role)
     {
         try {
             $role = Role::find($role->id);
-            return response()->json(['role' => $role], 200);
+            return response()->json(['success' => true, 'role' => $role], 200);
         } catch (Exception $exception) {
             return response()->json(
                 [
@@ -224,7 +223,6 @@ class RoleController extends Controller
             $role->name = $request->name;
             $role->name_slug = $request->name_slug;
             $role->description = $request->description;
-            $role->state = $request->state;
             $role->save();
 
             return response()->json(
