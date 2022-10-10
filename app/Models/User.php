@@ -60,4 +60,12 @@ class User extends Authenticatable
 
         $this->notify(new ResetPasswordNotification($url, $this->name));
     }
+
+    /**
+     * Get the role associated with the user.
+     */
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 }
