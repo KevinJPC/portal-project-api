@@ -31,6 +31,7 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+/* A way to store the credentials for the SOAP server. */
     'soap' => [
         'server' => env('SOAP_SERVER'),
         'token' => env('SOAP_TOKEN'),

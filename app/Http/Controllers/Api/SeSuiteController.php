@@ -14,6 +14,9 @@ class SeSuiteController extends Controller
         $this->formsWebService = app('soap_client_fm_ws');
     }
 
+    /**
+     * A test function to see what functions are available in the web service.
+     */
     public function testWs()
     {
         dd($this->formsWebService->__getFunctions());

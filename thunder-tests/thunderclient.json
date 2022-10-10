@@ -8,12 +8,23 @@
     "method": "POST",
     "sortNum": 30000,
     "created": "2022-09-08T17:02:32.795Z",
-    "modified": "2022-09-13T22:23:48.956Z",
-    "headers": [],
+    "modified": "2022-10-07T17:25:33.103Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Raros\",\n  \"description\": \"Rol del contratista\"\n}",
+      "raw": "{\n  \"name\": \"Contratista\",\n  \"name_slug\": \"contratista\",\n  \"description\": \"Rol del contratista\"\n}",
       "form": []
     },
     "auth": {
@@ -55,12 +66,12 @@
     "method": "POST",
     "sortNum": 20000,
     "created": "2022-09-08T18:54:51.258Z",
-    "modified": "2022-09-20T16:00:59.006Z",
+    "modified": "2022-10-07T17:26:56.633Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \" Kevin\",\n  \"dni\": \"609440138\",\n  \"first_last_name\": \"Lopez\",\n  \"second_last_name\": \"Cespedes\",\n  \"email\": \"Kevin123@gmail.com\",\n  \"password\": \"Kevin1234.\",\n  \"password_confirmation\": \"Kevin1234.\",\n  \"role_id\": 1\n}",
+      "raw": "{\n  \"name\": \" Kevin\",\n  \"dni\": \"604680943\",\n  \"first_last_name\": \"Pitti\",\n  \"second_last_name\": \"Castro\",\n  \"email\": \"kepc08@gmail.com\",\n  \"password\": \"Kevin123.\",\n  \"password_confirmation\": \"Kevin123.\",\n  \"role_id\": 2\n}",
       "form": []
     },
     "auth": {
@@ -85,21 +96,28 @@
     "method": "POST",
     "sortNum": 40000,
     "created": "2022-09-08T22:19:28.544Z",
-    "modified": "2022-09-20T16:06:04.929Z",
+    "modified": "2022-10-05T16:47:48.092Z",
     "headers": [
       {
         "name": "Accept",
-        "value": "application/json"
+        "value": "application/json",
+        "isDisabled": true
       },
       {
         "name": "Content-Type",
-        "value": "application/json"
+        "value": "application/json",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
       }
     ],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"email\": \"Kevin123@gmail.com\",\n  \"password\": \"Kevin1234.\"\n}",
+      "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"Password123.\"\n}",
       "form": []
     },
     "tests": [
@@ -196,11 +214,11 @@
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "e9097677-d9ee-4d1e-bed5-105e3b0271d2",
     "name": "ActivateAdmin",
-    "url": "http://localhost:8000/api/v1/admin/7/activate",
+    "url": "http://localhost:8000/api/v1/admin/2/activate",
     "method": "PATCH",
     "sortNum": 40000,
     "created": "2022-09-10T04:00:05.612Z",
-    "modified": "2022-09-13T22:09:19.973Z",
+    "modified": "2022-09-22T21:04:44.848Z",
     "headers": [],
     "params": [],
     "auth": {
@@ -313,7 +331,7 @@
     "method": "POST",
     "sortNum": 50000,
     "created": "2022-09-13T17:27:59.799Z",
-    "modified": "2022-09-15T23:19:36.614Z",
+    "modified": "2022-10-07T00:37:01.546Z",
     "headers": [
       {
         "name": "Accept",
@@ -322,6 +340,11 @@
       {
         "name": "Content-Type",
         "value": "application/json"
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
       }
     ],
     "params": [],
@@ -768,5 +791,55 @@
     "headers": [],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "0029e428-ebde-430c-b6dc-d434b62b1f93",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "e9097677-d9ee-4d1e-bed5-105e3b0271d2",
+    "name": "InactivateAdmin",
+    "url": "http://localhost:8000/api/v1/admin/2/inactivate",
+    "method": "PATCH",
+    "sortNum": 270000,
+    "created": "2022-09-22T21:03:30.220Z",
+    "modified": "2022-09-22T21:04:30.218Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "e1f8a764-4be4-4b21-9f49-3677f6397c28",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "423a3123-ea8e-4bd8-93b9-64ea4c72dced",
+    "name": "Reconnect",
+    "url": "http://localhost:8000/api/v1/auth/reconnect",
+    "method": "POST",
+    "sortNum": 45000,
+    "created": "2022-10-07T00:36:28.971Z",
+    "modified": "2022-10-10T18:03:32.822Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": [
+      {
+        "type": "set-env-var",
+        "custom": "json.data.token",
+        "action": "setto",
+        "value": "{{token}}"
+      }
+    ]
   }
 ]
