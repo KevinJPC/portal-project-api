@@ -198,7 +198,7 @@ class RoleController extends Controller
     {
         try {
             $role = Role::find($role->id);
-            return response()->json(['success' => true, 'role' => $role], 200);
+            return response()->json(['role' => $role], 200);
         } catch (Exception $exception) {
             return response()->json(
                 [
