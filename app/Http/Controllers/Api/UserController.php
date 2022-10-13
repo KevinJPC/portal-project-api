@@ -107,15 +107,17 @@ class UserController extends Controller
     public function getUserById(User $user)
     {
         try {
-            $user = DB::table('users')
-                ->select('name', 'first_last_name', 'second_last_name', 'email')
-                ->where('id', $user->id)
-                ->first();
-
             return response()->json(
                 [
                     'success' => true,
-                    'data' => ['user' => $user],
+                    'data' => [
+                        'user' => [
+                            'name' => $user->name,
+                            'first_last_name' => $user->first_last_name,
+                            'second_last_name' => $user->second_last_name,
+                            'email' => $user->email,
+                        ],
+                    ],
                 ],
                 200,
             );
