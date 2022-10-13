@@ -8,7 +8,7 @@
     "method": "POST",
     "sortNum": 30000,
     "created": "2022-09-08T17:02:32.795Z",
-    "modified": "2022-10-10T20:03:28.144Z",
+    "modified": "2022-10-11T16:36:16.684Z",
     "headers": [
       {
         "name": "Accept",
@@ -24,7 +24,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"General\",\n  \"name_slug\": \"general\",\n  \"description\": \"Rol general\"\n}",
+      "raw": "{\n  \"name\": \"Supervisor\",\n  \"name_slug\": \"supervisor\",\n  \"description\": \"Rol del Supervisor\"\n}",
       "form": []
     },
     "auth": {
@@ -38,16 +38,22 @@
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "57155924-dd15-463b-a596-1e436a9958f0",
     "name": "getInactivateRoles",
-    "url": "http://127.0.0.1:8000/api/v1/roles/inactives?page=2",
+    "url": "http://127.0.0.1:8000/api/v1/roles/inactives?page=1",
     "method": "GET",
     "sortNum": 50000,
     "created": "2022-09-08T17:53:33.505Z",
-    "modified": "2022-09-13T22:21:46.898Z",
-    "headers": [],
+    "modified": "2022-10-11T17:19:25.769Z",
+    "headers": [
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
     "params": [
       {
         "name": "page",
-        "value": "2",
+        "value": "1",
         "isPath": false
       }
     ],
@@ -66,7 +72,7 @@
     "method": "POST",
     "sortNum": 20000,
     "created": "2022-09-08T18:54:51.258Z",
-    "modified": "2022-10-10T20:04:29.715Z",
+    "modified": "2022-10-11T16:32:13.046Z",
     "headers": [
       {
         "name": "Accept",
@@ -82,7 +88,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \" Karla\",\n  \"dni\": \"604680943\",\n  \"first_last_name\": \"Pitti\",\n  \"second_last_name\": \"Castro\",\n  \"email\": \"Karla@gmail.com\",\n  \"password\": \"Karla123.\",\n  \"password_confirmation\": \"Karla123.\",\n  \"role_id\": 2\n}",
+      "raw": "{\n  \"name\": \"Antony\",\n  \"dni\": \"604610390\",\n  \"first_last_name\": \"Torres\",\n  \"second_last_name\": \"Lopez\",\n  \"email\": \"rt026000@gmail.com\",\n  \"password\": \"Tony2106.\",\n  \"password_confirmation\": \"Tony2106.\",\n  \"role_id\": 1\n}",
       "form": []
     },
     "auth": {
@@ -107,17 +113,15 @@
     "method": "POST",
     "sortNum": 40000,
     "created": "2022-09-08T22:19:28.544Z",
-    "modified": "2022-10-10T19:51:14.303Z",
+    "modified": "2022-10-11T16:31:55.305Z",
     "headers": [
       {
         "name": "Accept",
-        "value": "application/json",
-        "isDisabled": true
+        "value": "application/json"
       },
       {
         "name": "Content-Type",
-        "value": "application/json",
-        "isDisabled": true
+        "value": "application/json"
       },
       {
         "name": "User-Agent",
@@ -130,6 +134,10 @@
       "type": "json",
       "raw": "{\n  \"email\": \"rt026000@gmail.com\",\n  \"password\": \"Tony2106.\"\n}",
       "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
     },
     "tests": [
       {
@@ -247,7 +255,7 @@
     "method": "POST",
     "sortNum": 110000,
     "created": "2022-09-12T17:48:10.454Z",
-    "modified": "2022-10-06T20:08:00.283Z",
+    "modified": "2022-10-11T15:11:14.865Z",
     "headers": [
       {
         "name": "Accept",
@@ -263,7 +271,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Karla\",\n  \"dni\": \"609440138\",\n  \"first_last_name\": \"Lopez\",\n  \"second_last_name\": \"Cordoba\",\n  \"email\": \"Karla123@gmail.com\",\n  \"password\": \"Pablo1234.\",\n  \"password_confirmation\": \"Pablo1234.\"\n}",
+      "raw": "{\n  \"name\": \"Antony\",\n  \"dni\": \"604610390\",\n  \"first_last_name\": \"Torres\",\n  \"second_last_name\": \"Lopez\",\n  \"email\": \"rt026000@gmail.com\",\n  \"password\": \"Tony2106.\",\n  \"password_confirmation\": \"Tony2106.\"\n \n}",
       "form": []
     },
     "auth": {
@@ -863,23 +871,36 @@
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "57155924-dd15-463b-a596-1e436a9958f0",
     "name": "updateRole",
-    "url": "",
-    "method": "GET",
+    "url": "http://127.0.0.1:8000/api/v1/roles/2",
+    "method": "PATCH",
     "sortNum": 280000,
     "created": "2022-10-05T17:15:24.951Z",
-    "modified": "2022-10-05T17:15:24.951Z",
-    "headers": []
+    "modified": "2022-10-12T15:20:55.915Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"Generalsosss\",\n  \"name_slug\": \"generalsosss\",\n  \"description\": \"Rol de generals\"\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
   },
   {
-    "_id": "96ad0ad7-d71a-454b-9091-88e039c075d9",
-    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
-    "containerId": "57155924-dd15-463b-a596-1e436a9958f0",
-    "name": "getRoleByID",
-    "url": "http://127.0.0.1:8000/api/v1/roles/2",
-    "method": "GET",
-    "sortNum": 290000,
-    "created": "2022-10-10T15:59:52.689Z",
-    "modified": "2022-10-10T16:00:39.393Z",
     "_id": "e1f8a764-4be4-4b21-9f49-3677f6397c28",
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "423a3123-ea8e-4bd8-93b9-64ea4c72dced",
@@ -914,5 +935,97 @@
         "value": "{{token}}"
       }
     ]
+  },
+  {
+    "_id": "12c61f0e-8392-4948-aa22-c0d3b7b2b17c",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "57155924-dd15-463b-a596-1e436a9958f0",
+    "name": "inactivateRole",
+    "url": "http://127.0.0.1:8000/api/v1/roles/2/inactivate",
+    "method": "PATCH",
+    "sortNum": 290000,
+    "created": "2022-10-11T17:07:54.026Z",
+    "modified": "2022-10-11T17:13:31.051Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "81a4e65a-527d-44ad-b0b4-832a653a3e6b",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "57155924-dd15-463b-a596-1e436a9958f0",
+    "name": "activateRole",
+    "url": "http://127.0.0.1:8000/api/v1/roles/2/activate",
+    "method": "PATCH",
+    "sortNum": 300000,
+    "created": "2022-10-11T17:08:16.653Z",
+    "modified": "2022-10-11T17:14:18.704Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "e0f0763b-b3c0-423f-bf20-0d8af30c733a",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "57155924-dd15-463b-a596-1e436a9958f0",
+    "name": "getRoleById",
+    "url": "http://127.0.0.1:8000/api/v1/roles/2",
+    "method": "GET",
+    "sortNum": 310000,
+    "created": "2022-10-11T17:35:55.325Z",
+    "modified": "2022-10-11T17:45:50.928Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"id\": 2,\n  \"name\": \"General\",\n  \"name_slug\": \"general\",\n  \"description\": \"Rol de general\"\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
   }
 ]

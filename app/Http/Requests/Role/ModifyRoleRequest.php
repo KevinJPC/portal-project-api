@@ -25,9 +25,8 @@ class ModifyRoleRequest extends FormRequest
     {
         return [
             'name' => 'required|min:5',
-            'name_slug' => 'required|unique',
+            'name_slug' => 'required|unique:roles',
             'description',
-            'state' => 'required',
         ];
     }
 }
