@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use App\Models\User;
 use App\Models\Role;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\Admin\UpdateAdminRequest;
 use App\Http\Requests\Admin\RegisterAdminRequest;
-use App\Http\Requests\User\UpdateUserRequest;
 
 class AdminController extends Controller
 {
@@ -68,7 +68,7 @@ class AdminController extends Controller
      *
      * @return A JSON response with the success of the operation and a message.
      */
-    public function updateAdmin(User $user, UpdateUserRequest $request)
+    public function updateAdmin(User $user, UpdateAdminRequest $request)
     {
         try {
             if (User::where('id', $user->id)->exists()) {

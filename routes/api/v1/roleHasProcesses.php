@@ -12,10 +12,7 @@ Route::middleware('auth:api')->group(function () {
         RoleshasProcessesController::class,
         'allRolesHasProcesses',
     ]);
-    Route::get('/{role:id}/getRole', [
-        RoleshasProcessesController::class,
-        'getRoleHasProcesses',
-    ]);
+
     //Route::post('/', [RolesHasProcess::class, 'createRolehasProcesses']);
     //Route::post('/', [RolesHasProcess::class, 'createRolehasProcesses']);
 });
