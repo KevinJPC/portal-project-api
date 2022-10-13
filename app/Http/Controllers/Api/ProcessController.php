@@ -104,14 +104,18 @@ class ProcessController extends Controller
     public function getProcessById(Process $process)
     {
         try {
-            $process = DB::table('processes')
-                ->where('id', $process->id)
-                ->first();
+            $role_has_processes_controller = new RoleshasProcessesController();
+            $roles = $role_has_processes_controller->getRoleHasProcesses(
+                $process->id,
+            );
 
             return response()->json(
                 [
                     'success' => true,
-                    'data' => ['process' => $process],
+                    'data' => [
+                        'process' => $process,
+                        'roles' => $roles,
+                    ],
                 ],
                 200,
             );
