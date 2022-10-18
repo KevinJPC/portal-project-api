@@ -314,7 +314,8 @@ class ProcessController extends Controller
                 ->where('processes.name', 'ILIKE', $request . '%')
                 ->orwhere('processes.name', 'ILIKE', '%' . $request . '%')
                 ->orwhere('processes.name', 'ILIKE', '%' . $request)
-                ->get();
+                ->get()
+                ->paginate(10);
 
             return response()->json(
                 [
