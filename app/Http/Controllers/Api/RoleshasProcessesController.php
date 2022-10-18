@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use Exception;
-use App\Models\Role;
-use App\Models\Process;
-use App\Models\RolesHasProcess;
 use Illuminate\Support\Facades\DB;
+use App\Models\Process;
+use Illuminate\Support\Arr;
+use App\Models\Role;
+use App\Models\RolesHasProcess;
 use App\Http\Requests\RoleHasProceces\RoleHasProcesCreateRequest;
 
 class RoleshasProcessesController extends Controller
@@ -113,49 +114,29 @@ class RoleshasProcessesController extends Controller
     public function modifyRolehasProcesses($array, $idProcess)
     {
         try {
+            
             $arraynow = DB::table('roles_has_processes')
-                ->select('role_id')
-                ->where('process_id', '=', $process->id);
-
-            if (count($array) < count($arraynow)) {
-                for ($i = count($array); $i < count($arraynow); $i++) {
+            ->where('process_id','=',$idProcess)->groupBy('role_id')
+            ->pluck('role_id');
+            $arraynow = $arraynow -> toArray();
+            for ($i=0; $i < count($array); $i++) { 
+                if (!in_array($array[$i], $arraynow)) {
                     $rolehasprocesses = new RolesHasProcess();
                     $rolehasprocesses->role_id = $array[$i];
                     $rolehasprocesses->process_id = $idProcess;
                     $rolehasprocesses->save();
                 }
-
-                return response()->json(
-                    [
-                        'success' => true,
-                        'message' => 'Roles agregados correctamente',
-                        'data' => ['RoleHasProcesses' => $rolehasprocesses],
-                    ],
-                    200,
-                );
-            } else {
-                //$arraydelete = [];
-                for ($i = 0; $i < count($array); $i++) {
-                    for ($j = 0; $j < count($arraynow); $j++) {
-                        if ($array[$i] == $arraynow[$j]) {
-                            unset($arraynow[$j]);
-                        }
-                    }
-                }
-
-                for ($i = 0; $i < count($arraynow); $i++) {
-                    RolesHasProcess::where('role_id', $arraynow[$i])->delete();
-                }
-
-                return response()->json(
-                    [
-                        'success' => true,
-                        'message' => 'Roles eliminados correctamente',
-                        'data' => ['RoleHasProcesses' => $rolehasprocesses],
-                    ],
-                    200,
-                );
             }
+            for ($i=0; $i < count($arraynow); $i++) { 
+                if (!in_array($arraynow[$i],$array)) {
+                    RolesHasProcess::where('role_id', $arraynow[$i])->delete();
+                } 
+            }
+                return response()->json([
+                    "success" => true,
+                    "message" => "Roles Modificados correctamente",
+                    "data" => ["RoleHasProcesses" => $rolehasprocesses]
+            ],200);            
         } catch (Exception $exception) {
             response()->json(
                 [
