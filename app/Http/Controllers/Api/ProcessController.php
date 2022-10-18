@@ -299,4 +299,41 @@ class ProcessController extends Controller
             );
         }
     }
+
+    /**
+     * It searches for a process in the database and returns the results in a paginated format
+     *
+     * @return An array of objects.
+     */
+    public function searchProcess($request)
+    {
+        try {
+            //echo($request);
+            $active_processes = DB::table('processes')
+                ->where('state', '=', 'A')
+                ->where('processes.name', 'ILIKE', $request . '%')
+                ->orwhere('processes.name', 'ILIKE', '%' . $request . '%')
+                ->orwhere('processes.name', 'ILIKE', '%' . $request)
+                ->get()
+                ->paginate(10);
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'data' => [
+                        'active_processes' => $active_processes,
+                    ],
+                ],
+                200,
+            );
+        } catch (\Exception $exception) {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => $exception->getMessage(),
+                ],
+                400,
+            );
+        }
+    }
 }

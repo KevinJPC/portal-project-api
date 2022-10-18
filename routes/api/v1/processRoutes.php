@@ -31,4 +31,5 @@ Route::middleware('auth:api')->group(function () {
     ]);
 
     Route::get('/{process:id}', [ProcessController::class, 'getProcessById']);
+    Route::get('/{process:name}', [ProcessController::class, 'searchProcess']);
 });
