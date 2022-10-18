@@ -281,7 +281,8 @@ class AdminController extends Controller
                 ->where('users.name', 'ILIKE', $request . '%')
                 ->orWhere('users.dni', 'ILIKE', $request . '%')
                 ->orWhere('users.email', 'ILIKE', $request . '%')
-                ->get();
+                ->get()
+                ->paginate(10);
 
             return response()->json(
                 [
