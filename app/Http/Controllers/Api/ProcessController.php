@@ -66,9 +66,6 @@ class ProcessController extends Controller
                     'visible' => $request->visible,
                 ]);
 
-                
-
-
                 $role_has_processes = new RoleshasProcessesController();
                 $role_has_processes->modifyRolehasProcesses(
                     $request->roles,
@@ -289,6 +286,42 @@ class ProcessController extends Controller
                 [
                     'success' => true,
                     'message' => 'Proceso activado correctamente',
+                ],
+                200,
+            );
+        } catch (\Exception $exception) {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => $exception->getMessage(),
+                ],
+                400,
+            );
+        }
+    }
+
+    /**
+     * It searches for a process in the database and returns the results in a paginated format
+     *
+     * @return An array of objects.
+     */
+    public function searchProcess($request)
+    {
+        try {
+            //echo($request);
+            $active_processes = DB::table('processes')
+                ->where('state', '=', 'A')
+                ->where('processes.name', 'ILIKE', $request . '%')
+                ->orwhere('processes.name', 'ILIKE', '%' . $request . '%')
+                ->orwhere('processes.name', 'ILIKE', '%' . $request)
+                ->get();
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'data' => [
+                        'active_processes' => $active_processes,
+                    ],
                 ],
                 200,
             );

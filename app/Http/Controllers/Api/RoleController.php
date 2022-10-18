@@ -243,4 +243,29 @@ class RoleController extends Controller
             );
         }
     }
+
+    public function searchRole($request)
+    {
+        try {
+            $roles = DB::table('roles')
+                ->where('state', 'A')
+                ->where('name', 'ILIKE', $request . '%')
+                ->get();
+            //echo($request);
+            return response()->json(
+                [
+                    'roles' => $roles,
+                ],
+                200,
+            );
+        } catch (\Throwable $th) {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => $exception->getMessage(),
+                ],
+                400,
+            );
+        }
+    }
 }

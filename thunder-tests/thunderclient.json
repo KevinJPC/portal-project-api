@@ -24,7 +24,6 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Supervisor\",\n  \"name_slug\": \"supervisor\",\n  \"description\": \"Rol del Supervisor\"\n}",
       "raw": "{\n  \"name\": \"Gestor\",\n  \"name_slug\": \"gestor\",\n  \"description\": \"Rol Gestor\"\n}",
       "form": []
     },
@@ -114,7 +113,7 @@
     "method": "POST",
     "sortNum": 40000,
     "created": "2022-09-08T22:19:28.544Z",
-    "modified": "2022-10-11T20:28:19.554Z",
+    "modified": "2022-10-14T16:18:27.327Z",
     "headers": [
       {
         "name": "Accept",
@@ -134,7 +133,6 @@
     "body": {
       "type": "json",
       "raw": "{\n  \"email\": \"rt026000@gmail.com\",\n  \"password\": \"Tony2106.\"\n}",
-      "raw": "{\n  \"email\": \"admin1234@example.com\",\n  \"password\": \"Password123.\"\n}",
       "form": []
     },
     "auth": {
@@ -268,7 +266,7 @@
     "method": "POST",
     "sortNum": 110000,
     "created": "2022-09-12T17:48:10.454Z",
-    "modified": "2022-10-11T14:39:00.348Z",
+    "modified": "2022-10-17T19:45:40.601Z",
     "headers": [
       {
         "name": "Accept",
@@ -284,8 +282,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Antony\",\n  \"dni\": \"604610390\",\n  \"first_last_name\": \"Torres\",\n  \"second_last_name\": \"Lopez\",\n  \"email\": \"rt026000@gmail.com\",\n  \"password\": \"Tony2106.\",\n  \"password_confirmation\": \"Tony2106.\"\n \n}",
-      "raw": "{\n  \"name\": \"Wilmer\",\n  \"dni\": \"609440138\",\n  \"first_last_name\": \"Lopez\",\n  \"second_last_name\": \"Cordoba\",\n  \"email\": \"Wilmer12345@gmail.com\",\n  \"password\": \"Pablo1234.\",\n  \"password_confirmation\": \"Pablo1234.\"\n}",
+      "raw": "{\n  \"name\": \"Antony\",\n  \"dni\": \"604610390\",\n  \"first_last_name\": \"Torres\",\n  \"second_last_name\": \"Lpoez\",\n  \"email\": \"antonytorres@gmail.com\",\n  \"password\": \"Tony2106.\",\n  \"password_confirmation\": \"Tony2106.\"\n}",
       "form": []
     },
     "auth": {
@@ -303,7 +300,7 @@
     "method": "GET",
     "sortNum": 55000,
     "created": "2022-09-12T22:24:01.695Z",
-    "modified": "2022-10-05T17:18:05.523Z",
+    "modified": "2022-10-14T14:49:00.848Z",
     "headers": [
       {
         "name": "Accept",
@@ -522,7 +519,7 @@
     "method": "POST",
     "sortNum": 150000,
     "created": "2022-09-14T17:38:39.635Z",
-    "modified": "2022-10-12T20:38:41.863Z",
+    "modified": "2022-10-18T14:11:00.299Z",
     "headers": [
       {
         "name": "Accept",
@@ -538,7 +535,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"se_oid\": \"Seoid93859\",\n  \"se_name\": \"Revision de pedido bancario 3\",\n  \"name\": \"Proceso portal 5\",\n  \"visible\": 1,\n  \"roles\": [1, 2, 3, 4]\n}",
+      "raw": "{\n  \"se_oid\": \"Seoid93750\",\n  \"se_name\": \"Revision de pedidos\",\n  \"name\": \"Proceso portal 4\",\n  \"visible\": 1,\n  \"roles\": [1, 2, 3, 4]\n}",
       "form": []
     },
     "auth": {
@@ -1067,6 +1064,60 @@
       "raw": "{\n  \"id\": 2,\n  \"name\": \"General\",\n  \"name_slug\": \"general\",\n  \"description\": \"Rol de general\"\n}",
       "form": []
     },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "e03b9713-86d7-4a6a-a54e-02591969a48e",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "57155924-dd15-463b-a596-1e436a9958f0",
+    "name": "searchRole",
+    "url": "http://127.0.0.1:8000/api/v1/roles/Supervisor",
+    "method": "GET",
+    "sortNum": 320000,
+    "created": "2022-10-14T15:13:22.662Z",
+    "modified": "2022-10-14T21:47:58.219Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "43aa10e0-e966-4940-b377-82f9d3e407a5",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "e9097677-d9ee-4d1e-bed5-105e3b0271d2",
+    "name": "GetSearchAdmin",
+    "url": "http://localhost:8000/api/v1/admin/rt",
+    "method": "GET",
+    "sortNum": 330000,
+    "created": "2022-10-17T19:51:42.707Z",
+    "modified": "2022-10-17T22:13:37.714Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "7f149e64-0b32-4d6b-98f2-da6f463a001a",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "8874a6ff-705d-46e5-8d85-9d5b9ad5dfe6",
+    "name": "SerachProcess",
+    "url": "http://localhost:8000/api/v1/processes/4",
+    "method": "GET",
+    "sortNum": 340000,
+    "created": "2022-10-18T14:05:29.121Z",
+    "modified": "2022-10-18T20:52:16.931Z",
+    "headers": [],
+    "params": [],
     "auth": {
       "type": "bearer",
       "bearer": "{{token}}"

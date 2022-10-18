@@ -11,6 +11,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/inactives', [RoleController::class, 'getInactiveRoles']);
     Route::get('/actives', [RoleController::class, 'getActiveRoles']);
     Route::get('/{role:id}', [RoleController::class, 'getRoleById']);
+    Route::get('/{role:name}', [RoleController::class, 'searchRole']);
     Route::patch('/{role:id}/inactivate', [
         RoleController::class,
         'inactivateRole',

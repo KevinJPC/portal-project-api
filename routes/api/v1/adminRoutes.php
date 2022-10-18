@@ -17,5 +17,6 @@ Route::middleware('auth:api')->group(function () {
     ]);
 
     Route::get('/actives', [AdminController::class, 'getActiveAdmins']);
+    Route::get('/{user:name}', [AdminController::class, 'searchAdmin']);
     Route::get('/inactives', [AdminController::class, 'getInactiveAdmins']);
 });
