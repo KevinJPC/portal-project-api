@@ -107,7 +107,7 @@
     "method": "POST",
     "sortNum": 40000,
     "created": "2022-09-08T22:19:28.544Z",
-    "modified": "2022-10-11T20:28:19.554Z",
+    "modified": "2022-10-13T17:22:16.043Z",
     "headers": [
       {
         "name": "Accept",
@@ -128,7 +128,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"email\": \"admin1234@example.com\",\n  \"password\": \"Password123.\"\n}",
+      "raw": "{\n  \"email\": \"admin1234@example.com\",\n  \"password\": \"Password12345.\"\n}",
       "form": []
     },
     "tests": [
@@ -419,12 +419,23 @@
     "method": "PATCH",
     "sortNum": 140000,
     "created": "2022-09-13T18:20:54.740Z",
-    "modified": "2022-09-20T15:29:27.346Z",
-    "headers": [],
+    "modified": "2022-10-13T17:13:50.457Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"old_password\": \"Kevin7777.\",\n  \"password\": \"Kevin123.\",\n  \"password_confirmation\": \"Kevin123.\"\n}",
+      "raw": "{\n  \"old_password\": \"Password123.\",\n  \"password\": \"Password1234.\",\n  \"password_confirmation\": \"Password1234.\"\n}",
       "form": []
     },
     "auth": {
