@@ -309,19 +309,18 @@ class ProcessController extends Controller
     {
         try {
             //echo($request);
-            $active_processes = DB::table('processes')
+            $search_process = DB::table('processes')
                 ->where('state', '=', 'A')
                 ->where('processes.name', 'ILIKE', $request . '%')
                 ->orwhere('processes.name', 'ILIKE', '%' . $request . '%')
                 ->orwhere('processes.name', 'ILIKE', '%' . $request)
-                ->get()
                 ->paginate(10);
 
             return response()->json(
                 [
                     'success' => true,
                     'data' => [
-                        'active_processes' => $active_processes,
+                        'search_process' => $search_process,
                     ],
                 ],
                 200,
