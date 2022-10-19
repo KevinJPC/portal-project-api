@@ -250,12 +250,14 @@ class RoleController extends Controller
             $roles = DB::table('roles')
                 ->where('state', 'A')
                 ->where('name', 'ILIKE', $request . '%')
-                ->get()
                 ->paginate(10);
             //echo($request);
             return response()->json(
                 [
-                    'roles' => $roles,
+                    'success' => true,
+                    'data' => [
+                        'roles' => $roles,
+                    ],
                 ],
                 200,
             );
