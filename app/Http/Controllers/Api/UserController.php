@@ -62,20 +62,32 @@ class UserController extends Controller
 
         try {
             if (Hash::check($request->old_password, $current_user->password)) {
-                $user_id = $current_user->id;
-                $new_password = Hash::make($request->password);
+                if (Hash::check($request->password, $current_user->password)) {
+                    return response()->json(
+                        [
+                            'success' => false,
+                            'message' =>
+                                'La nueva contraseña debe ser diferente a la actual',
+                        ],
+                        400,
+                    );
+                } else {
+                    $user_id = $current_user->id;
+                    $new_password = Hash::make($request->password);
 
-                User::where('id', $user_id)->update([
-                    'password' => $new_password,
-                ]);
+                    User::where('id', $user_id)->update([
+                        'password' => $new_password,
+                    ]);
 
-                return response(
-                    [
-                        'success' => true,
-                        'message' => 'La contraseña se modificó correctamente',
-                    ],
-                    200,
-                );
+                    return response(
+                        [
+                            'success' => true,
+                            'message' =>
+                                'La contraseña se modificó correctamente',
+                        ],
+                        200,
+                    );
+                }
             } else {
                 return response()->json(
                     [
