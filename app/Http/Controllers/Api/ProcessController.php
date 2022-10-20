@@ -309,7 +309,7 @@ class ProcessController extends Controller
     {
         try {
             //echo($request);
-            $search_process = DB::table('processes')
+            $search_processes = DB::table('processes')
                 ->where('state', '=', 'A')
                 ->where('processes.name', 'ILIKE', $request . '%')
                 ->orwhere('processes.name', 'ILIKE', '%' . $request . '%')
@@ -320,7 +320,50 @@ class ProcessController extends Controller
                 [
                     'success' => true,
                     'data' => [
-                        'search_process' => $search_process,
+                        'search_processes' => $search_processes,
+                    ],
+                ],
+                200,
+            );
+        } catch (\Exception $exception) {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => $exception->getMessage(),
+                ],
+                400,
+            );
+        }
+    }
+
+    public function getSearchVisiblesProcesses($request)
+    {
+        try {
+            $search_user_processes = DB::table('processes')
+                ->join('roles_has_processes', function ($join) {
+                    $join
+                        ->on(
+                            'roles_has_processes.process_id',
+                            '=',
+                            'processes.id',
+                        )
+                        ->where(
+                            'roles_has_processes.role_id',
+                            '=',
+                            Auth::user()->role_id,
+                        );
+                })
+                ->where('processes.visible', '=', 1)
+                ->where('processes.name', 'ILIKE', $request . '%')
+                ->orwhere('processes.name', 'ILIKE', '%' . $request . '%')
+                ->orwhere('processes.name', 'ILIKE', '%' . $request)
+                ->paginate(10);
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'data' => [
+                        'search_user_processes' => $search_user_processes,
                     ],
                 ],
                 200,

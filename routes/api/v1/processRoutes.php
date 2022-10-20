@@ -20,7 +20,6 @@ Route::middleware('auth:api')->get('/actives', [
 
 Route::middleware('auth:api')->group(function () {
     Route::post('/register', [ProcessController::class, 'registerProcess']);
-    Route::get('/{process:name}', [ProcessController::class, 'searchProcess']);
     Route::get('/{process:id}', [ProcessController::class, 'getProcessById']);
     Route::patch('/{process:id}', [ProcessController::class, 'updateProcess']);
     Route::patch('/{process:id}/inactivate', [
@@ -31,4 +30,7 @@ Route::middleware('auth:api')->group(function () {
         ProcessController::class,
         'activateProcess',
     ]);
+    
+    Route::get('/{process:name}', [ProcessController::class, 'searchProcess']);
+    Route::get('/visible/{process:name}', [ProcessController::class, 'getSearchVisiblesProcesses']);
 });

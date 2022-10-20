@@ -10,7 +10,6 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/inactives', [RoleController::class, 'getInactiveRoles']);
     Route::get('/actives', [RoleController::class, 'getActiveRoles']);
     Route::post('/', [RoleController::class, 'createRole']);
-    Route::get('/{role:name}', [RoleController::class, 'searchRole']);
     Route::get('/{role:id}', [RoleController::class, 'getRoleById']);
     Route::patch('/{role:id}', [RoleController::class, 'updateRole']);
     Route::patch('/{role:id}/inactivate', [
@@ -21,4 +20,5 @@ Route::middleware('auth:api')->group(function () {
         RoleController::class,
         'activateRole',
     ]);
+    Route::get('/{role:name}', [RoleController::class, 'searchRole']);
 });
