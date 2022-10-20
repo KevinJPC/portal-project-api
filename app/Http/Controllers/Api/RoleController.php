@@ -255,7 +255,6 @@ class RoleController extends Controller
                 ->orwhere('name', 'ILIKE', '%' . $request . '%')
                 ->orwhere('name', 'ILIKE', '%' . $request)
                 ->paginate(10);
-
             return response()->json(
                 [   'success' => true,
                     'data' => ['roles' => $roles],
