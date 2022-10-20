@@ -60,7 +60,8 @@ class RoleController extends Controller
                 ->paginate(10);
             return response()->json(
                 [
-                    'roles' => $roles,
+                    'success' => true,
+                    'data' => ['roles' => $roles],
                 ],
                 200,
             );
@@ -102,7 +103,8 @@ class RoleController extends Controller
 
             return response()->json(
                 [
-                    'roles' => $roles,
+                    'success' => true,
+                    'data' => ['roles' => $roles],
                 ],
                 200,
             );
@@ -250,18 +252,17 @@ class RoleController extends Controller
             $roles = DB::table('roles')
                 ->where('state', 'A')
                 ->where('name', 'ILIKE', $request . '%')
+                ->orwhere('name', 'ILIKE', '%' . $request . '%')
+                ->orwhere('name', 'ILIKE', '%' . $request)
                 ->paginate(10);
-            //echo($request);
+
             return response()->json(
-                [
-                    'success' => true,
-                    'data' => [
-                        'roles' => $roles,
-                    ],
+                [   'success' => true,
+                    'data' => ['roles' => $roles],
                 ],
                 200,
             );
-        } catch (\Throwable $th) {
+        } catch (\Exception $exception) {
             return response()->json(
                 [
                     'success' => false,

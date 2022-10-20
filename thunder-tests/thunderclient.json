@@ -1095,8 +1095,19 @@
     "method": "GET",
     "sortNum": 320000,
     "created": "2022-10-14T15:13:22.662Z",
-    "modified": "2022-10-14T21:47:58.219Z",
-    "headers": [],
+    "modified": "2022-10-19T15:14:51.460Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
     "params": [],
     "auth": {
       "type": "bearer",
