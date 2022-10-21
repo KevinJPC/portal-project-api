@@ -11,6 +11,17 @@ use App\Http\Controllers\Api\RoleshasProcessesController;
 
 class ProcessController extends Controller
 {
+    private $workflow_web_services;
+
+    /**
+     * The constructor function is called when the class is instantiated. It is used to initialize the
+     * class properties.
+     */
+    public function __construct()
+    {
+        $this->workflow_web_services = app('workflow_web_services');
+    }
+
     /**
      * It creates a new process and create a new instance of the RoleshasProcessesController
      * and calling the createRolehasProcesses method
@@ -282,6 +293,75 @@ class ProcessController extends Controller
                 [
                     'success' => true,
                     'message' => 'Proceso activado correctamente',
+                ],
+                200,
+            );
+        } catch (\Exception $exception) {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => $exception->getMessage(),
+                ],
+                400,
+            );
+        }
+    }
+
+    /**
+     * It gets all the processes from the SE Suite database, then filters them by the ones that have a specific
+     * property in the json field, then returns the filtered processes
+     *
+     * @return An array of objects.
+     */
+    public function getSeSuiteProcesses()
+    {
+        try {
+            /* Getting all the processes from the se suite database. */
+            $sesuite_processes = DB::connection('sqlsrv')
+                ->table('pmactivity')
+                ->select(
+                    'pmactivity.idactivity',
+                    'pmactivity.nmactivity',
+                    'pmactivity.txactivity',
+                )
+                ->rightJoin(
+                    'pmacttype',
+                    'pmactivity.cdacttype',
+                    '=',
+                    'pmacttype.cdacttype',
+                )
+                ->where(function ($query) {
+                    $query
+                        ->whereIn('pmactivity.fgstatus', [1, 2])
+                        ->orWhereNull('pmactivity.fgstatus');
+                })
+                ->where('pmacttype.fgtype', '=', '1')
+                ->whereNotNull('pmactivity.idactivity')
+                ->get();
+
+            $processes_configured = [];
+
+            /* Looping through the SE Suite processes */
+            foreach ($sesuite_processes as $key => $process) {
+                /*
+                 * Decoding the json string that is stored in the txactivity field of the pmactivity
+                 table. 
+                 */
+                $process->txactivity = json_decode($process->txactivity);
+
+                /* Checking if the txactivity field is set and if it has a portal property. If it does, it is adding
+                 the idactivity and nmactivity to the array. */
+                if ($process->txactivity?->portal ?? false) {
+                    $processes_configured[] = [
+                        'se_oid' => $process->idactivity,
+                        'se_name' => $process->nmactivity,
+                    ];
+                }
+            }
+            return response()->json(
+                [
+                    'success' => true,
+                    'data' => $processes_configured,
                 ],
                 200,
             );

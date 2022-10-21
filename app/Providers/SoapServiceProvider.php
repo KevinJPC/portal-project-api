@@ -18,7 +18,7 @@ class SoapServiceProvider extends ServiceProvider
         /* Getting the server and user token from the config file. */
         $server = config('services.soap.server');
 
-        $userToken = config('services.soap.token');
+        $token = config('services.soap.token');
 
         //URL to download a remote WSDL
 
@@ -35,7 +35,7 @@ class SoapServiceProvider extends ServiceProvider
 
             'stream_context' => stream_context_create([
                 'http' => [
-                    'header' => 'Authorization: ' . $userToken,
+                    'header' => 'Authorization: ' . $token,
                 ],
 
                 'ssl' => [
@@ -57,11 +57,11 @@ class SoapServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('soap_client_wf_ws', function () {
+        $this->app->singleton('workflow_web_services', function () {
             return $this->createSoapClient('wf_ws');
         });
 
-        $this->app->singleton('soap_client_fm_ws', function () {
+        $this->app->singleton('forms_web_services', function () {
             return $this->createSoapClient('fm_ws');
         });
     }

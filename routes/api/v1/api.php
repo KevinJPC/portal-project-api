@@ -37,8 +37,6 @@ Route::prefix('/processes')->group(
     base_path('routes/api/v1/processRoutes.php'),
 );
 
-Route::prefix('/user-has-process')->group(
+Route::prefix('/users/processes')->group(
     base_path('routes/api/v1/userHasProcessRoutes.php'),
 );
-
-Route::get('/sesuite/test-ws', [SeSuiteController::class, 'testWs']);
