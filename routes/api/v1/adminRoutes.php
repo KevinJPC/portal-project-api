@@ -17,5 +17,5 @@ Route::middleware('auth:api')->group(function () {
         AdminController::class,
         'activateAdmin',
     ]);
-    Route::get('/{user:name}', [AdminController::class, 'searchAdmin']);
+    Route::get('/search/{user:name}', [AdminController::class, 'searchAdmin']);
 });

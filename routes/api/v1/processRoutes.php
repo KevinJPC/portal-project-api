@@ -31,6 +31,6 @@ Route::middleware('auth:api')->group(function () {
         'activateProcess',
     ]);
     
-    Route::get('/{process:name}', [ProcessController::class, 'searchProcess']);
-    Route::get('/visible/{process:name}', [ProcessController::class, 'getSearchVisiblesProcesses']);
+    Route::get('/search/{process:name}', [ProcessController::class, 'searchProcess']);
+    Route::get('/visibles/{process:name}', [ProcessController::class, 'getSearchVisiblesProcesses']);
 });
