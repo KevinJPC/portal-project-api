@@ -224,9 +224,12 @@ class RoleController extends Controller
     public function updateRole(ModifyRoleRequest $request, Role $role)
     {
         try {
+            
             $role = Role::find($role->id);
             $role->name = $request->name;
-            $role->name_slug = $request->name_slug;
+            if (!($role->name_slug = $request->name_slug)) {
+                $role->name_slug = $request->name_slug;
+            }
             $role->description = $request->description;
             $role->save();
 

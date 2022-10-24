@@ -913,11 +913,11 @@
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "57155924-dd15-463b-a596-1e436a9958f0",
     "name": "updateRole",
-    "url": "http://127.0.0.1:8000/api/v1/roles/2",
+    "url": "http://127.0.0.1:8000/api/v1/roles/8",
     "method": "PATCH",
     "sortNum": 280000,
     "created": "2022-10-05T17:15:24.951Z",
-    "modified": "2022-10-12T15:20:55.915Z",
+    "modified": "2022-10-24T19:29:06.457Z",
     "headers": [
       {
         "name": "Accept",
@@ -933,7 +933,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Generalsosss\",\n  \"name_slug\": \"generalsosss\",\n  \"description\": \"Rol de generals\"\n}",
+      "raw": "{\n  \"name\": \"Secretariado\",\n  \"name_slug\": \"secretariado\",\n  \"description\": \"Rol del secretariado\"\n}",
       "form": []
     },
     "auth": {
