@@ -131,7 +131,6 @@ class RoleController extends Controller
             $hasUsers = DB::table('users')
                 ->where('role_id', $role->id)
                 ->first();
-            //dd($hasUsers);
             if (!$hasUsers) {
                 $role->state = 'I';
                 $role->save();
@@ -171,6 +170,7 @@ class RoleController extends Controller
     public function activateRole(Role $role)
     {
         try {
+            $role = Role::find($role->id);
             $role->state = 'A';
             $role->save();
             return response()->json(
@@ -200,7 +200,10 @@ class RoleController extends Controller
     public function getRoleById(Role $role)
     {
         try {
-            return response()->json(['success' => true, 'role' => $role], 200);
+            return response()->json(
+                ['success' => true, 'data' => ['role' => $role]],
+                200,
+            );
         } catch (Exception $exception) {
             return response()->json(
                 [
@@ -256,9 +259,7 @@ class RoleController extends Controller
                 ->orwhere('name', 'ILIKE', '%' . $request)
                 ->paginate(10);
             return response()->json(
-                [   'success' => true,
-                    'data' => ['roles' => $roles],
-                ],
+                ['success' => true, 'data' => ['roles' => $roles]],
                 200,
             );
         } catch (\Exception $exception) {

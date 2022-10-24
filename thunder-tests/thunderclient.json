@@ -113,7 +113,7 @@
     "method": "POST",
     "sortNum": 40000,
     "created": "2022-09-08T22:19:28.544Z",
-    "modified": "2022-10-20T21:46:02.329Z",
+    "modified": "2022-10-20T22:38:32.296Z",
     "headers": [
       {
         "name": "Accept",
@@ -132,7 +132,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"email\": \"JhonSmmt@gmail.com\",\n  \"password\": \"Tony2106.\"\n}",
+      "raw": "{\n  \"email\": \"rt026000@gmail.com\",\n  \"password\": \"Tony2106.\"\n}",
       "form": []
     },
     "auth": {
@@ -983,11 +983,11 @@
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "57155924-dd15-463b-a596-1e436a9958f0",
     "name": "inactivateRole",
-    "url": "http://127.0.0.1:8000/api/v1/roles/2/inactivate",
+    "url": "http://127.0.0.1:8000/api/v1/roles/5/inactivate",
     "method": "PATCH",
     "sortNum": 290000,
     "created": "2022-10-11T17:07:54.026Z",
-    "modified": "2022-10-11T17:13:31.051Z",
+    "modified": "2022-10-21T15:29:21.870Z",
     "headers": [
       {
         "name": "Accept",
@@ -1045,7 +1045,7 @@
     "method": "GET",
     "sortNum": 310000,
     "created": "2022-10-11T17:35:55.325Z",
-    "modified": "2022-10-11T17:45:50.928Z",
+    "modified": "2022-10-21T15:14:28.221Z",
     "headers": [
       {
         "name": "Accept",
@@ -1075,11 +1075,11 @@
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "57155924-dd15-463b-a596-1e436a9958f0",
     "name": "searchRole",
-    "url": "http://127.0.0.1:8000/api/v1/roles/bode",
+    "url": "http://127.0.0.1:8000/api/v1/roles/search/bode",
     "method": "GET",
     "sortNum": 320000,
     "created": "2022-10-14T15:13:22.662Z",
-    "modified": "2022-10-20T00:40:55.565Z",
+    "modified": "2022-10-21T15:27:50.688Z",
     "headers": [
       {
         "name": "Accept",
@@ -1104,11 +1104,11 @@
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "e9097677-d9ee-4d1e-bed5-105e3b0271d2",
     "name": "GetSearchAdmin",
-    "url": "http://localhost:8000/api/v1/admin/rt",
+    "url": "http://localhost:8000/api/v1/admin/search/rt",
     "method": "GET",
     "sortNum": 330000,
     "created": "2022-10-17T19:51:42.707Z",
-    "modified": "2022-10-17T22:13:37.714Z",
+    "modified": "2022-10-24T14:59:50.884Z",
     "headers": [],
     "params": [],
     "auth": {
@@ -1122,11 +1122,11 @@
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "8874a6ff-705d-46e5-8d85-9d5b9ad5dfe6",
     "name": "SerachProcess",
-    "url": "http://localhost:8000/api/v1/processes/4",
+    "url": "http://localhost:8000/api/v1/processes/search/4",
     "method": "GET",
     "sortNum": 340000,
     "created": "2022-10-18T14:05:29.121Z",
-    "modified": "2022-10-18T20:52:16.931Z",
+    "modified": "2022-10-24T14:59:31.932Z",
     "headers": [],
     "params": [],
     "auth": {
