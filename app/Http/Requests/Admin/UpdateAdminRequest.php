@@ -29,7 +29,7 @@ class UpdateAdminRequest extends FormRequest
             'second_last_name' => 'required|max:60',
             'email' => [
                 'required',
-                'email',
+                'email:rfc,dns',
                 'max:60',
                 'unique:users,email,' . $this->route('user')->id,
             ],
