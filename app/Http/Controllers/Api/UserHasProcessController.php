@@ -47,6 +47,7 @@ class UserHasProcessController extends Controller
         try {
             $user_processes = DB::table('processes')
                 ->select(
+                    'processes.id',
                     'processes.name',
                     'processes.created_at',
                     'users_has_processes.activity',

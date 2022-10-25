@@ -72,7 +72,7 @@
     "method": "POST",
     "sortNum": 20000,
     "created": "2022-09-08T18:54:51.258Z",
-    "modified": "2022-10-20T21:27:31.142Z",
+    "modified": "2022-10-20T16:44:59.301Z",
     "headers": [
       {
         "name": "Accept",
@@ -88,7 +88,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Maria\",\n  \"dni\": \"608400830\",\n  \"first_last_name\": \"Sequeira\",\n  \"second_last_name\": \"Marines\",\n  \"email\": \"SMary@gmail.com\",\n  \"password\": \"Tony2106.\",\n  \"password_confirmation\": \"Tony2106.\",\n  \"role_id\": 7\n}",
+      "raw": "{\n  \"name\": \"Wilmer\",\n  \"dni\": \"604610390\",\n  \"first_last_name\": \"Lopez\",\n  \"second_last_name\": \"Cespedes\",\n  \"email\": \"wlopez@gmail.com\",\n  \"password\": \"Wilmer123.\",\n  \"password_confirmation\": \"Wilmer123.\",\n  \"role_id\": 2\n}",
       "form": []
     },
     "auth": {
@@ -113,7 +113,7 @@
     "method": "POST",
     "sortNum": 40000,
     "created": "2022-09-08T22:19:28.544Z",
-    "modified": "2022-10-20T22:38:32.296Z",
+    "modified": "2022-10-21T21:28:14.343Z",
     "headers": [
       {
         "name": "Accept",
@@ -132,7 +132,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"email\": \"rt026000@gmail.com\",\n  \"password\": \"Tony2106.\"\n}",
+      "raw": "{\n  \"email\": \"wlopez@gmail.com\",\n  \"password\": \"Wilmer123.\"\n}",
       "form": []
     },
     "auth": {
@@ -734,16 +734,27 @@
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "b0c2eb15-146d-4f11-984a-ba0758093d34",
     "name": "StartProcess",
-    "url": "http://localhost:8000/api/v1/user-has-process/1",
+    "url": "http://localhost:8000/api/v1/user-has-process/5",
     "method": "POST",
     "sortNum": 210000,
     "created": "2022-09-15T23:28:20.704Z",
-    "modified": "2022-09-16T21:17:19.802Z",
-    "headers": [],
+    "modified": "2022-10-25T18:05:20.136Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"status\": 1,\n  \"activity\": \"actividad 7\"\n}",
+      "raw": "{\n  \"status\": 1,\n  \"activity\": \"actividad #\"\n}",
       "form": []
     },
     "auth": {

@@ -33,7 +33,7 @@ class UserController extends Controller
                 return response()->json(
                     [
                         'success' => true,
-                        'message' => 'Usuario modificado correctamente',
+                        'message' => 'Información modificada correctamente',
                     ],
                     200,
                 );

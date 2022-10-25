@@ -29,6 +29,7 @@ class UpdateUserRequest extends FormRequest
             'second_last_name' => 'required|max:60',
             'email' => [
                 'required',
+                'email:rfc,dns',
                 'unique:users,email,' . auth()->user()->id,
                 'max:60',
             ],
