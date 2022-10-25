@@ -20,5 +20,5 @@ Route::middleware('auth:api')->group(function () {
         RoleController::class,
         'activateRole',
     ]);
-    Route::get('/{role:name}', [RoleController::class, 'searchRole']);
+    Route::get('/search/{role:name}', [RoleController::class, 'searchRole']);
 });
