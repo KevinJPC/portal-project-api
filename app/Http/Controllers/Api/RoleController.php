@@ -60,7 +60,8 @@ class RoleController extends Controller
                 ->paginate(10);
             return response()->json(
                 [
-                    'roles' => $roles,
+                    'success' => true,
+                    'data' => ['roles' => $roles],
                 ],
                 200,
             );
@@ -95,14 +96,15 @@ class RoleController extends Controller
     {
         try {
             $roles = DB::table('roles')
-                //->join('roles_has_processes','roles.id','=','role_id')
                 ->where('state', 'A')
+                ->where('name_slug', '!=', 'admin')
                 ->latest()
                 ->paginate(10);
 
             return response()->json(
                 [
-                    'roles' => $roles,
+                    'success' => true,
+                    'data' => ['roles' => $roles],
                 ],
                 200,
             );
@@ -129,7 +131,6 @@ class RoleController extends Controller
             $hasUsers = DB::table('users')
                 ->where('role_id', $role->id)
                 ->first();
-            //dd($hasUsers);
             if (!$hasUsers) {
                 $role->state = 'I';
                 $role->save();
@@ -169,6 +170,7 @@ class RoleController extends Controller
     public function activateRole(Role $role)
     {
         try {
+            $role = Role::find($role->id);
             $role->state = 'A';
             $role->save();
             return response()->json(
@@ -195,11 +197,13 @@ class RoleController extends Controller
      *
      * @param Role role The role object that you want to get.
      */
-    public function getRole(Role $role)
+    public function getRoleById(Role $role)
     {
         try {
-            $role = Role::find($role->id);
-            return response()->json(['role' => $role], 200);
+            return response()->json(
+                ['success' => true, 'data' => ['role' => $role]],
+                200,
+            );
         } catch (Exception $exception) {
             return response()->json(
                 [
@@ -220,11 +224,13 @@ class RoleController extends Controller
     public function updateRole(ModifyRoleRequest $request, Role $role)
     {
         try {
+            
             $role = Role::find($role->id);
             $role->name = $request->name;
-            $role->name_slug = $request->name_slug;
+            if (!($role->name_slug = $request->name_slug)) {
+                $role->name_slug = $request->name_slug;
+            }
             $role->description = $request->description;
-            $role->state = $request->state;
             $role->save();
 
             return response()->json(
@@ -236,6 +242,30 @@ class RoleController extends Controller
                 200,
             );
         } catch (Exception $exception) {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => $exception->getMessage(),
+                ],
+                400,
+            );
+        }
+    }
+
+    public function searchRole($request)
+    {
+        try {
+            $roles = DB::table('roles')
+                ->where('state', 'A')
+                ->where('name', 'ILIKE', $request . '%')
+                ->orwhere('name', 'ILIKE', '%' . $request . '%')
+                ->orwhere('name', 'ILIKE', '%' . $request)
+                ->paginate(10);
+            return response()->json(
+                ['success' => true, 'data' => ['roles' => $roles]],
+                200,
+            );
+        } catch (\Exception $exception) {
             return response()->json(
                 [
                     'success' => false,

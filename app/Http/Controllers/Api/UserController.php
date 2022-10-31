@@ -33,7 +33,7 @@ class UserController extends Controller
                 return response()->json(
                     [
                         'success' => true,
-                        'message' => 'Usuario modificado correctamente',
+                        'message' => 'Información modificada correctamente',
                     ],
                     200,
                 );
@@ -62,20 +62,32 @@ class UserController extends Controller
 
         try {
             if (Hash::check($request->old_password, $current_user->password)) {
-                $user_id = $current_user->id;
-                $new_password = Hash::make($request->password);
+                if (Hash::check($request->password, $current_user->password)) {
+                    return response()->json(
+                        [
+                            'success' => false,
+                            'message' =>
+                                'La nueva contraseña debe ser diferente a la actual',
+                        ],
+                        400,
+                    );
+                } else {
+                    $user_id = $current_user->id;
+                    $new_password = Hash::make($request->password);
 
-                User::where('id', $user_id)->update([
-                    'password' => $new_password,
-                ]);
+                    User::where('id', $user_id)->update([
+                        'password' => $new_password,
+                    ]);
 
-                return response(
-                    [
-                        'success' => true,
-                        'message' => 'La contraseña se modificó correctamente',
-                    ],
-                    200,
-                );
+                    return response(
+                        [
+                            'success' => true,
+                            'message' =>
+                                'La contraseña se modificó correctamente',
+                        ],
+                        200,
+                    );
+                }
             } else {
                 return response()->json(
                     [
@@ -107,15 +119,17 @@ class UserController extends Controller
     public function getUserById(User $user)
     {
         try {
-            $user = DB::table('users')
-                ->select('name', 'first_last_name', 'second_last_name', 'email')
-                ->where('id', $user->id)
-                ->first();
-
             return response()->json(
                 [
                     'success' => true,
-                    'data' => ['user' => $user],
+                    'data' => [
+                        'user' => [
+                            'name' => $user->name,
+                            'first_last_name' => $user->first_last_name,
+                            'second_last_name' => $user->second_last_name,
+                            'email' => $user->email,
+                        ],
+                    ],
                 ],
                 200,
             );

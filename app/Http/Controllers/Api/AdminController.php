@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use App\Models\User;
 use App\Models\Role;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\Admin\UpdateAdminRequest;
 use App\Http\Requests\Admin\RegisterAdminRequest;
-use App\Http\Requests\User\UpdateUserRequest;
 
 class AdminController extends Controller
 {
@@ -68,7 +68,7 @@ class AdminController extends Controller
      *
      * @return A JSON response with the success of the operation and a message.
      */
-    public function updateAdmin(User $user, UpdateUserRequest $request)
+    public function updateAdmin(User $user, UpdateAdminRequest $request)
     {
         try {
             if (User::where('id', $user->id)->exists()) {
@@ -243,6 +243,52 @@ class AdminController extends Controller
                 [
                     'success' => true,
                     'message' => 'Usuario activado correctamente',
+                ],
+                200,
+            );
+        } catch (\Exception $exception) {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => $exception->getMessage(),
+                ],
+                400,
+            );
+        }
+    }
+
+    public function searchAdmin($request)
+    {
+        try {
+            $search_users = DB::table('users')
+                ->select(
+                    'users.id',
+                    'users.name',
+                    'users.dni',
+                    'users.first_last_name',
+                    'users.second_last_name',
+                    'users.email',
+                    'users.created_at',
+                    'users.updated_at',
+                )
+                ->where('users.id', '!=', Auth::user()->id)
+                ->join('roles', function ($join) {
+                    $join
+                        ->on('users.role_id', '=', 'roles.id')
+                        ->where('roles.name_slug', '=', 'admin');
+                })
+                ->where('users.state', '=', 'A')
+                ->where('users.name', 'ILIKE', $request . '%')
+                ->orWhere('users.dni', 'ILIKE', $request . '%')
+                ->orWhere('users.email', 'ILIKE', $request . '%')
+                ->paginate(10);
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'data' => [
+                        'search_users' => $search_users,
+                    ],
                 ],
                 200,
             );

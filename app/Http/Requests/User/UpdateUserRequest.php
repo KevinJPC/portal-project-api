@@ -27,7 +27,12 @@ class UpdateUserRequest extends FormRequest
             'name' => 'required|max:60',
             'first_last_name' => 'required|max:60',
             'second_last_name' => 'required|max:60',
-            'email' => 'required|unique:users|max:60',
+            'email' => [
+                'required',
+                'email:rfc,dns',
+                'unique:users,email,' . auth()->user()->id,
+                'max:60',
+            ],
         ];
     }
 }

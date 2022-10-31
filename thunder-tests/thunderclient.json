@@ -8,7 +8,7 @@
     "method": "POST",
     "sortNum": 30000,
     "created": "2022-09-08T17:02:32.795Z",
-    "modified": "2022-10-10T20:03:28.144Z",
+    "modified": "2022-10-11T22:42:04.572Z",
     "headers": [
       {
         "name": "Accept",
@@ -24,7 +24,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"General\",\n  \"name_slug\": \"general\",\n  \"description\": \"Rol general\"\n}",
+      "raw": "{\n  \"name\": \"Gestor\",\n  \"name_slug\": \"gestor\",\n  \"description\": \"Rol Gestor\"\n}",
       "form": []
     },
     "auth": {
@@ -38,16 +38,22 @@
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "57155924-dd15-463b-a596-1e436a9958f0",
     "name": "getInactivateRoles",
-    "url": "http://127.0.0.1:8000/api/v1/roles/inactives?page=2",
+    "url": "http://127.0.0.1:8000/api/v1/roles/inactives?page=1",
     "method": "GET",
     "sortNum": 50000,
     "created": "2022-09-08T17:53:33.505Z",
-    "modified": "2022-09-13T22:21:46.898Z",
-    "headers": [],
+    "modified": "2022-10-11T17:19:25.769Z",
+    "headers": [
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
     "params": [
       {
         "name": "page",
-        "value": "2",
+        "value": "1",
         "isPath": false
       }
     ],
@@ -111,13 +117,11 @@
     "headers": [
       {
         "name": "Accept",
-        "value": "application/json",
-        "isDisabled": true
+        "value": "application/json"
       },
       {
         "name": "Content-Type",
-        "value": "application/json",
-        "isDisabled": true
+        "value": "application/json"
       },
       {
         "name": "User-Agent",
@@ -130,6 +134,10 @@
       "type": "json",
       "raw": "{\n  \"email\": \"kevin@gmail.com\",\n  \"password\": \"Kevin123.\"\n}",
       "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
     },
     "tests": [
       {
@@ -225,12 +233,23 @@
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "e9097677-d9ee-4d1e-bed5-105e3b0271d2",
     "name": "ActivateAdmin",
-    "url": "http://localhost:8000/api/v1/admin/2/activate",
+    "url": "http://localhost:8000/api/v1/admin/7/activate",
     "method": "PATCH",
     "sortNum": 40000,
     "created": "2022-09-10T04:00:05.612Z",
-    "modified": "2022-09-22T21:04:44.848Z",
-    "headers": [],
+    "modified": "2022-10-11T04:01:15.172Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
     "params": [],
     "auth": {
       "type": "bearer",
@@ -247,7 +266,7 @@
     "method": "POST",
     "sortNum": 110000,
     "created": "2022-09-12T17:48:10.454Z",
-    "modified": "2022-10-06T20:08:00.283Z",
+    "modified": "2022-10-17T19:45:40.601Z",
     "headers": [
       {
         "name": "Accept",
@@ -263,7 +282,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Karla\",\n  \"dni\": \"609440138\",\n  \"first_last_name\": \"Lopez\",\n  \"second_last_name\": \"Cordoba\",\n  \"email\": \"Karla123@gmail.com\",\n  \"password\": \"Pablo1234.\",\n  \"password_confirmation\": \"Pablo1234.\"\n}",
+      "raw": "{\n  \"name\": \"Antony\",\n  \"dni\": \"604610390\",\n  \"first_last_name\": \"Torres\",\n  \"second_last_name\": \"Lpoez\",\n  \"email\": \"antonytorres@gmail.com\",\n  \"password\": \"Tony2106.\",\n  \"password_confirmation\": \"Tony2106.\"\n}",
       "form": []
     },
     "auth": {
@@ -281,8 +300,19 @@
     "method": "GET",
     "sortNum": 55000,
     "created": "2022-09-12T22:24:01.695Z",
-    "modified": "2022-09-14T15:17:01.745Z",
-    "headers": [],
+    "modified": "2022-10-14T14:49:00.848Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
     "params": [
       {
         "name": "page",
@@ -290,6 +320,10 @@
         "isPath": false
       }
     ],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
     "tests": []
   },
   {
@@ -297,11 +331,11 @@
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "837f7af7-ce0d-4fce-a664-eceeb3f40389",
     "name": "GetUserById",
-    "url": "http://localhost:8000/api/v1/users/3",
+    "url": "http://localhost:8000/api/v1/users/4",
     "method": "GET",
     "sortNum": 10000,
     "created": "2022-09-13T16:15:18.935Z",
-    "modified": "2022-10-06T19:57:17.382Z",
+    "modified": "2022-10-20T21:45:41.533Z",
     "headers": [],
     "params": [],
     "auth": {
@@ -315,16 +349,27 @@
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "e9097677-d9ee-4d1e-bed5-105e3b0271d2",
     "name": "UpdateAdmin",
-    "url": "http://localhost:8000/api/v1/admin/8",
+    "url": "http://localhost:8000/api/v1/admin/10",
     "method": "PATCH",
     "sortNum": 120000,
     "created": "2022-09-13T16:16:26.903Z",
-    "modified": "2022-09-13T22:08:29.336Z",
-    "headers": [],
+    "modified": "2022-10-12T17:34:13.908Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Pablo\",\n  \"first_last_name\": \"Lopez\",\n  \"second_last_name\": \"Cascante\",\n  \"email\": \"Pablo123456@gmail.com\"\n}",
+      "raw": "{\n  \"name\": \"Ejemplo\",\n  \"first_last_name\": \"Ejemplo\",\n  \"second_last_name\": \"Ejemplo\",\n  \"email\": \"ejemplo@gmail.com\"\n}",
       "form": []
     },
     "auth": {
@@ -439,13 +484,17 @@
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "13415fe4-5eff-47c6-b543-6a2aa142ffbd",
     "name": "getRolesHasProcesses",
-    "url": "http://127.0.0.1:8000/api/v1/roleHasProcesses/8/getRole",
+    "url": "http://127.0.0.1:8000/api/v1/roles-has-process/5/getRole",
     "method": "GET",
     "sortNum": 100000,
     "created": "2022-09-13T22:33:12.545Z",
-    "modified": "2022-09-14T19:26:52.253Z",
+    "modified": "2022-09-20T20:36:57.472Z",
     "headers": [],
     "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
     "tests": []
   },
   {
@@ -566,7 +615,7 @@
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "8874a6ff-705d-46e5-8d85-9d5b9ad5dfe6",
     "name": "GetActiveProcesses",
-    "url": "http://localhost:8000/api/v1/processes/actives?page=1",
+    "url": "http://localhost:8000/api/v1/processes/actives",
     "method": "GET",
     "sortNum": 175000,
     "created": "2022-09-14T18:22:41.380Z",
@@ -583,13 +632,7 @@
         "isDisabled": true
       }
     ],
-    "params": [
-      {
-        "name": "page",
-        "value": "1",
-        "isPath": false
-      }
-    ],
+    "params": [],
     "auth": {
       "type": "bearer",
       "bearer": "{{token}}"
@@ -648,12 +691,23 @@
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "8874a6ff-705d-46e5-8d85-9d5b9ad5dfe6",
     "name": "GetProcessById",
-    "url": "http://localhost:8000/api/v1/processes/PO000001.2022.015",
+    "url": "http://localhost:8000/api/v1/processes/4",
     "method": "GET",
     "sortNum": 200000,
     "created": "2022-09-15T21:33:43.474Z",
-    "modified": "2022-09-21T16:49:35.361Z",
-    "headers": [],
+    "modified": "2022-10-12T21:30:13.284Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
     "params": [],
     "auth": {
       "type": "bearer",
@@ -827,17 +881,102 @@
     ]
   },
   {
+    "_id": "137f883a-84cb-4918-9fa8-98fdec9bbece",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "13415fe4-5eff-47c6-b543-6a2aa142ffbd",
+    "name": "modifyRolesHasProcesses",
+    "url": "http://127.0.0.1:8000/api/v1/roleHasProcesses/modify",
+    "method": "GET",
+    "sortNum": 200000,
+    "created": "2022-09-20T14:27:53.591Z",
+    "modified": "2022-09-20T14:34:48.283Z"
+  },
+  {
+    "_id": "45eb70d1-e0cc-44b2-a4b1-130a6a1a9356",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "dbe8383e-a8bc-4249-8b26-4c0cc60b671e",
+    "name": "test-ws",
+    "url": "http://localhost:8000/api/v1/sesuite/test-ws",
+    "method": "GET",
+    "sortNum": 260000,
+    "created": "2022-09-21T21:36:04.480Z",
+    "modified": "2022-10-06T21:41:23.963Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
     "_id": "0029e428-ebde-430c-b6dc-d434b62b1f93",
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "e9097677-d9ee-4d1e-bed5-105e3b0271d2",
     "name": "InactivateAdmin",
-    "url": "http://localhost:8000/api/v1/admin/2/inactivate",
+    "url": "http://localhost:8000/api/v1/admin/7/inactivate",
     "method": "PATCH",
     "sortNum": 270000,
     "created": "2022-09-22T21:03:30.220Z",
-    "modified": "2022-09-22T21:04:30.218Z",
-    "headers": [],
+    "modified": "2022-10-11T03:57:17.208Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
     "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "aae7ab2f-60af-497f-a9d3-77c1ac475e02",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "57155924-dd15-463b-a596-1e436a9958f0",
+    "name": "updateRole",
+    "url": "http://127.0.0.1:8000/api/v1/roles/8",
+    "method": "PATCH",
+    "sortNum": 280000,
+    "created": "2022-10-05T17:15:24.951Z",
+    "modified": "2022-10-24T19:29:06.457Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"Secretariado\",\n  \"name_slug\": \"secretariado\",\n  \"description\": \"Rol del secretariado\"\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
     "tests": []
   },
   {
@@ -885,7 +1024,18 @@
     "method": "GET",
     "sortNum": 290000,
     "created": "2022-10-12T21:58:28.753Z",
-    "modified": "2022-10-12T22:00:30.693Z",
+    "modified": "2022-10-12T22:00:30.693Z"
+  },
+  {
+    "_id": "12c61f0e-8392-4948-aa22-c0d3b7b2b17c",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "57155924-dd15-463b-a596-1e436a9958f0",
+    "name": "inactivateRole",
+    "url": "http://127.0.0.1:8000/api/v1/roles/5/inactivate",
+    "method": "PATCH",
+    "sortNum": 290000,
+    "created": "2022-10-11T17:07:54.026Z",
+    "modified": "2022-10-21T15:29:21.870Z",
     "headers": [
       {
         "name": "Accept",
@@ -914,7 +1064,18 @@
     "method": "GET",
     "sortNum": 300000,
     "created": "2022-10-12T23:08:25.349Z",
-    "modified": "2022-10-28T16:47:25.079Z",
+    "modified": "2022-10-28T16:47:25.079Z"
+  },
+  {
+    "_id": "81a4e65a-527d-44ad-b0b4-832a653a3e6b",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "57155924-dd15-463b-a596-1e436a9958f0",
+    "name": "activateRole",
+    "url": "http://127.0.0.1:8000/api/v1/roles/2/activate",
+    "method": "PATCH",
+    "sortNum": 300000,
+    "created": "2022-10-11T17:08:16.653Z",
+    "modified": "2022-10-11T17:14:18.704Z",
     "headers": [
       {
         "name": "Accept",
@@ -965,6 +1126,22 @@
     "sortNum": 320000,
     "created": "2022-10-26T21:00:44.503Z",
     "modified": "2022-10-27T17:03:03.128Z",
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "e0f0763b-b3c0-423f-bf20-0d8af30c733a",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "57155924-dd15-463b-a596-1e436a9958f0",
+    "name": "getRoleById",
+    "url": "http://127.0.0.1:8000/api/v1/roles/2",
+    "method": "GET",
+    "sortNum": 310000,
+    "created": "2022-10-11T17:35:55.325Z",
+    "modified": "2022-10-21T15:14:28.221Z",
     "headers": [
       {
         "name": "Accept",
@@ -983,6 +1160,86 @@
       "raw": "{\n  \"atrcedula\": \"6-0468-0943\", \n  \"atranioscump\": \"1\", \n  \"atrnombre\": \"Kevin\"\n}",
       "form": []
     },
+    "raw": "{\n  \"id\": 2,\n  \"name\": \"General\",\n  \"name_slug\": \"general\",\n  \"description\": \"Rol de general\"\n}",
+    "form": []
+  },
+  {
+    "_id": "e03b9713-86d7-4a6a-a54e-02591969a48e",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "57155924-dd15-463b-a596-1e436a9958f0",
+    "name": "searchRole",
+    "url": "http://127.0.0.1:8000/api/v1/roles/search/bode",
+    "method": "GET",
+    "sortNum": 320000,
+    "created": "2022-10-14T15:13:22.662Z",
+    "modified": "2022-10-21T15:27:50.688Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "43aa10e0-e966-4940-b377-82f9d3e407a5",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "e9097677-d9ee-4d1e-bed5-105e3b0271d2",
+    "name": "GetSearchAdmin",
+    "url": "http://localhost:8000/api/v1/admin/search/rt",
+    "method": "GET",
+    "sortNum": 330000,
+    "created": "2022-10-17T19:51:42.707Z",
+    "modified": "2022-10-24T14:59:50.884Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "7f149e64-0b32-4d6b-98f2-da6f463a001a",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "8874a6ff-705d-46e5-8d85-9d5b9ad5dfe6",
+    "name": "SerachProcess",
+    "url": "http://localhost:8000/api/v1/processes/search/4",
+    "method": "GET",
+    "sortNum": 340000,
+    "created": "2022-10-18T14:05:29.121Z",
+    "modified": "2022-10-24T14:59:31.932Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "1075264a-f9ef-49ba-86db-eddaf05de4fc",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "8874a6ff-705d-46e5-8d85-9d5b9ad5dfe6",
+    "name": "GetSearchVisiblesProcesses",
+    "url": "http://localhost:8000/api/v1/processes/visible/8",
+    "method": "GET",
+    "sortNum": 360000,
+    "created": "2022-10-20T21:47:16.902Z",
+    "modified": "2022-10-20T21:52:23.897Z",
+    "headers": [],
+    "params": [],
     "tests": []
   }
 ]

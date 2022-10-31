@@ -87,7 +87,7 @@ class UserHasProcessController extends Controller
             /* A query builder that is selecting the user's processes*/
             $user_processes = DB::table('processes')
                 ->select(
-                    'users_has_processes.id',
+                    'processes.id',
                     'processes.name',
                     'users_has_processes.se_oid',
                 )

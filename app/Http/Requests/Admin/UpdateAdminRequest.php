@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Process;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateProcessRequest extends FormRequest
+class UpdateAdminRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,17 +24,15 @@ class UpdateProcessRequest extends FormRequest
     public function rules()
     {
         return [
-<<<<<<< HEAD
-            'name' => 'required|min:10',
-=======
-            'name' => [
+            'name' => 'required|max:60',
+            'first_last_name' => 'required|max:60',
+            'second_last_name' => 'required|max:60',
+            'email' => [
                 'required',
-                'min:10',
-                'unique:processes,name,' . $this->route('process')->id,
+                'email:rfc,dns',
+                'max:60',
+                'unique:users,email,' . $this->route('user')->id,
             ],
->>>>>>> 09e8246839c7d6bd0bbb12a88c21480c4dca3ff3
-            'visible' => 'required',
-            'roles' => 'required',
         ];
     }
 }

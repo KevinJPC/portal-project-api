@@ -199,5 +199,9 @@ return [
         'updated_at'               => 'actualizado el',
         'username'                 => 'usuario',
         'year'                     => 'año',
+        'first_last_name'          => 'primer apellido',
+        'second_last_name'         => 'segundo apellido',
+        'old_password'             => 'contraseña actual',
+        'dni'                      => 'cédula',
     ],
 ];

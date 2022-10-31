@@ -112,14 +112,18 @@ class ProcessController extends Controller
     public function getProcessById(Process $process)
     {
         try {
-            $process = DB::table('processes')
-                ->where('id', $process->id)
-                ->first();
+            $role_has_processes_controller = new RoleshasProcessesController();
+            $roles = $role_has_processes_controller->getRoleHasProcesses(
+                $process->id,
+            );
 
             return response()->json(
                 [
                     'success' => true,
-                    'data' => ['process' => $process],
+                    'data' => [
+                        'process' => $process,
+                        'roles' => $roles,
+                    ],
                 ],
                 200,
             );
@@ -358,10 +362,86 @@ class ProcessController extends Controller
                     ];
                 }
             }
+
+            return response()->json([
+                'success' => true,
+                'data' => $processes_configured,
+            ]);
+        } catch (\Exception $exception) {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => $exception->getMessage(),
+                ],
+                400,
+            );
+        }
+    }
+
+    /* It searches for a process in the database and returns the results in a paginated format
+     *
+     * @return An array of objects.
+     */
+    public function searchProcess($request)
+    {
+        try {
+            //echo($request);
+            $search_processes = DB::table('processes')
+                ->where('state', '=', 'A')
+                ->where('processes.name', 'ILIKE', $request . '%')
+                ->orwhere('processes.name', 'ILIKE', '%' . $request . '%')
+                ->orwhere('processes.name', 'ILIKE', '%' . $request)
+                ->paginate(10);
+
             return response()->json(
                 [
                     'success' => true,
-                    'data' => $processes_configured,
+                    'data' => [
+                        'search_processes' => $search_processes,
+                    ],
+                ],
+                200,
+            );
+        } catch (\Exception $exception) {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => $exception->getMessage(),
+                ],
+                400,
+            );
+        }
+    }
+
+    public function getSearchVisiblesProcesses($request)
+    {
+        try {
+            $search_user_processes = DB::table('processes')
+                ->join('roles_has_processes', function ($join) {
+                    $join
+                        ->on(
+                            'roles_has_processes.process_id',
+                            '=',
+                            'processes.id',
+                        )
+                        ->where(
+                            'roles_has_processes.role_id',
+                            '=',
+                            Auth::user()->role_id,
+                        );
+                })
+                ->where('processes.visible', '=', 1)
+                ->where('processes.name', 'ILIKE', $request . '%')
+                ->orwhere('processes.name', 'ILIKE', '%' . $request . '%')
+                ->orwhere('processes.name', 'ILIKE', '%' . $request)
+                ->paginate(10);
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'data' => [
+                        'search_user_processes' => $search_user_processes,
+                    ],
                 ],
                 200,
             );
