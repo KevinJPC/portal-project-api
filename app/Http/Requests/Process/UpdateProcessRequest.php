@@ -30,6 +30,7 @@ class UpdateProcessRequest extends FormRequest
                 'unique:processes,name,' . $this->route('process')->id,
             ],
             'visible' => 'required',
+            'roles' => 'required',
         ];
     }
 }
