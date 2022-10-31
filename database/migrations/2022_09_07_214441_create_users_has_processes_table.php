@@ -22,8 +22,7 @@ return new class extends Migration {
                 ->foreignId('process_id')
                 ->constrained()
                 ->onDelete('cascade');
-            $table->integer('status');
-            $table->string('activity');
+            $table->string('se_oid');
             $table->timestamps();
         });
     }

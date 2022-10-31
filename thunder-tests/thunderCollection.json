@@ -83,13 +83,6 @@
         "containerId": "",
         "created": "2022-09-16T22:52:18.700Z",
         "sortNum": 20000
-      },
-      {
-        "_id": "dbe8383e-a8bc-4249-8b26-4c0cc60b671e",
-        "name": "sesuite",
-        "containerId": "",
-        "created": "2022-09-21T21:35:31.585Z",
-        "sortNum": 60000
       }
     ],
     "settings": {
