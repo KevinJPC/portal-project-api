@@ -25,7 +25,6 @@ class RegisterProcessRequest extends FormRequest
     {
         return [
             'se_oid' => 'required',
-            'se_name' => 'required',
             'name' => 'required|min:10',
             'visible' => 'required',
         ];

@@ -33,7 +33,6 @@ class ProcessController extends Controller
         try {
             $process = Process::create([
                 'se_oid' => $request->se_oid,
-                'se_name' => $request->se_name,
                 'name' => $request->name,
                 'visible' => $request->visible,
                 'state' => 'A',
