@@ -17,8 +17,12 @@ Route::middleware('auth:api')->group(function () {
         UserHasProcessController::class,
         'getUserProcessById',
     ]);
-    Route::get('/{usershasprocess:id}/activity/{activity_se_oid}', [
+    Route::get('/{usershasprocess:id}/enabled-activity/form', [
         UserHasProcessController::class,
-        'getUserProcessActivityByOid',
+        'getUserProcessEnabledActivityForm',
+    ]);
+    Route::post('/{usershasprocess:id}/enabled-activity/form', [
+        UserHasProcessController::class,
+        'saveUserProcessEnabledActivityForm',
     ]);
 });

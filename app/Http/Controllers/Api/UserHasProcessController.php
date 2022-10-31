@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Api\SeSuiteController;
 use App\Http\Requests\UserHasProcess\StartProcessRequest;
+use App\Http\Requests\UserHasProcess\SaveUserProcessEnabledActivityFormRequest;
 
 class UserHasProcessController extends Controller
 {
@@ -210,7 +211,6 @@ class UserHasProcessController extends Controller
                     'wfstruct.nrorder',
                     'wfstruct.idstruct',
                     'wfstruct.nmstruct',
-                    'wfstruct.idstruct',
                     'wfstruct.dsstruct',
                     'wfstruct.fgstatus',
                 )
@@ -279,28 +279,141 @@ class UserHasProcessController extends Controller
         }
     }
 
-    public function getUserProcessActivityByOid(
+    public function getUserProcessEnabledActivityForm(
         UsersHasProcess $usershasprocess,
-        $activity_se_oid,
     ) {
-        $response = $this->forms_web_services->getTableRecord([
-            'TableID' => 'tbprueba001',
-            'Pagination' => 1,
-            'TableFieldList' => [
-                'TableField' => [
-                    'TableFieldID' => 'OID',
-                    'TableFieldValue' => 'fc57792d99be60ded2f472871f59313c',
+        $activity = $this->sqlsrv_connection
+            ->table('wfprocess')
+            ->select(
+                'wfstruct.nmstruct',
+                'wfstruct.dsstruct',
+                'efrevisionform.oid as oidrevisionform',
+            )
+            ->join('wfstruct', 'wfprocess.cdprocess', '=', 'wfstruct.idprocess')
+            ->join(
+                'wfactivity',
+                'wfstruct.idobject',
+                '=',
+                'wfactivity.idobject',
+            )
+            ->join(
+                'gnactivity',
+                'wfactivity.cdgenactivity',
+                '=',
+                'gnactivity.cdgenactivity',
+            )
+            ->join('gnassoc', 'gnactivity.cdassoc', '=', 'gnassoc.cdassoc')
+            ->join('gnassocform', 'gnassoc.cdassoc', '=', 'gnassocform.cdassoc')
+            ->join('efform', 'gnassocform.oidform', '=', 'efform.oid')
+            ->join(
+                'efrevisionform',
+                'efform.oid',
+                '=',
+                'efrevisionform.oidform',
+            )
+            ->where('wfstruct.idprocess', '=', $usershasprocess->se_oid)
+            ->where('wfstruct.fgtype', '=', 2)
+            ->where('wfstruct.fgstatus', '=', 2)
+            ->first();
+
+        $activity->dsstruct = json_decode($activity->dsstruct);
+
+        $fields = $this->sqlsrv_connection
+            ->table('efstructform')
+            ->select(
+                'efstructform.nmlabel',
+                'efstructform.idstruct',
+                'efstructform.nmvalue',
+                'efstructform.fgtype',
+                'efstructform.fgrequired',
+                'efstructform.fgenabled',
+                'efstructform.nrorder',
+                'efstructform.fgtype',
+                'emattrmodel.idname',
+                'emattrmodel.fgtypeattribute',
+            )
+            ->leftJoin(
+                'emattrmodel',
+                'efstructform.oidattributemodel',
+                '=',
+                'emattrmodel.oid',
+            )
+            ->where(
+                'efstructform.oidrevisionform',
+                '=',
+                $activity->oidrevisionform,
+            )
+            ->where('efstructform.fghidden', '=', 2)
+            ->orderBy('efstructform.nrorder', 'asc')
+            ->get();
+
+        $portal_fields = [];
+
+        foreach ($fields as $key => $field) {
+            $field->idstruct = explode('x', $field->idstruct);
+
+            if (
+                $field->idstruct[0] === 'portal' &&
+                $field->idstruct[1] !== 'hj'
+            ) {
+                $portal_fields[] = $field;
+            }
+        }
+
+        foreach ($portal_fields as $parent_key => $parent) {
+            if (($parent->idstruct[2] ?? null) === 'fs') {
+                $children_array = [];
+                foreach ($fields as $children_key => $children) {
+                    if (
+                        ($children->idstruct[1] ?? null) === 'hj' &&
+                        ($children->idstruct[2] ?? null) ===
+                            ($parent->idstruct[3] ?? null)
+                    ) {
+                        $children_array[] = $children;
+                    }
+                }
+                $portal_fields[$parent_key] = array_merge(
+                    (array) $parent,
+                    (array) ['children' => $children_array],
+                );
+            }
+        }
+
+        dd($portal_fields);
+
+        return response()->json(
+            [
+                'success' => true,
+                'data' => [
+                    'activity' => [
+                        'name' =>
+                            $activity->dsstruct?->nom ?? $struct->nmstruct,
+                        'form' => $fields,
+                    ],
                 ],
             ],
-        ]);
-        dd($response);
+            200,
+        );
+    }
 
-        $test = $this->sqlsrv_connection
-            ->table('WFFORMLIST')
-            ->get()
-            ->dd();
-        dd($activity_se_oid);
+    public function saveUserProcessEnabledActivityForm(
+        UsersHasProcess $usershasprocess,
+        SaveUserProcessEnabledActivityFormRequest $request,
+    ) {
+        dd('save form');
     }
 
     // $response = $this->forms_web_services->__getFunctions();
 }
+
+// $response = $this->forms_web_services->getTableRecord([
+//     'TableID' => 'tbprueba001',
+//     'Pagination' => 1,
+//     'TableFieldList' => [
+//         'TableField' => [
+//             'TableFieldID' => 'OID',
+//             'TableFieldValue' => 'fc57792d99be60ded2f472871f59313c',
+//         ],
+//     ],
+// ]);
+// dd($response);

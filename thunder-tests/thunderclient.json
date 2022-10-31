@@ -727,7 +727,7 @@
     "method": "GET",
     "sortNum": 230000,
     "created": "2022-09-15T23:31:22.884Z",
-    "modified": "2022-10-20T18:34:43.440Z",
+    "modified": "2022-10-31T14:52:56.265Z",
     "headers": [
       {
         "name": "Accept",
@@ -910,11 +910,11 @@
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "b0c2eb15-146d-4f11-984a-ba0758093d34",
     "name": "GetUserProcessById",
-    "url": "http://localhost:8000/api/v1/users/processes/13",
+    "url": "http://localhost:8000/api/v1/users/processes/21",
     "method": "GET",
     "sortNum": 300000,
     "created": "2022-10-12T23:08:25.349Z",
-    "modified": "2022-10-20T18:34:47.817Z",
+    "modified": "2022-10-28T16:47:25.079Z",
     "headers": [
       {
         "name": "Accept",
@@ -934,12 +934,12 @@
     "_id": "098b0969-0593-422d-83f6-a833c75afc14",
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "b0c2eb15-146d-4f11-984a-ba0758093d34",
-    "name": "GetUserProcessActivityByOid",
-    "url": "http://localhost:8000/api/v1/users/processes/14/activity/1",
+    "name": "GetUserProcessEnabledActivityForm",
+    "url": "http://localhost:8000/api/v1/users/processes/21/enabled-activity/form",
     "method": "GET",
     "sortNum": 310000,
     "created": "2022-10-20T18:01:03.339Z",
-    "modified": "2022-10-20T18:01:39.320Z",
+    "modified": "2022-10-25T22:23:40.377Z",
     "headers": [
       {
         "name": "Accept",
@@ -953,6 +953,36 @@
       }
     ],
     "params": [],
+    "tests": []
+  },
+  {
+    "_id": "4c59cbd4-8692-4ab2-a44e-6ad1f6babf68",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "b0c2eb15-146d-4f11-984a-ba0758093d34",
+    "name": "SaveUserProcessEnabledActivityForm",
+    "url": "http://localhost:8000/api/v1/users/processes/21/enabled-activity/form",
+    "method": "POST",
+    "sortNum": 320000,
+    "created": "2022-10-26T21:00:44.503Z",
+    "modified": "2022-10-27T17:03:03.128Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"atrcedula\": \"6-0468-0943\", \n  \"atranioscump\": \"1\", \n  \"atrnombre\": \"Kevin\"\n}",
+      "form": []
+    },
     "tests": []
   }
 ]
