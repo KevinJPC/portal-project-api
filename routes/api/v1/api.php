@@ -19,7 +19,9 @@ use App\Http\Controllers\Api\SeSuiteController;
 
 Route::prefix('/roles')->group(base_path('routes/api/v1/roleRoutes.php'));
 
-Route::prefix('/roles-has-process')->group(base_path('routes/api/v1/roles-has-process.php'));
+Route::prefix('/roles-has-process')->group(
+    base_path('routes/api/v1/roles-has-process.php'),
+);
 
 Route::prefix('/auth')->group(base_path('routes/api/v1/authRoutes.php'));
 
@@ -35,8 +37,6 @@ Route::prefix('/processes')->group(
     base_path('routes/api/v1/processRoutes.php'),
 );
 
-Route::prefix('/user-has-process')->group(
+Route::prefix('/users/processes')->group(
     base_path('routes/api/v1/userHasProcessRoutes.php'),
 );
-
-Route::get('/sesuite/test-ws', [SeSuiteController::class, 'testWs']);
