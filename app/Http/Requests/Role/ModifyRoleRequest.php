@@ -28,7 +28,7 @@ class ModifyRoleRequest extends FormRequest
             'name_slug' => 
             ['required',
             'unique:roles,name_slug,'. $this->route('role')->id,],
-            'description',
+            'description' => 'min:5',
         ];
     }
 }
