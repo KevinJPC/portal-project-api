@@ -906,7 +906,7 @@
     "_id": "cae7e959-60ab-4819-9a99-e3438590cecd",
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "b0c2eb15-146d-4f11-984a-ba0758093d34",
-    "name": "GetUserProcessById",
+    "name": "GetUserProcessById ",
     "url": "http://localhost:8000/api/v1/users/processes/1",
     "method": "GET",
     "sortNum": 300000,
