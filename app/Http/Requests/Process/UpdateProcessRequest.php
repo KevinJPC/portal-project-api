@@ -24,15 +24,11 @@ class UpdateProcessRequest extends FormRequest
     public function rules()
     {
         return [
-<<<<<<< HEAD
-            'name' => 'required|min:10',
-=======
             'name' => [
                 'required',
                 'min:10',
                 'unique:processes,name,' . $this->route('process')->id,
             ],
->>>>>>> 09e8246839c7d6bd0bbb12a88c21480c4dca3ff3
             'visible' => 'required',
             'roles' => 'required',
         ];
