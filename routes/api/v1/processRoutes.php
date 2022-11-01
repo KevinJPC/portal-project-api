@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/actives', [
 ]);
 
 Route::middleware('auth:api')->group(function () {
+    
     Route::get('/sesuite', [ProcessController::class, 'getSeSuiteProcesses']);
     Route::post('/register', [ProcessController::class, 'registerProcess']);
     Route::get('/{process:id}', [ProcessController::class, 'getProcessById']);
@@ -36,7 +37,6 @@ Route::middleware('auth:api')->group(function () {
         ProcessController::class,
         'getInactiveProcesses',
     ]);
-
     Route::get('/search/{process:name}', [
         ProcessController::class,
         'searchProcess',

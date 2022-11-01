@@ -38,16 +38,16 @@
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "57155924-dd15-463b-a596-1e436a9958f0",
     "name": "getInactivateRoles",
-    "url": "http://127.0.0.1:8000/api/v1/roles/inactives?page=2",
+    "url": "http://127.0.0.1:8000/api/v1/roles/inactives?page=1",
     "method": "GET",
     "sortNum": 50000,
     "created": "2022-09-08T17:53:33.505Z",
-    "modified": "2022-09-13T22:21:46.898Z",
+    "modified": "2022-10-31T21:50:22.395Z",
     "headers": [],
     "params": [
       {
         "name": "page",
-        "value": "2",
+        "value": "1",
         "isPath": false
       }
     ],
@@ -107,7 +107,7 @@
     "method": "POST",
     "sortNum": 40000,
     "created": "2022-09-08T22:19:28.544Z",
-    "modified": "2022-10-17T16:03:21.638Z",
+    "modified": "2022-10-31T21:32:59.513Z",
     "headers": [
       {
         "name": "Accept",
@@ -128,7 +128,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"email\": \"kevin@gmail.com\",\n  \"password\": \"Kevin123.\"\n}",
+      "raw": "{\n  \"email\": \"rt026000@gmail.com\",\n  \"password\": \"Tony2106.\"\n}",
       "form": []
     },
     "tests": [
@@ -470,7 +470,7 @@
     "method": "POST",
     "sortNum": 150000,
     "created": "2022-09-14T17:38:39.635Z",
-    "modified": "2022-10-18T21:11:32.220Z",
+    "modified": "2022-11-01T16:25:56.083Z",
     "headers": [
       {
         "name": "Accept",
@@ -486,7 +486,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"se_oid\": \"PO000005\",\n  \"se_name\": \"Proceso prueba\",\n  \"name\": \"Proceso de prueba PO000005\",\n  \"visible\": 1,\n  \"roles\": [2]\n}",
+      "raw": "{\n  \"se_oid\": \"PO000003\",\n  \"name\": \"Proceso de prueba PO000003\",\n  \"visible\": 1,\n  \"roles\": [2]\n}",
       "form": []
     },
     "auth": {
@@ -981,5 +981,17 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "f4c455a1-cd3e-403d-9146-b5eb435d9014",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "bf2c800a-06f6-4631-84b3-2c77a4e58111",
+    "name": "getNotification",
+    "url": "",
+    "method": "GET",
+    "sortNum": 330000,
+    "created": "2022-10-31T21:38:38.725Z",
+    "modified": "2022-10-31T21:38:38.725Z",
+    "headers": []
   }
 ]
