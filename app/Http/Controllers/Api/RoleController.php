@@ -7,7 +7,6 @@ use App\Http\Requests\Role\ModifyRoleRequest;
 use App\Models\Role;
 use Exception;
 use Illuminate\Support\Facades\DB;
-
 use App\Models\RolesHasProcess;
 
 class RoleController extends Controller

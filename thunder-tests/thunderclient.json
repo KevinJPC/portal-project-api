@@ -8,7 +8,7 @@
     "method": "POST",
     "sortNum": 30000,
     "created": "2022-09-08T17:02:32.795Z",
-    "modified": "2022-10-31T15:34:06.424Z",
+    "modified": "2022-11-01T16:34:36.966Z",
     "headers": [
       {
         "name": "Accept",
@@ -24,7 +24,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"General\",\n  \"name_slug\": \"general\",\n  \"description\": \"Rol general\"\n}",
+      "raw": "{\n  \"name\": \"Bodega\",\n  \"name_slug\": \"bodega\",\n  \"description\": \"Rol de bodega\"\n}",
       "form": []
     },
     "auth": {
@@ -66,7 +66,7 @@
     "method": "POST",
     "sortNum": 20000,
     "created": "2022-09-08T18:54:51.258Z",
-    "modified": "2022-10-17T16:02:50.794Z",
+    "modified": "2022-11-01T16:36:47.888Z",
     "headers": [
       {
         "name": "Accept",
@@ -82,7 +82,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Kevin\",\n  \"dni\": \"604680943\",\n  \"first_last_name\": \"Pitti\",\n  \"second_last_name\": \"Castro\",\n  \"email\": \"kevin@gmail.com\",\n  \"password\": \"Kevin123.\",\n  \"password_confirmation\": \"Kevin123.\",\n  \"role_id\": 2\n}",
+      "raw": "{\n  \"name\": \"Pedro\",\n  \"dni\": \"604610391\",\n  \"first_last_name\": \"Gonzales\",\n  \"second_last_name\": \"Lopez\",\n  \"email\": \"GLopez@gmail.com\",\n  \"password\": \"Tony2106.\",\n  \"password_confirmation\": \"Tony2106.\",\n  \"role_id\": 2\n}",
       "form": []
     },
     "auth": {
@@ -107,7 +107,7 @@
     "method": "POST",
     "sortNum": 40000,
     "created": "2022-09-08T22:19:28.544Z",
-    "modified": "2022-10-31T15:34:32.973Z",
+    "modified": "2022-11-01T16:37:01.624Z",
     "headers": [
       {
         "name": "Accept",
@@ -128,7 +128,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"email\": \"rt026000@gmail.com\",\n  \"password\": \"Tony2106.\"\n}",
+      "raw": "{\n  \"email\": \"GLopez@gmail.com\",\n  \"password\": \"Tony2106.\"\n}",
       "form": []
     },
     "tests": [
@@ -470,7 +470,7 @@
     "method": "POST",
     "sortNum": 150000,
     "created": "2022-09-14T17:38:39.635Z",
-    "modified": "2022-10-31T15:36:27.951Z",
+    "modified": "2022-11-02T16:00:55.649Z",
     "headers": [
       {
         "name": "Accept",
@@ -486,7 +486,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"se_oid\": \"PO000003\",\n  \"name\": \"Proceso de prueba PO000005\",\n  \"visible\": 1,\n  \"roles\": [2]\n}",
+      "raw": "{\n  \"se_oid\": \"PO000009\",\n  \"name\": \"Proceso de prueba no visible PO000009\",\n  \"visible\": 1,\n  \"roles\": [2]\n}",
       "form": []
     },
     "auth": {
@@ -500,11 +500,11 @@
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "8874a6ff-705d-46e5-8d85-9d5b9ad5dfe6",
     "name": "UpdateProcess",
-    "url": "http://localhost:8000/api/v1/processes/1",
+    "url": "http://localhost:8000/api/v1/processes/2",
     "method": "PATCH",
     "sortNum": 160000,
     "created": "2022-09-14T17:41:02.000Z",
-    "modified": "2022-10-31T15:37:32.233Z",
+    "modified": "2022-10-31T15:23:37.018Z",
     "headers": [
       {
         "name": "Accept",
@@ -520,7 +520,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Proceso prueba de portal PO000003\",\n  \"visible\": 1,\n  \"roles\": [2]\n}",
+      "raw": "{\n  \"name\": \"Proceso prueba de portal\",\n  \"visible\": 1,\n  \"roles\": [2]\n}",
       "form": []
     },
     "auth": {
@@ -690,12 +690,12 @@
     "_id": "b3b401ef-0921-47cc-907c-ddd3855320b5",
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "b0c2eb15-146d-4f11-984a-ba0758093d34",
-    "name": "StartProcess ",
-    "url": "http://localhost:8000/api/v1/users/processes/1/start",
+    "name": "StartProcess",
+    "url": "http://localhost:8000/api/v1/users/processes/2/start",
     "method": "POST",
     "sortNum": 210000,
     "created": "2022-09-15T23:28:20.704Z",
-    "modified": "2022-10-18T22:53:53.544Z",
+    "modified": "2022-11-02T17:13:36.167Z",
     "headers": [
       {
         "name": "Accept",
@@ -906,12 +906,12 @@
     "_id": "cae7e959-60ab-4819-9a99-e3438590cecd",
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "b0c2eb15-146d-4f11-984a-ba0758093d34",
-    "name": "GetUserProcessById ",
-    "url": "http://localhost:8000/api/v1/users/processes/1",
+    "name": "GetUserProcessById",
+    "url": "http://localhost:8000/api/v1/users/processes/21",
     "method": "GET",
     "sortNum": 300000,
     "created": "2022-10-12T23:08:25.349Z",
-    "modified": "2022-10-31T15:43:54.836Z",
+    "modified": "2022-10-28T16:47:25.079Z",
     "headers": [
       {
         "name": "Accept",
@@ -987,11 +987,28 @@
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "bf2c800a-06f6-4631-84b3-2c77a4e58111",
     "name": "getNotification",
-    "url": "",
+    "url": "http://localhost:8000/api/v1/notifications",
     "method": "GET",
     "sortNum": 330000,
     "created": "2022-10-31T21:38:38.725Z",
-    "modified": "2022-10-31T21:38:38.725Z",
-    "headers": []
+    "modified": "2022-11-01T22:14:54.124Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
   }
 ]

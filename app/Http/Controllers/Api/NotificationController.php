@@ -1,18 +1,32 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Models\Notification;
+use Exception;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
 {
-    public function getNotifications($request)
+    private $sqlsrv_connection;
+
+    /**
+     * The constructor function is called when the class is instantiated. It is used to initialize the
+     * class properties.
+     */
+    public function __construct()
+    {
+        $this->sqlsrv_connection = DB::connection('sqlsrv');
+    }
+
+    public function getNotifications()
     {
         try {
-            $user_notification = DB::table('processes')
+            $user_processes = DB::table('processes')
                 ->select(
-                    'processes.id',
+                    'users_has_processes.id',
                     'processes.name',
                     'users_has_processes.se_oid',
                 )
@@ -29,52 +43,57 @@ class NotificationController extends Controller
                             Auth::user()->id,
                         );
                 })
-                ->orderBy('users_has_processes.se_oid', 'desc');
-            $user_notification_oid = $user_notification->pluck('se_oid');
+                ->orderBy('users_has_processes.se_oid', 'desc')
+                ->get();
+            //->paginate(10);
 
-            $notify = $this->sqlsrv_connection
+            $user_processes_oid = $user_processes->pluck('se_oid');
+
+            $se_processes = $this->sqlsrv_connection
                 ->table('wfstruct')
-                ->select('wfstruct.nmstruct', 'wfstruct.dsstruct')
-                ->join('wfprocess')
-                ->on('wfprocess.cdprocess', '=', ' wfstruct.idprocess')
+                ->select(
+                    'wfstruct.idprocess',
+                    'wfstruct.nmstruct',
+                    'wfstruct.dsstruct',
+                )
+                ->join(
+                    'wfprocess',
+                    'wfprocess.cdprocess',
+                    '=',
+                    'wfstruct.idprocess',
+                )
+                ->where('wfprocess.fgstatus', '=', 1)
                 ->where('wfstruct.fgstatus', '=', 2)
                 ->where('wfstruct.fgtype', '=', 2)
                 ->whereIn('wfstruct.idprocess', $user_processes_oid)
                 ->orderBy('wfprocess.idprocess', 'desc')
                 ->get();
+            //dd($se_processes);
 
-            foreach ($notify as $key => $notify) {
-                $notify->dsstruct = json_decode($notify->dsstruct);
-                $user_notification[$key] = (object) array_merge(
-                    (array) $user_notification[$key],
-                    (array) [
-                        'activity' => $notify->nmstruct,
-                        'procces' =>
-                            $workflow->dsstruct?->nom ?? $workflow->nmstruct,
-                    ],
-                );
+            $notifications = [];
+            foreach ($se_processes as $key_se => $se_process) {
+                $se_process->dsstruct = json_decode($se_process->dsstruct);
+                foreach ($user_processes as $key_user => $user_process) {
+                    if (
+                        $se_process->idprocess === $user_process->se_oid &&
+                        $se_process->dsstruct?->ejecportal
+                    ) {
+                        $notifications[] = [
+                            'user_process_id' => $user_process->id,
+                            'process_name' => $user_process->name,
+                            'activity_name' =>
+                                $se_process->dsstruct?->nom ??
+                                $se_process->nmstruct,
+                        ];
+                    }
+                }
             }
-
-            /**
-             * select wfstruct.nmstruct, wfstruct.dsstruct from wfprocess
-             * join wfstruct on wfprocess.cdprocess = wfstruct.idprocess
-             * where wfprocess.fgstatus = 1
-             * and wfstruct.idprocess = 137
-             * and wfstruct.fgstatus = 2
-             * and wfstruct.fgtype = 2
-             * order by wfstruct.idprocess desc
-             */
-
-            /* $notification = new Notification();
-             * $notification = $request->description;
-             * $notification = $request->users_has_process_id;
-             * $notification->save();*/
 
             return response()->json(
                 [
                     'success' => true,
                     'message' => 'Nueva notificación',
-                    'data' => ['notification' => $user_notification],
+                    'data' => ['notifications' => $notifications],
                 ],
                 200,
             );
