@@ -8,7 +8,7 @@
     "method": "POST",
     "sortNum": 30000,
     "created": "2022-09-08T17:02:32.795Z",
-    "modified": "2022-10-31T15:34:06.424Z",
+    "modified": "2022-10-31T22:42:23.681Z",
     "headers": [
       {
         "name": "Accept",
@@ -24,7 +24,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"General\",\n  \"name_slug\": \"general\",\n  \"description\": \"Rol general\"\n}",
+      "raw": "{\n  \"name\": \"Gestor\",\n  \"name_slug\": \"gestor\",\n  \"description\": \"Rol Gestor\"\n}",
       "form": []
     },
     "auth": {
@@ -66,7 +66,7 @@
     "method": "POST",
     "sortNum": 20000,
     "created": "2022-09-08T18:54:51.258Z",
-    "modified": "2022-10-17T16:02:50.794Z",
+    "modified": "2022-10-31T21:33:05.820Z",
     "headers": [
       {
         "name": "Accept",
@@ -82,7 +82,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Kevin\",\n  \"dni\": \"604680943\",\n  \"first_last_name\": \"Pitti\",\n  \"second_last_name\": \"Castro\",\n  \"email\": \"kevin@gmail.com\",\n  \"password\": \"Kevin123.\",\n  \"password_confirmation\": \"Kevin123.\",\n  \"role_id\": 2\n}",
+      "raw": "{\n  \"name\": \"Wilmer\",\n  \"dni\": \"604680943\",\n  \"first_last_name\": \"Pitti\",\n  \"second_last_name\": \"Castro\",\n  \"email\": \"wlopez@gmail.com\",\n  \"password\": \"Wilmer123.\",\n  \"password_confirmation\": \"Wilmer123.\",\n  \"role_id\": 2\n}",
       "form": []
     },
     "auth": {

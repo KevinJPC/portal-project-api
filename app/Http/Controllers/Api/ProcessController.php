@@ -208,12 +208,17 @@ class ProcessController extends Controller
     {
         try {
             $user_processes = DB::table('processes')
+                ->select(
+                    'processes.id',
+                    'processes.name',
+                    'processes.created_at',
+                )
                 ->join('roles_has_processes', function ($join) {
                     $join
                         ->on(
-                            'roles_has_processes.process_id',
-                            '=',
                             'processes.id',
+                            '=',
+                            'roles_has_processes.process_id',
                         )
                         ->where(
                             'roles_has_processes.role_id',
