@@ -76,10 +76,41 @@ class RoleController extends Controller
         }
     }
 
-    
+    /**
+     * It returns a list of roles that are active and not admin.
+     * 
+     * @return An array of objects.
+     */
+    public function publicRoles()
+    {
+        try {
+            $roles = DB::table('roles')
+                ->where('state', 'A')
+                ->where('name_slug', '!=', 'admin')
+                ->orderBy('name')
+                ->get();
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'data' => ['roles' => $roles],
+                ],
+                200,
+            );
+        } catch (Exception $exception) {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => $exception->getMessage(),
+                ],
+                400,
+            );
+        }
+    }
+
     /**
      * It returns a paginated list of all roles that are active and not admin.
-     * 
+     *
      * @return A JSON response with the following structure:
      */
     public function getActiveRoles()

@@ -21,9 +21,14 @@ class NotificationController extends Controller
         $this->sqlsrv_connection = DB::connection('sqlsrv');
     }
 
+    /**
+     * It gets the user's processes from the database, gets the user's processes from the SE, compares
+     * them and returns the notifications
+     */
     public function getNotifications()
     {
         try {
+            /* Getting the user's processes from the database. */
             $user_processes = DB::table('processes')
                 ->select(
                     'users_has_processes.id',
@@ -45,10 +50,12 @@ class NotificationController extends Controller
                 })
                 ->orderBy('users_has_processes.se_oid', 'desc')
                 ->get();
-            //->paginate(10);
+            
 
+            /* Getting the `se_oid` from the `` array. */
             $user_processes_oid = $user_processes->pluck('se_oid');
 
+            /* Getting the user's processes from the SE. */
             $se_processes = $this->sqlsrv_connection
                 ->table('wfstruct')
                 ->select(
@@ -68,8 +75,9 @@ class NotificationController extends Controller
                 ->whereIn('wfstruct.idprocess', $user_processes_oid)
                 ->orderBy('wfprocess.idprocess', 'desc')
                 ->get();
-            //dd($se_processes);
+            
 
+            /* Comparing the user's processes from the database with the user's processes from the SE. */
             $notifications = [];
             foreach ($se_processes as $key_se => $se_process) {
                 $se_process->dsstruct = json_decode($se_process->dsstruct);
@@ -85,10 +93,11 @@ class NotificationController extends Controller
                                 $se_process->dsstruct?->nom ??
                                 $se_process->nmstruct,
                         ];
-                    }
+                    } 
                 }
             }
 
+            /* Returning a JSON response with the notifications. */
             return response()->json(
                 [
                     'success' => true,
@@ -97,7 +106,9 @@ class NotificationController extends Controller
                 ],
                 200,
             );
-        } catch (Exception $exception) {
+        } /* Catching any exception that may occur and returning a JSON response with the exception
+        message. */
+        catch (Exception $exception) {
             response()->json(
                 [
                     'success' => false,
