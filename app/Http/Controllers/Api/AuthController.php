@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -21,40 +22,38 @@ class AuthController extends Controller
      */
     public function register(RegisterRequest $request)
     {
-        try {
-            $user = User::create([
-                'name' => $request->name,
-                'first_last_name' => $request->first_last_name,
-                'second_last_name' => $request->second_last_name,
-                'dni' => $request->dni,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'state' => 'A',
-                'role_id' => $request->role_id,
-            ]);
+        $user = User::create([
+            'name' => $request->name,
+            'first_last_name' => $request->first_last_name,
+            'second_last_name' => $request->second_last_name,
+            'dni' => $request->dni,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'state' => 'A',
+            'role_id' => $request->role_id,
+        ]);
 
-            $token = $user->createToken('auth_token')->accessToken;
+        $token = $user->createToken('auth_token')->accessToken;
 
-            return response()->json(
-                [
-                    'success' => true,
-                    'message' => 'Registro exitoso',
-                    'data' => [
-                        'user' => $user,
-                        'token' => $token,
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Registro exitoso',
+                'data' => [
+                    'user' => [
+                        'id' => $user->id,
+                        'name' => $user->name,
+                        'first_last_name' => $user->first_last_name,
+                        'second_last_name' => $user->second_last_name,
+                        'role' => $user->is_admin
+                            ? 'admin'
+                            : $user->role->name_slug,
                     ],
+                    'token' => $token,
                 ],
-                200,
-            );
-        } catch (\Exception $exception) {
-            return response()->json(
-                [
-                    'success' => false,
-                    'message' => $exception->getMessage(),
-                ],
-                400,
-            );
-        }
+            ],
+            200,
+        );
     }
 
     /**
@@ -67,46 +66,29 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request)
     {
-        try {
-            if (!Auth::attempt($request->only('email', 'password'))) {
-                return response()->json(
-                    [
-                        'success' => false,
-                        'message' =>
-                            'Correo electrónico o contraseña incorrecta',
-                    ],
-                    401,
-                );
-            }
-            $user = Auth::user();
-            $token = $user->createToken('auth_token')->accessToken;
+        $isAuthenticated = Auth::attempt([
+            'email' => $request->email,
+            'password' => $request->password,
+        ]);
+        $user = Auth::user();
 
-            return response()->json(
-                [
-                    'success' => true,
-                    'message' => 'Sesión iniciada exitosamente',
-                    'data' => [
-                        'user' => [
-                            'id' => $user->id,
-                            'name' => $user->name,
-                            'first_last_name' => $user->first_last_name,
-                            'second_last_name' => $user->second_last_name,
-                            'role' => $user->role->name_slug,
-                        ],
-                        'token' => $token,
-                    ],
-                ],
-                200,
-            );
-        } catch (\Exception $exception) {
-            return response()->json(
-                [
-                    'success' => false,
-                    'message' => $exception->getMessage(),
-                ],
-                400,
-            );
+        if (!$isAuthenticated || $user->state !== 'A') {
+            abort(401, 'Correo electrónico o contraseña incorrecta');
         }
+
+        $token = $user->createToken('auth_token')->accessToken;
+
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Sesión iniciada exitosamente',
+                'data' => [
+                    'user' => $user,
+                    'token' => $token,
+                ],
+            ],
+            200,
+        );
     }
 
     /**
@@ -116,67 +98,38 @@ class AuthController extends Controller
      */
     public function logout(Request $request)
     {
-        try {
-            Auth::user()
-                ->token()
-                ->revoke();
+        Auth::user()
+            ->token()
+            ->revoke();
 
-            return response()->json(
-                [
-                    'success' => true,
-                    'message' => 'Sesión cerrada exitosamente',
-                ],
-                200,
-            );
-        } catch (\Expection $exception) {
-            return response()->json(
-                [
-                    'success' => false,
-                    'message' => $exception->getMessage(),
-                ],
-                400,
-            );
-        }
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Sesión cerrada exitosamente',
+            ],
+            200,
+        );
     }
 
     /**
-     * It returns the user's data and the token
+     * It returns the user's data
      *
      * @param Request request The request object.
      *
-     * @return The user's data and the token.
+     * @return The user's data
      */
     public function reconnect(Request $request)
     {
-        try {
-            $user = Auth::user();
-            $token = explode(' ', $request->header('Authorization'))[1];
-            return response()->json(
-                [
-                    'success' => true,
-                    'message' => 'Reconexión exitosa',
-                    'data' => [
-                        'user' => [
-                            'id' => $user->id,
-                            'name' => $user->name,
-                            'first_last_name' => $user->first_last_name,
-                            'second_last_name' => $user->second_last_name,
-                            'email' => $user->email,
-                            'role' => $user->role->name_slug,
-                        ],
-                        'token' => $token,
-                    ],
-                ],
-                200,
-            );
-        } catch (\Exception $exception) {
-            return response()->json(
-                [
-                    'success' => false,
-                    'message' => $exception->getMessage(),
-                ],
-                400,
-            );
-        }
+        $user = Auth::user();
+        $token = explode(' ', $request->header('Authorization'))[1];
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Reconexión exitosa',
+                'data' => $user,
+                'token' => $token,
+            ],
+            200,
+        );
     }
 }

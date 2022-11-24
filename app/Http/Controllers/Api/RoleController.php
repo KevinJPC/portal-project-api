@@ -97,7 +97,6 @@ class RoleController extends Controller
         try {
             $roles = DB::table('roles')
                 ->where('state', 'A')
-                ->where('name_slug', '!=', 'admin')
                 ->latest()
                 ->paginate(10);
 
@@ -224,7 +223,6 @@ class RoleController extends Controller
     public function updateRole(ModifyRoleRequest $request, Role $role)
     {
         try {
-            
             $role = Role::find($role->id);
             $role->name = $request->name;
             if (!($role->name_slug = $request->name_slug)) {

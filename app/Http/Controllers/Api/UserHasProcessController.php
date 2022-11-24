@@ -28,6 +28,14 @@ class UserHasProcessController extends Controller
         $this->sqlsrv_connection = DB::connection('sqlsrv');
     }
 
+    public function splitIdentifier($fields)
+    {
+        return array_map(function ($field) {
+            $field->identifier = explode('x', $field->identifier);
+            return $field;
+        }, $fields->toArray());
+    }
+
     /**
      * It creates a new workflow on SE Ssuite using web service workflow, and then creates a new record in the database
      * with the workflow's ID
@@ -87,7 +95,7 @@ class UserHasProcessController extends Controller
             /* A query builder that is selecting the user's processes*/
             $user_processes = DB::table('processes')
                 ->select(
-                    'processes.id',
+                    'users_has_processes.id',
                     'processes.name',
                     'users_has_processes.se_oid',
                 )
@@ -321,16 +329,12 @@ class UserHasProcessController extends Controller
         $fields = $this->sqlsrv_connection
             ->table('efstructform')
             ->select(
-                'efstructform.nmlabel',
-                'efstructform.idstruct',
-                'efstructform.nmvalue',
-                'efstructform.fgtype',
-                'efstructform.fgrequired',
-                'efstructform.fgenabled',
-                'efstructform.nrorder',
-                'efstructform.fgtype',
-                'emattrmodel.idname',
-                'emattrmodel.fgtypeattribute',
+                'efstructform.nmlabel as label_text',
+                'efstructform.idstruct as identifier',
+                'efstructform.nmvalue as value',
+                'efstructform.fgtype as component_type',
+                'emattrmodel.idname as attribute_name',
+                'emattrmodel.fgtypeattribute as attribute_type',
             )
             ->leftJoin(
                 'emattrmodel',
@@ -344,42 +348,77 @@ class UserHasProcessController extends Controller
                 $activity->oidrevisionform,
             )
             ->where('efstructform.fghidden', '=', 2)
-            ->orderBy('efstructform.nrorder', 'asc')
             ->get();
+
+        $fields = $this->splitIdentifier($fields);
 
         $portal_fields = [];
 
-        foreach ($fields as $key => $field) {
-            $field->idstruct = explode('x', $field->idstruct);
-
+        foreach ($fields as $field_key => $field) {
             if (
-                $field->idstruct[0] === 'portal' &&
-                $field->idstruct[1] !== 'hj'
+                ($field->identifier[0] ?? null) === 'portal' &&
+                ($field->identifier[2] ?? null) === 'fs'
             ) {
-                $portal_fields[] = $field;
-            }
-        }
-
-        foreach ($portal_fields as $parent_key => $parent) {
-            if (($parent->idstruct[2] ?? null) === 'fs') {
-                $children_array = [];
-                foreach ($fields as $children_key => $children) {
+                $options_array = [];
+                foreach ($fields as $field_option_key => $field_option) {
                     if (
-                        ($children->idstruct[1] ?? null) === 'hj' &&
-                        ($children->idstruct[2] ?? null) ===
-                            ($parent->idstruct[3] ?? null)
+                        ($field_option->identifier[0] ?? null) === 'portal' &&
+                        ($field_option->identifier[1] ?? null) === 'opc' &&
+                        ($field_option->identifier[2] ?? null) ===
+                            ($field->identifier[3] ?? null)
                     ) {
-                        $children_array[] = $children;
+                        $field_option = (object) array_merge(
+                            (array) $field_option,
+                            [
+                                'order' => $field_option->identifier[3],
+                            ],
+                        );
+                        unset($field_option->identifier);
+                        $options_array[] = $field_option;
                     }
                 }
-                $portal_fields[$parent_key] = array_merge(
-                    (array) $parent,
-                    (array) ['children' => $children_array],
+                array_multisort(
+                    array_column($options_array, 'order'),
+                    SORT_ASC,
+                    $options_array,
+                );
+                $field = (object) array_merge(
+                    (array) $field,
+                    (array) [
+                        'attribute_name' =>
+                            ($field->identifier[4] ?? null) === 'rb'
+                                ? $options_array[0]->attribute_name ?? null
+                                : null,
+                        'attribute_type' =>
+                            ($field->identifier[4] ?? null) === 'rb'
+                                ? $options_array[0]->attribute_type ?? null
+                                : null,
+                        'options_type' => $field->identifier[4],
+                        'options' => $options_array,
+                    ],
                 );
             }
+
+            if (
+                ($field->identifier[0] ?? null) === 'portal' &&
+                ($field->identifier[1] ?? null) !== 'opc'
+            ) {
+                $portal_fields[] = (object) array_merge(
+                    (array) $field,
+                    (array) [
+                        'order' => $field->identifier[1],
+                    ],
+                );
+            }
+
+            unset($portal_fields[$field_key]->identifier);
         }
 
-        dd($portal_fields);
+        array_multisort(
+            array_column($portal_fields, 'order'),
+            SORT_ASC,
+            $portal_fields,
+        );
 
         return response()->json(
             [
@@ -388,7 +427,7 @@ class UserHasProcessController extends Controller
                     'activity' => [
                         'name' =>
                             $activity->dsstruct?->nom ?? $struct->nmstruct,
-                        'form' => $fields,
+                        'form' => $portal_fields,
                     ],
                 ],
             ],

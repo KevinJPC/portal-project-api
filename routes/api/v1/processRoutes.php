@@ -3,6 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProcessController;
 
+//Note: restrict /visibles route to user and all the others to admin role, like this:
+/* Route::middleware(['auth:api', 'restrictToAdmin'])
+ * or
+ * Route::middleware(['auth:api', 'restrictToUser']) */
+
 Route::middleware('auth:api')->get('/visibles', [
     ProcessController::class,
     'getVisiblesProcesses',

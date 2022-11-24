@@ -19,6 +19,18 @@ class RegisterAdminRequest extends FormRequest
     }
 
     /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'email' => Str::lower($this->email),
+        ]);
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, mixed>
@@ -26,6 +38,7 @@ class RegisterAdminRequest extends FormRequest
     public function rules()
     {
         $rules = [
+            //make custom validator for dni format
             'dni' => 'required|max:20|regex:/^[0-9]+$/',
             'name' => 'required|max:60',
             'first_last_name' => 'required|max:60',
