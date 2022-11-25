@@ -102,11 +102,9 @@ class ProcessController extends Controller
     }
 
     /**
-     * It gets a process by its id
+     * It gets a process by its id and returns the process and the roles that are associated with it
      *
-     * @param Process process The process object that contains the id of the process you want to get.
-     *
-     * @return A JSON object with the process data.
+     * @param Process process is the process object
      */
     public function getProcessById(Process $process)
     {
@@ -210,12 +208,17 @@ class ProcessController extends Controller
     {
         try {
             $user_processes = DB::table('processes')
+                ->select(
+                    'processes.id',
+                    'processes.name',
+                    'processes.created_at',
+                )
                 ->join('roles_has_processes', function ($join) {
                     $join
                         ->on(
-                            'roles_has_processes.process_id',
-                            '=',
                             'processes.id',
+                            '=',
+                            'roles_has_processes.process_id',
                         )
                         ->where(
                             'roles_has_processes.role_id',
