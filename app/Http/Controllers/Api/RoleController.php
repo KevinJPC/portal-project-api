@@ -7,7 +7,6 @@ use App\Http\Requests\Role\ModifyRoleRequest;
 use App\Models\Role;
 use Exception;
 use Illuminate\Support\Facades\DB;
-
 use App\Models\RolesHasProcess;
 
 class RoleController extends Controller
@@ -56,8 +55,9 @@ class RoleController extends Controller
         try {
             $roles = DB::table('roles')
                 ->where('state', 'I')
-                ->latest()
+                ->orderBy('name')
                 ->paginate(10);
+
             return response()->json(
                 [
                     'success' => true,
@@ -77,28 +77,50 @@ class RoleController extends Controller
     }
 
     /**
-     * It returns a paginated list of all the roles in the database that have a state of A.
+     * It returns a list of roles that are active and not admin.
+     * 
+     * @return An array of objects.
+     */
+    public function publicRoles()
+    {
+        try {
+            $roles = DB::table('roles')
+                ->where('state', 'A')
+                ->where('name_slug', '!=', 'admin')
+                ->orderBy('name')
+                ->get();
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'data' => ['roles' => $roles],
+                ],
+                200,
+            );
+        } catch (Exception $exception) {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => $exception->getMessage(),
+                ],
+                400,
+            );
+        }
+    }
+
+    /**
+     * It returns a paginated list of all roles that are active and not admin.
      *
-     * @return A JSON object with the following structure:
-     * ```
-     * {
-     *     "roles": {
-     *         "current_page": 1,
-     *         "data": [
-     *             {
-     *                 "id": 1,
-     *                 "name": "Administrador",
-     *                 "description": "Administrador del sistema",
-     *                 "state": "A",
-     *                 "created_
+     * @return A JSON response with the following structure:
      */
     public function getActiveRoles()
     {
         try {
             $roles = DB::table('roles')
                 ->where('state', 'A')
+
                 ->where('name_slug', '!=', 'admin')
-                ->latest()
+                ->orderBy('name')
                 ->paginate(10);
 
             return response()->json(
@@ -224,7 +246,6 @@ class RoleController extends Controller
     public function updateRole(ModifyRoleRequest $request, Role $role)
     {
         try {
-            
             $role = Role::find($role->id);
             $role->name = $request->name;
             if (!($role->name_slug = $request->name_slug)) {
