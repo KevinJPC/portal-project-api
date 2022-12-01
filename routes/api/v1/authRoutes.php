@@ -6,7 +6,7 @@ Route::post('/register', [AuthController::class, 'register']);
 
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::middleware('auth:api')->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
     //Note: Changes route to /user instead /reconnect
     Route::post('/reconnect', [AuthController::class, 'reconnect']);
 

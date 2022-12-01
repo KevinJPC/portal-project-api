@@ -3,7 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Laravel\Passport\HasApiTokens;
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\ResetPasswordNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -51,10 +51,10 @@ class User extends Authenticatable
 
     public function sendPasswordResetNotification($token)
     {
-        $baseUrl = 'https://spa.test';
+        $baseUrl = env('FRONTEND_URL');
         $url =
             $baseUrl .
-            '/reset-password?token=' .
+            '/restablecer-contrasena/confirmar?token=' .
             $token .
             '&email=' .
             $this->email;

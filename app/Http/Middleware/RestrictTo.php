@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class RestrictToAdmin
+class RestrictTo
 {
     /**
      * Handle an incoming request.
@@ -15,10 +15,13 @@ class RestrictToAdmin
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next, $role)
     {
-        if (!Auth::user()->is_admin) {
-            abort(404, 'No encontrado');
+        $role = $role === 'admin';
+        $role_user = Auth::user()->is_admin;
+
+        if ($role !== $role_user) {
+            abort(403, 'Accesso prohibido');
         }
         return $next($request);
     }

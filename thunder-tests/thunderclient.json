@@ -42,8 +42,18 @@
     "method": "GET",
     "sortNum": 50000,
     "created": "2022-09-08T17:53:33.505Z",
-    "modified": "2022-09-13T22:21:46.898Z",
-    "headers": [],
+    "modified": "2022-11-28T18:03:22.444Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "application/json"
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
     "params": [
       {
         "name": "page",
@@ -66,7 +76,7 @@
     "method": "POST",
     "sortNum": 20000,
     "created": "2022-09-08T18:54:51.258Z",
-    "modified": "2022-11-23T22:18:22.514Z",
+    "modified": "2022-11-28T18:01:33.679Z",
     "headers": [
       {
         "name": "Accept",
@@ -82,7 +92,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Kevin\",\n  \"dni\": \"604680943\",\n  \"first_last_name\": \"Pitti\",\n  \"second_last_name\": \"Castro\",\n  \"email\": \"KEVIN123@gmail.com\",\n  \"password\": \"Kevin123.\",\n  \"password_confirmation\": \"Kevin123.\",\n  \"role_id\": 1\n}",
+      "raw": "{\n  \"name\": \"Kevin\",\n  \"dni\": \"604680943\",\n  \"first_last_name\": \"Pitti\",\n  \"second_last_name\": \"Castro\",\n  \"email\": \"kevin@gmail.com\",\n  \"password\": \"Kevin123.\",\n  \"password_confirmation\": \"Kevin123.\",\n  \"role_id\": 1\n}",
       "form": []
     },
     "auth": {
@@ -107,7 +117,7 @@
     "method": "POST",
     "sortNum": 40000,
     "created": "2022-09-08T22:19:28.544Z",
-    "modified": "2022-11-23T23:05:13.678Z",
+    "modified": "2022-11-26T19:59:44.471Z",
     "headers": [
       {
         "name": "Accept",
@@ -128,7 +138,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"email\": \"kevin@gmail.com\",\n  \"password\": \"Kevin123.\"\n}",
+      "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"Password123.\"\n}",
       "form": []
     },
     "tests": [
@@ -281,8 +291,13 @@
     "method": "GET",
     "sortNum": 55000,
     "created": "2022-09-12T22:24:01.695Z",
-    "modified": "2022-09-14T15:17:01.745Z",
-    "headers": [],
+    "modified": "2022-11-28T18:03:47.650Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "application/json"
+      }
+    ],
     "params": [
       {
         "name": "page",
@@ -667,7 +682,7 @@
     "method": "POST",
     "sortNum": 90000,
     "created": "2022-09-15T23:20:07.814Z",
-    "modified": "2022-09-20T15:30:28.753Z",
+    "modified": "2022-11-28T23:04:22.269Z",
     "headers": [
       {
         "name": "Accept",
@@ -681,7 +696,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"email\": \"kevin123456@gmail.com\"\n}",
+      "raw": "{\n  \"email\": \"\"\n}",
       "form": []
     },
     "tests": []
@@ -794,7 +809,7 @@
     "method": "POST",
     "sortNum": 100000,
     "created": "2022-09-16T22:52:34.684Z",
-    "modified": "2022-09-20T15:32:29.330Z",
+    "modified": "2022-11-29T20:17:16.787Z",
     "headers": [
       {
         "name": "Accept",
@@ -808,11 +823,8 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"token\": \"ef031defbc2dde2564c5f6f116ab2ee9a8e2f8b72ccc6a69aef9c27a33335f41\",\n  \"email\": \"kevin123456@gmail.com\",\n  \"password\": \"Kevin777.\",\n  \"password_confirmation\": \"Kevin777.\"\n}",
+      "raw": "{\n  \"token\": \"cc78c6128da14803a8e9477632b1b978720231808fab37665994c339b77c7813\",\n  \"email\": \"kevin@gmail.com\",\n  \"password\": \"Kevin123.\",\n  \"password_confirmation\": \"Kevin123.\"\n}",
       "form": []
-    },
-    "auth": {
-      "type": "bearer"
     },
     "tests": [
       {
@@ -846,7 +858,7 @@
     "method": "POST",
     "sortNum": 45000,
     "created": "2022-10-07T00:36:28.971Z",
-    "modified": "2022-10-10T18:03:32.822Z",
+    "modified": "2022-11-26T19:58:59.086Z",
     "headers": [
       {
         "name": "Accept",
@@ -978,6 +990,35 @@
     "body": {
       "type": "json",
       "raw": "{\n  \"atrcedula\": \"6-0468-0943\", \n  \"atranioscump\": \"1\", \n  \"atrnombre\": \"Kevin\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "42fd6639-8176-447b-9791-75942ddca164",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "b8f23e6b-b848-467e-9531-b19306dc7529",
+    "name": "validateResetToken",
+    "url": "http://localhost:8000/api/v1/password/validate",
+    "method": "POST",
+    "sortNum": 330000,
+    "created": "2022-11-28T18:50:49.903Z",
+    "modified": "2022-11-28T22:16:30.992Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "application/json"
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"email\": \"kevin@gmal.com\",\n  \"token\": \"444df2da836df5326bb168a789b05e65c2b2bbf3822b21a60435b128c701b820\"\n}",
       "form": []
     },
     "tests": []

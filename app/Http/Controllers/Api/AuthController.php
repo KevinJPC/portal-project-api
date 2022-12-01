@@ -33,22 +33,14 @@ class AuthController extends Controller
             'role_id' => $request->role_id,
         ]);
 
-        $token = $user->createToken('auth_token')->accessToken;
+        $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json(
             [
                 'success' => true,
                 'message' => 'Registro exitoso',
                 'data' => [
-                    'user' => [
-                        'id' => $user->id,
-                        'name' => $user->name,
-                        'first_last_name' => $user->first_last_name,
-                        'second_last_name' => $user->second_last_name,
-                        'role' => $user->is_admin
-                            ? 'admin'
-                            : $user->role->name_slug,
-                    ],
+                    'user' => $user,
                     'token' => $token,
                 ],
             ],
@@ -76,7 +68,7 @@ class AuthController extends Controller
             abort(401, 'Correo electrónico o contraseña incorrecta');
         }
 
-        $token = $user->createToken('auth_token')->accessToken;
+        $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json(
             [
@@ -98,9 +90,10 @@ class AuthController extends Controller
      */
     public function logout(Request $request)
     {
-        Auth::user()
-            ->token()
-            ->revoke();
+        $request
+            ->user()
+            ->currentAccessToken()
+            ->delete();
 
         return response()->json(
             [
@@ -126,8 +119,10 @@ class AuthController extends Controller
             [
                 'success' => true,
                 'message' => 'Reconexión exitosa',
-                'data' => $user,
-                'token' => $token,
+                'data' => [
+                    'user' => $user,
+                    'token' => $token,
+                ],
             ],
             200,
         );
