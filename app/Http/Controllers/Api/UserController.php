@@ -54,7 +54,7 @@ class UserController extends Controller
      *
      * @param UpdatePasswordRequest request The request object.
      *
-     * @return A response with a success message and a status code of 200.
+     * @return A response with a success message
      */
     public function updatePassword(UpdatePasswordRequest $request)
     {

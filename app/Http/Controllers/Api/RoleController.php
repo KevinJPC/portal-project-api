@@ -78,7 +78,7 @@ class RoleController extends Controller
 
     /**
      * It returns a list of roles that are active and not admin.
-     * 
+     *
      * @return An array of objects.
      */
     public function publicRoles()
@@ -142,10 +142,11 @@ class RoleController extends Controller
     }
 
     /**
-     * A function that allows you to delete a role, but it is not completely deleted, it is
-     * deactivated.
+     * If the role has no users assigned to it, then it can be inactivated
      *
-     * @param Role role The role to be deleted.
+     * @param Role role The role to be inactivated
+     *
+     * @return The response is a JSON object with the following structure:
      */
     public function inactivateRole(Role $role)
     {
@@ -185,9 +186,11 @@ class RoleController extends Controller
     }
 
     /**
-     * It activates a role.
+     * It activates a role by changing the state of the role from 'I' to 'A'
      *
-     * @param Role role The role to be activated.
+     * @param Role
+     *
+     * @return The response is a JSON object
      */
     public function activateRole(Role $role)
     {
@@ -273,6 +276,12 @@ class RoleController extends Controller
         }
     }
 
+    /**
+     * It searches for a role in the database and returns the results in a paginated format
+     *
+     * @param request the search term
+     * @return JSON response
+     */
     public function searchRole($request)
     {
         try {
