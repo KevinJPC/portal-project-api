@@ -380,9 +380,12 @@ class ProcessController extends Controller
         }
     }
 
-    /* It searches for a process in the database and returns the results in a paginated format
+    /**
+     * It searches for a process in the database and returns the results in a paginated format.
      *
-     * @return An array of objects.
+     * @param request the search term
+     *
+     * @return JSON response.
      */
     public function searchProcess($request)
     {
@@ -415,6 +418,14 @@ class ProcessController extends Controller
         }
     }
 
+    /**
+     * It gets all the processes that the user has access to and that are visible, and then it searches
+     * for the ones that match the search request
+     *
+     * @param request the search term
+     *
+     * @return JSON response
+     */
     public function getSearchVisiblesProcesses($request)
     {
         try {

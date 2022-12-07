@@ -191,6 +191,12 @@ class AdminController extends Controller
         );
     }
 
+    /**
+     * Search for users with the role of admin, search by name, dni, and email.
+     *
+     * @param request "admin"
+     * @return JSON response
+     */
     public function searchAdmin($request)
     {
         $search_users = DB::table('users')
