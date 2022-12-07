@@ -38,7 +38,10 @@ Route::prefix('/processes')->group(
     base_path('routes/api/v1/processRoutes.php'),
 );
 
+Route::prefix('/notifications')->group(
+    base_path('routes/api/v1/notificationRoute.php'),
+);
+
 Route::prefix('/users/processes')->group(
     base_path('routes/api/v1/userHasProcessRoutes.php'),
 );
-// });

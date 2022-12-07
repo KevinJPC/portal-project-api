@@ -65,7 +65,7 @@ class AuthController extends Controller
         $user = Auth::user();
 
         if (!$isAuthenticated || $user->state !== 'A') {
-            abort(401, 'Correo electrónico o contraseña incorrecta');
+            abort(401, 'Correo electrónico o contraseña incorrecta.');
         }
 
         $token = $user->createToken('auth_token')->plainTextToken;

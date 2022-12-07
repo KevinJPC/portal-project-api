@@ -156,7 +156,7 @@ class UserHasProcessController extends Controller
                 $user_processes[$key] = (object) array_merge(
                     (array) $user_processes[$key],
                     (array) [
-                        'status' => $workflow->fgstatus,
+                        'status' => (int) $workflow->fgstatus,
                         'enabled_activity' =>
                             $workflow->dsstruct?->nom ?? $workflow->nmstruct,
                         'started_at' => $workflow->dtstart,
@@ -244,7 +244,7 @@ class UserHasProcessController extends Controller
                     'name' => $struct->dsstruct?->nom ?? $struct->nmstruct,
                     'execute_on_portal' =>
                         $struct->dsstruct?->ejecportal ?? false,
-                    'status' => $struct->fgstatus,
+                    'status' => (int) $struct->fgstatus,
                 ];
 
                 /* Getting the order of the enabled activity. */
@@ -268,7 +268,7 @@ class UserHasProcessController extends Controller
                             'name' => $process->name,
                             'started_at' => $sesuite_workflow->dtstart,
                             'finished_at' => $sesuite_workflow->dtfinish,
-                            'status' => $sesuite_workflow->fgstatus,
+                            'status' => (int) $sesuite_workflow->fgstatus,
                             'percentage_advance' => $percentage_advance,
                             'activities' => $activities,
                         ],

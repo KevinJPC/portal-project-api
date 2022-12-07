@@ -25,5 +25,8 @@ Route::middleware(['auth:sanctum', 'restrictTo:admin'])->group(function () {
         RoleController::class,
         'activateRole',
     ]);
+
     Route::get('/search/{role:name}', [RoleController::class, 'searchRole']);
 });
+/* A public route that is not protected by the `auth:sanctum` middleware. */
+Route::get('/', [RoleController::class, 'publicRoles']);
