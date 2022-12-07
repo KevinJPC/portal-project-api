@@ -117,7 +117,7 @@
     "method": "POST",
     "sortNum": 40000,
     "created": "2022-09-08T22:19:28.544Z",
-    "modified": "2022-11-26T19:59:44.471Z",
+    "modified": "2022-12-07T04:47:32.651Z",
     "headers": [
       {
         "name": "Accept",
@@ -138,7 +138,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"email\": \"rt026000@gmail.com\",\n  \"password\": \"Tony2106.\"\n}",
+      "raw": "{\n  \"email\": \"kevin@gmail.com\",\n  \"password\": \"Kevin123.\"\n}",
       "form": []
     },
     "tests": [
@@ -995,33 +995,6 @@
     "tests": []
   },
   {
-    "_id": "42fd6639-8176-447b-9791-75942ddca164",
-    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
-    "containerId": "b8f23e6b-b848-467e-9531-b19306dc7529",
-    "name": "validateResetToken",
-    "url": "http://localhost:8000/api/v1/password/validate",
-    "method": "POST",
-    "sortNum": 330000,
-    "created": "2022-11-28T18:50:49.903Z",
-    "modified": "2022-11-28T22:16:30.992Z",
-    "headers": [
-      {
-        "name": "Accept",
-        "value": "application/json"
-      }
-    ],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"email\": \"kevin@gmal.com\",\n  \"token\": \"444df2da836df5326bb168a789b05e65c2b2bbf3822b21a60435b128c701b820\"\n}",
-      "form": []
-    },
-    "tests": [],
-    "auth": {
-      "type": "bearer",
-      "bearer": "{{token}}"
-    }
-  },
-  {
     "_id": "f4c455a1-cd3e-403d-9146-b5eb435d9014",
     "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
     "containerId": "bf2c800a-06f6-4631-84b3-2c77a4e58111",
@@ -1069,5 +1042,32 @@
     ],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "42fd6639-8176-447b-9791-75942ddca164",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "b8f23e6b-b848-467e-9531-b19306dc7529",
+    "name": "validateResetToken",
+    "url": "http://localhost:8000/api/v1/password/validate",
+    "method": "POST",
+    "sortNum": 330000,
+    "created": "2022-11-28T18:50:49.903Z",
+    "modified": "2022-11-28T22:16:30.992Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "application/json"
+      }
+    ],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"email\": \"kevin@gmal.com\",\n  \"token\": \"444df2da836df5326bb168a789b05e65c2b2bbf3822b21a60435b128c701b820\"\n}",
+      "form": []
+    },
+    "tests": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    }
   }
 ]

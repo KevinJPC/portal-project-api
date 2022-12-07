@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class RestrictTo
 {
     /**
-     * Handle an incoming request.
+     * If the user's role is different from the one passed by parameter, it aborts the request with a 403 status code.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next

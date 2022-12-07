@@ -49,12 +49,12 @@ class AuthController extends Controller
     }
 
     /**
-     * The function receives a LoginAuthRequest object, which is a request object that contains the
-     * email and password fields. If the email and password are correct, the function returns a
-     * response with the user and token data. If the email and password are incorrect, the function
-     * returns a response with an error message
+     * It checks if the user is authenticated and if the user's state is 'A' (active). If it is, it
+     * creates a token and returns a response with the user and the token.
      *
-     * @param LoginAuthRequest request The request object.
+     * @param LoginRequest request The request object.
+     *
+     * @return The user and the token.
      */
     public function login(LoginRequest $request)
     {
@@ -105,7 +105,7 @@ class AuthController extends Controller
     }
 
     /**
-     * It returns the user's data
+     * It returns the user's data and current access token
      *
      * @param Request request The request object.
      *
