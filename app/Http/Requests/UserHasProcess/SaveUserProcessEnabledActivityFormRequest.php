@@ -7,12 +7,16 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
+/*
+    !!!IMPORTANT: This is a custom request just to test the creation of dynamic rules and attributes based on form fields
+*/
 class SaveUserProcessEnabledActivityFormRequest extends FormRequest
 {
     protected $fields;
 
     public function __construct(Request $request)
     {
+        //instead of doing this, you have to modify the middleware EnsureEnabledActivityIsExecutable and pass the activity from the request
         $this->activity = DB::connection('sqlsrv')
             ->table('wfprocess')
             ->select('wfstruct.idobject', 'wfstruct.dsstruct')
@@ -78,10 +82,12 @@ class SaveUserProcessEnabledActivityFormRequest extends FormRequest
      */
     public function authorize()
     {
+        //this is no longer necessary, yo have to remove this validation and instead use EnsureIsOwnerUser middleware in the route
         if ($this->route('usershasprocess')->user_id !== Auth::user()->id) {
             return false;
         }
 
+        //instead of doing this, you have to modify the EnsureEnabledActivityIsExecutable middleware
         if (!json_decode($this->activity->dsstruct)?->ejecportal) {
             return false;
         }
@@ -96,6 +102,7 @@ class SaveUserProcessEnabledActivityFormRequest extends FormRequest
      */
     public function rules()
     {
+        //Creation of dynamic rules based on the form of the enabled activity
         $rules = [];
 
         foreach ($this->fields as $key => $field) {
@@ -123,6 +130,7 @@ class SaveUserProcessEnabledActivityFormRequest extends FormRequest
      */
     public function attributes()
     {
+        //Creation of dynamic attributes based on the form of the enabled activity
         $attributes = [];
         foreach ($this->fields as $key => $field) {
             $attributes[$field->idname] = strtolower($field->nmlabel);

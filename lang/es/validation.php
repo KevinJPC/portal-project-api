@@ -203,5 +203,6 @@ return [
         'second_last_name'         => 'segundo apellido',
         'old_password'             => 'contraseña actual',
         'dni'                      => 'cédula',
+        'role_id'                  => 'rol',
     ],
 ];

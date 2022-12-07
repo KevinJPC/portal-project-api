@@ -6,7 +6,7 @@ use App\Http\Controllers\Api\RoleController;
 
 /* A group of routes that are protected by the `auth:sanctum` middleware. */
 
-Route::middleware('auth:api')->group(function () {
+Route::middleware(['auth:sanctum', 'restrictTo:admin'])->group(function () {
     Route::get('/inactives', [RoleController::class, 'getInactiveRoles']);
     Route::get('/actives', [RoleController::class, 'getActiveRoles']);
     Route::post('/', [RoleController::class, 'createRole']);

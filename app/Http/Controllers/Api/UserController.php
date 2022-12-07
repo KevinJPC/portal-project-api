@@ -21,30 +21,20 @@ class UserController extends Controller
      */
     public function updateUser(UpdateUserRequest $request)
     {
-        try {
-            if (User::where('id', Auth::user()->id)->exists()) {
-                User::where('id', Auth::user()->id)->update([
-                    'name' => $request->name,
-                    'first_last_name' => $request->first_last_name,
-                    'second_last_name' => $request->second_last_name,
-                    'email' => $request->email,
-                ]);
+        if (User::where('id', Auth::user()->id)->exists()) {
+            User::where('id', Auth::user()->id)->update([
+                'name' => $request->name,
+                'first_last_name' => $request->first_last_name,
+                'second_last_name' => $request->second_last_name,
+                'email' => $request->email,
+            ]);
 
-                return response()->json(
-                    [
-                        'success' => true,
-                        'message' => 'Información modificada correctamente',
-                    ],
-                    200,
-                );
-            }
-        } catch (\Exception $exception) {
             return response()->json(
                 [
-                    'success' => false,
-                    'message' => $exception->getMessage(),
+                    'success' => true,
+                    'message' => 'Información modificada correctamente',
                 ],
-                400,
+                200,
             );
         }
     }
@@ -60,48 +50,37 @@ class UserController extends Controller
     {
         $current_user = Auth::user();
 
-        try {
-            if (Hash::check($request->old_password, $current_user->password)) {
-                if (Hash::check($request->password, $current_user->password)) {
-                    return response()->json(
-                        [
-                            'success' => false,
-                            'message' =>
-                                'La nueva contraseña debe ser diferente a la actual',
-                        ],
-                        400,
-                    );
-                } else {
-                    $user_id = $current_user->id;
-                    $new_password = Hash::make($request->password);
-
-                    User::where('id', $user_id)->update([
-                        'password' => $new_password,
-                    ]);
-
-                    return response(
-                        [
-                            'success' => true,
-                            'message' =>
-                                'La contraseña se modificó correctamente',
-                        ],
-                        200,
-                    );
-                }
-            } else {
+        if (Hash::check($request->old_password, $current_user->password)) {
+            if (Hash::check($request->password, $current_user->password)) {
                 return response()->json(
                     [
                         'success' => false,
-                        'message' => 'La contraseña actual no es la correcta',
+                        'message' =>
+                            'La nueva contraseña debe ser diferente a la actual',
                     ],
                     400,
                 );
+            } else {
+                $user_id = $current_user->id;
+                $new_password = Hash::make($request->password);
+
+                User::where('id', $user_id)->update([
+                    'password' => $new_password,
+                ]);
+
+                return response(
+                    [
+                        'success' => true,
+                        'message' => 'La contraseña se modificó correctamente',
+                    ],
+                    200,
+                );
             }
-        } catch (\Exception $exception) {
+        } else {
             return response()->json(
                 [
                     'success' => false,
-                    'message' => $exception->getMessage(),
+                    'message' => 'La contraseña actual no es la correcta',
                 ],
                 400,
             );
@@ -118,29 +97,19 @@ class UserController extends Controller
      */
     public function getUserById(User $user)
     {
-        try {
-            return response()->json(
-                [
-                    'success' => true,
-                    'data' => [
-                        'user' => [
-                            'name' => $user->name,
-                            'first_last_name' => $user->first_last_name,
-                            'second_last_name' => $user->second_last_name,
-                            'email' => $user->email,
-                        ],
+        return response()->json(
+            [
+                'success' => true,
+                'data' => [
+                    'user' => [
+                        'name' => $user->name,
+                        'first_last_name' => $user->first_last_name,
+                        'second_last_name' => $user->second_last_name,
+                        'email' => $user->email,
                     ],
                 ],
-                200,
-            );
-        } catch (\Exception $exception) {
-            return response()->json(
-                [
-                    'success' => false,
-                    'message' => $exception->getMessage(),
-                ],
-                400,
-            );
-        }
+            ],
+            200,
+        );
     }
 }

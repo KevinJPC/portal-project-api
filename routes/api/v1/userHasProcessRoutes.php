@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserHasProcessController;
 
-Route::middleware('auth:api')->group(function () {
+Route::middleware(['auth:sanctum', 'restrictTo:user'])->group(function () {
     Route::post('/{process:id}/start', [
         UserHasProcessController::class,
         'startProcess',
@@ -13,16 +13,16 @@ Route::middleware('auth:api')->group(function () {
         UserHasProcessController::class,
         'getUserProcesses',
     ]);
-    Route::get('/{usershasprocess:id}', [
+    Route::middleware(['ensureIsOwnerUser'])->get('/{usershasprocess:id}', [
         UserHasProcessController::class,
         'getUserProcessById',
     ]);
-    Route::get('/{usershasprocess:id}/enabled-activity/form', [
-        UserHasProcessController::class,
-        'getUserProcessEnabledActivityForm',
-    ]);
-    Route::post('/{usershasprocess:id}/enabled-activity/form', [
-        UserHasProcessController::class,
-        'saveUserProcessEnabledActivityForm',
-    ]);
+    Route::middleware(['ensureIsOwnerUser'])->get(
+        '/{usershasprocess:id}/enabled-activity/form',
+        [UserHasProcessController::class, 'getUserProcessEnabledActivityForm'],
+    );
+    Route::middleware(['ensureIsOwnerUser'])->post(
+        '/{usershasprocess:id}/enabled-activity/form',
+        [UserHasProcessController::class, 'saveUserProcessEnabledActivityForm'],
+    );
 });

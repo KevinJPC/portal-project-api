@@ -36,43 +36,33 @@ class UserHasProcessController extends Controller
      */
     public function startProcess(Process $process)
     {
-        try {
-            /* Calling the `newWorkflow` function from the `workflow_web_services` object. */
-            $workflow = $this->workflow_web_services->newWorkflow([
-                'ProcessID' => $process->se_oid,
-                'WorkflowTitle' =>
-                    $process->se_name .
-                    ' Portal ' .
-                    Auth::user()->dni .
-                    ' ' .
-                    date('d-m-Y'),
-            ]);
+        /* Calling the `newWorkflow` function from the `workflow_web_services` object. */
+        $workflow = $this->workflow_web_services->newWorkflow([
+            'ProcessID' => $process->se_oid,
+            'WorkflowTitle' =>
+                $process->se_name .
+                ' Portal ' .
+                Auth::user()->dni .
+                ' ' .
+                date('d-m-Y'),
+        ]);
 
-            $process_started = UsersHasProcess::create([
-                'user_id' => Auth::user()->id,
-                'process_id' => $process->id,
-                'se_oid' => $workflow->RecordKey,
-            ]);
+        $process_started = UsersHasProcess::create([
+            'user_id' => Auth::user()->id,
+            'process_id' => $process->id,
+            'se_oid' => $workflow->RecordKey,
+        ]);
 
-            return response()->json(
-                [
-                    'success' => true,
-                    'message' => 'Proceso iniciado exitosamente',
-                    'data' => [
-                        'process_started' => $process_started,
-                    ],
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Proceso iniciado exitosamente',
+                'data' => [
+                    'process_started' => $process_started,
                 ],
-                200,
-            );
-        } catch (\Exception $exception) {
-            return response()->json(
-                [
-                    'success' => false,
-                    'message' => $exception->getMessage(),
-                ],
-                400,
-            );
-        }
+            ],
+            200,
+        );
     }
 
     /**
@@ -83,98 +73,84 @@ class UserHasProcessController extends Controller
      */
     public function getUserProcesses()
     {
-        try {
-            /* A query builder that is selecting the user's processes*/
-            $user_processes = DB::table('processes')
-                ->select(
-                    'users_has_processes.id',
-                    'processes.name',
-                    'users_has_processes.se_oid',
-                )
-                ->join('users_has_processes', function ($join) {
-                    $join
-                        ->on(
-                            'processes.id',
-                            '=',
-                            'users_has_processes.process_id',
-                        )
-                        ->where(
-                            'users_has_processes.user_id',
-                            '=',
-                            Auth::user()->id,
-                        );
-                })
-                ->orderBy('users_has_processes.se_oid', 'desc')
-                ->paginate(10);
+        /* A query builder that is selecting the user's processes*/
+        $user_processes = DB::table('processes')
+            ->select(
+                'users_has_processes.id',
+                'processes.name',
+                'users_has_processes.se_oid',
+            )
+            ->join('users_has_processes', function ($join) {
+                $join
+                    ->on('processes.id', '=', 'users_has_processes.process_id')
+                    ->where(
+                        'users_has_processes.user_id',
+                        '=',
+                        Auth::user()->id,
+                    );
+            })
+            ->orderBy('users_has_processes.se_oid', 'desc')
+            ->paginate(10);
 
-            /* Getting an array of `se_oid` column from the `user_processes` collection. */
-            $user_processes_oid = $user_processes->pluck('se_oid');
+        /* Getting an array of `se_oid` column from the `user_processes` collection. */
+        $user_processes_oid = $user_processes->pluck('se_oid');
 
-            $workflow_struct = $this->sqlsrv_connection
-                ->table('wfstruct')
-                ->select('idprocess', 'nmstruct', 'dsstruct')
-                ->where('wfstruct.fgtype', '=', 2)
-                ->where('wfstruct.fgstatus', '=', 2);
+        $workflow_struct = $this->sqlsrv_connection
+            ->table('wfstruct')
+            ->select('idprocess', 'nmstruct', 'dsstruct')
+            ->where('wfstruct.fgtype', '=', 2)
+            ->where('wfstruct.fgstatus', '=', 2);
 
-            /* Getting the status, enabled activity, started date and finish date of each process from SE Suite
-             database that matches one of the oids passed in the user_process_oid array. */
-            $workflows = $this->sqlsrv_connection
-                ->table('wfprocess')
-                ->select(
-                    'wfprocess.cdprocess',
-                    'wfprocess.fgstatus',
-                    'wfstruct.nmstruct',
-                    'wfstruct.dsstruct',
-                    'wfprocess.dtstart',
-                    'wfprocess.dtfinish',
-                )
-                ->leftJoinSub($workflow_struct, 'wfstruct', function ($join) {
-                    $join->on('wfprocess.cdprocess', '=', 'wfstruct.idprocess');
-                })
-                ->whereIn('wfprocess.cdprocess', $user_processes_oid)
-                ->orderBy('wfprocess.cdprocess', 'desc')
-                ->get();
+        /* Getting the status, enabled activity, started date and finish date of each process from SE Suite
+         database that matches one of the oids passed in the user_process_oid array. */
+        $workflows = $this->sqlsrv_connection
+            ->table('wfprocess')
+            ->select(
+                'wfprocess.cdprocess',
+                'wfprocess.fgstatus',
+                'wfstruct.nmstruct',
+                'wfstruct.dsstruct',
+                'wfprocess.dtstart',
+                'wfprocess.dtfinish',
+            )
+            ->leftJoinSub($workflow_struct, 'wfstruct', function ($join) {
+                $join->on('wfprocess.cdprocess', '=', 'wfstruct.idprocess');
+            })
+            ->whereIn('wfprocess.cdprocess', $user_processes_oid)
+            ->orderBy('wfprocess.cdprocess', 'desc')
+            ->get();
 
-            /* A foreach loop that is iterating over the workflows */
-            foreach ($workflows as $key => $workflow) {
-                /*
+        /* A foreach loop that is iterating over the workflows */
+        foreach ($workflows as $key => $workflow) {
+            /*
                  * Decoding the json string that is stored in the `dsstruct` column of the `wfstruct`
                  table. Gets the values previusly configured on SE Suite for each enabled activity
                  */
-                $workflow->dsstruct = json_decode($workflow->dsstruct);
+            $workflow->dsstruct = json_decode($workflow->dsstruct);
 
-                /* Merging the `user_processes` object with a new object that has the process status, enabled activity,
-                 started date and finished date from workflow object. */
-                $user_processes[$key] = (object) array_merge(
-                    (array) $user_processes[$key],
-                    (array) [
-                        'status' => (int) $workflow->fgstatus,
-                        'enabled_activity' =>
-                            $workflow->dsstruct?->nom ?? $workflow->nmstruct,
-                        'started_at' => $workflow->dtstart,
-                        'finished_at' => $workflow->dtfinish,
-                    ],
-                );
-            }
-
-            return response()->json(
-                [
-                    'success' => true,
-                    'data' => [
-                        'user_processes' => $user_processes,
-                    ],
+            /* Merging the `user_processes` object with a new object that has the process status, enabled activity,
+             started date and finished date from workflow object. */
+            $user_processes[$key] = (object) array_merge(
+                (array) $user_processes[$key],
+                (array) [
+                    'status' => (int) $workflow->fgstatus,
+                    'enabled_activity' =>
+                        $workflow->dsstruct?->nom ?? $workflow->nmstruct,
+                    'started_at' => $workflow->dtstart,
+                    'finished_at' => $workflow->dtfinish,
                 ],
-                200,
-            );
-        } catch (\Exception $exception) {
-            return response()->json(
-                [
-                    'success' => false,
-                    'message' => $exception->getMessage(),
-                ],
-                400,
             );
         }
+
+        return response()->json(
+            [
+                'success' => true,
+                'data' => [
+                    'user_processes' => $user_processes,
+                ],
+            ],
+            200,
+        );
     }
 
     /**
@@ -186,102 +162,97 @@ class UserHasProcessController extends Controller
      */
     public function getUserProcessById(UsersHasProcess $usershasprocess)
     {
-        try {
-            /* Getting the process name from the database. */
-            $process = DB::table('processes')
-                ->select('name')
-                ->where('id', '=', $usershasprocess->process_id)
-                ->first();
+        /* Getting the process name from the database. */
+        $process = DB::table('processes')
+            ->select('name')
+            ->where('id', '=', $usershasprocess->process_id)
+            ->first();
 
-            /* Getting the workflow information from the SE Suite database. */
-            $sesuite_workflow = $this->sqlsrv_connection
-                ->table('wfprocess')
-                ->select(
-                    'wfprocess.dtstart',
-                    'wfprocess.dtfinish',
-                    'wfprocess.fgstatus',
-                )
-                ->where('wfprocess.cdprocess', '=', $usershasprocess->se_oid)
-                ->first();
+        /* Getting the workflow information from the SE Suite database. */
+        $sesuite_workflow = $this->sqlsrv_connection
+            ->table('wfprocess')
+            ->select(
+                'wfprocess.dtstart',
+                'wfprocess.dtfinish',
+                'wfprocess.fgstatus',
+            )
+            ->where('wfprocess.cdprocess', '=', $usershasprocess->se_oid)
+            ->first();
 
-            /* Getting the workflow's activities from the SE Suite database. */
-            $sesuite_workflow_struct = $this->sqlsrv_connection
-                ->table('wfstruct')
-                ->select(
-                    'wfstruct.nrorder',
-                    'wfstruct.idstruct',
-                    'wfstruct.nmstruct',
-                    'wfstruct.dsstruct',
-                    'wfstruct.fgstatus',
-                )
-                ->where('wfstruct.idprocess', '=', $usershasprocess->se_oid)
-                ->where('wfstruct.fgtype', '=', 2)
-                ->orderBy('wfstruct.nrorder', 'asc')
-                ->get();
+        /* Getting the workflow's activities from the SE Suite database. */
+        $sesuite_workflow_struct = $this->sqlsrv_connection
+            ->table('wfstruct')
+            ->select(
+                'wfstruct.nrorder',
+                'wfstruct.idstruct',
+                'wfstruct.nmstruct',
+                'wfstruct.dsstruct',
+                'wfstruct.fgstatus',
+            )
+            ->where('wfstruct.idprocess', '=', $usershasprocess->se_oid)
+            ->where('wfstruct.fgtype', '=', 2)
+            ->orderBy('wfstruct.nrorder', 'asc')
+            ->get();
 
-            $activities = [];
+        $activities = [];
 
-            /* Iterating over the workflow's activities*/
-            foreach ($sesuite_workflow_struct as $key => $struct) {
-                /*
-                 * Decoding the json string that is stored in the `dsstruct` column of the `wfstruct`
-                 * table. Gets the values previusly configured on SE Suite for each activity.
-                 */
-                $struct->dsstruct = json_decode($struct->dsstruct);
+        /* Iterating over the workflow's activities*/
+        foreach ($sesuite_workflow_struct as $key => $struct) {
+            /*
+             * Decoding the json string that is stored in the `dsstruct` column of the `wfstruct`
+             * table. Gets the values previusly configured on SE Suite for each activity.
+             */
+            $struct->dsstruct = json_decode($struct->dsstruct);
 
-                /* Creating an array of activities. */
-                $activities[$key] = [
-                    'se_oid' => $struct->idstruct,
-                    'order' => $struct->nrorder,
-                    'name' => $struct->dsstruct?->nom ?? $struct->nmstruct,
-                    'execute_on_portal' =>
-                        $struct->dsstruct?->ejecportal ?? false,
-                    'status' => (int) $struct->fgstatus,
-                ];
+            /* Creating an array of activities. */
+            $activities[$key] = [
+                'se_oid' => $struct->idstruct,
+                'order' => $struct->nrorder,
+                'name' => $struct->dsstruct?->nom ?? $struct->nmstruct,
+                'execute_on_portal' => $struct->dsstruct?->ejecportal ?? false,
+                'status' => (int) $struct->fgstatus,
+            ];
 
-                /* Getting the order of the enabled activity. */
-                if ($struct->fgstatus === '2') {
-                    $enabled_activity_order = $struct->nrorder;
-                }
+            /* Getting the order of the enabled activity. */
+            if ($struct->fgstatus === '2') {
+                $enabled_activity_order = $struct->nrorder;
             }
+        }
 
-            /* Calculating the percentage of advance of the process. */
-            $percentage_advance = round(
-                ($enabled_activity_order - 1) / (sizeOf($activities) + 1),
-                2,
-            );
+        /* Calculating the percentage of advance of the process. */
+        $percentage_advance = round(
+            ($enabled_activity_order - 1) / (sizeOf($activities) + 1),
+            2,
+        );
 
-            return response()->json(
-                [
-                    'success' => true,
-                    'data' => [
-                        'process' => [
-                            'se_oid' => $usershasprocess->se_oid,
-                            'name' => $process->name,
-                            'started_at' => $sesuite_workflow->dtstart,
-                            'finished_at' => $sesuite_workflow->dtfinish,
-                            'status' => (int) $sesuite_workflow->fgstatus,
-                            'percentage_advance' => $percentage_advance,
-                            'activities' => $activities,
-                        ],
+        return response()->json(
+            [
+                'success' => true,
+                'data' => [
+                    'process' => [
+                        'se_oid' => $usershasprocess->se_oid,
+                        'name' => $process->name,
+                        'started_at' => $sesuite_workflow->dtstart,
+                        'finished_at' => $sesuite_workflow->dtfinish,
+                        'status' => (int) $sesuite_workflow->fgstatus,
+                        'percentage_advance' => $percentage_advance,
+                        'activities' => $activities,
                     ],
                 ],
-                200,
-            );
-        } catch (\Exception $exception) {
-            return response()->json(
-                [
-                    'success' => false,
-                    'message' => $exception->getMessage(),
-                ],
-                400,
-            );
-        }
+            ],
+            200,
+        );
     }
 
+    /**
+     * It gets the form fields from a database and returns them as a JSON response
+     *
+     * @param UsersHasProcess usershasprocess is the process that the user is currently in
+     */
     public function getUserProcessEnabledActivityForm(
         UsersHasProcess $usershasprocess,
     ) {
+        //Getting the enabled activity of the SE Suite process (workflow)
         $activity = $this->sqlsrv_connection
             ->table('wfprocess')
             ->select(
@@ -316,21 +287,19 @@ class UserHasProcessController extends Controller
             ->where('wfstruct.fgstatus', '=', 2)
             ->first();
 
+        /* Decoding the json activity description into an object. */
         $activity->dsstruct = json_decode($activity->dsstruct);
 
+        /* Getting form fields from SE Suite based on oidrevisionform from the activity */
         $fields = $this->sqlsrv_connection
             ->table('efstructform')
             ->select(
-                'efstructform.nmlabel',
-                'efstructform.idstruct',
-                'efstructform.nmvalue',
-                'efstructform.fgtype',
-                'efstructform.fgrequired',
-                'efstructform.fgenabled',
-                'efstructform.nrorder',
-                'efstructform.fgtype',
-                'emattrmodel.idname',
-                'emattrmodel.fgtypeattribute',
+                'efstructform.nmlabel as label_text',
+                'efstructform.idstruct as identifier',
+                'efstructform.nmvalue as value',
+                'efstructform.fgtype as component_type',
+                'emattrmodel.idname as attribute_name',
+                'emattrmodel.fgtypeattribute as attribute_type',
             )
             ->leftJoin(
                 'emattrmodel',
@@ -344,42 +313,13 @@ class UserHasProcessController extends Controller
                 $activity->oidrevisionform,
             )
             ->where('efstructform.fghidden', '=', 2)
-            ->orderBy('efstructform.nrorder', 'asc')
             ->get();
 
-        $portal_fields = [];
+        /* Splitting the fields identifier into an array. */
+        $fields = $this->splitIdentifier($fields);
 
-        foreach ($fields as $key => $field) {
-            $field->idstruct = explode('x', $field->idstruct);
-
-            if (
-                $field->idstruct[0] === 'portal' &&
-                $field->idstruct[1] !== 'hj'
-            ) {
-                $portal_fields[] = $field;
-            }
-        }
-
-        foreach ($portal_fields as $parent_key => $parent) {
-            if (($parent->idstruct[2] ?? null) === 'fs') {
-                $children_array = [];
-                foreach ($fields as $children_key => $children) {
-                    if (
-                        ($children->idstruct[1] ?? null) === 'hj' &&
-                        ($children->idstruct[2] ?? null) ===
-                            ($parent->idstruct[3] ?? null)
-                    ) {
-                        $children_array[] = $children;
-                    }
-                }
-                $portal_fields[$parent_key] = array_merge(
-                    (array) $parent,
-                    (array) ['children' => $children_array],
-                );
-            }
-        }
-
-        dd($portal_fields);
+        /* Getting the portal fields from the fields array. */
+        $portal_fields = $this->getPortalFields($fields);
 
         return response()->json(
             [
@@ -388,7 +328,7 @@ class UserHasProcessController extends Controller
                     'activity' => [
                         'name' =>
                             $activity->dsstruct?->nom ?? $struct->nmstruct,
-                        'form' => $fields,
+                        'form' => $portal_fields,
                     ],
                 ],
             ],
@@ -400,20 +340,113 @@ class UserHasProcessController extends Controller
         UsersHasProcess $usershasprocess,
         SaveUserProcessEnabledActivityFormRequest $request,
     ) {
-        dd('save form');
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'This functionality is not yet defined',
+            ],
+            200,
+        );
     }
 
-    // $response = $this->forms_web_services->__getFunctions();
-}
+    /**
+     * It takes a collection of objects, and for each object, it splits the identifier property into an
+     * array, and returns the collection of objects
+     */
+    private function splitIdentifier($fields)
+    {
+        return array_map(function ($field) {
+            $field->identifier = explode('x', $field->identifier);
+            return $field;
+        }, $fields->toArray());
+    }
 
-// $response = $this->forms_web_services->getTableRecord([
-//     'TableID' => 'tbprueba001',
-//     'Pagination' => 1,
-//     'TableFieldList' => [
-//         'TableField' => [
-//             'TableFieldID' => 'OID',
-//             'TableFieldValue' => 'fc57792d99be60ded2f472871f59313c',
-//         ],
-//     ],
-// ]);
-// dd($response);
+    /* Getting the portal fields array based on the format defined in the portal documentation */
+    private function getPortalFields($fields)
+    {
+        /* Creation of an empty array for the elements intended to be displayed in the portal  */
+        $portal_fields = [];
+
+        /* Taking the array of fields and adding the fields, targeted to be displayed in the
+         *  portal, to the "portal_fields" array based on the format defined in the portal documentation
+         */
+        foreach ($fields as $field_key => $field) {
+            /* Checking if the field is a portal field and a fieldset. */
+            if (
+                ($field->identifier[0] ?? null) === 'portal' &&
+                ($field->identifier[2] ?? null) === 'fs'
+            ) {
+                /* if the field is a portal field and a fieldset, then the array is traversed
+                 *  again in order to find the options of that fieldset */
+                $options_array = [];
+                foreach ($fields as $field_option_key => $field_option) {
+                    if (
+                        ($field_option->identifier[0] ?? null) === 'portal' &&
+                        ($field_option->identifier[1] ?? null) === 'opc' &&
+                        ($field_option->identifier[2] ?? null) ===
+                            ($field->identifier[3] ?? null)
+                    ) {
+                        /* Merging in order to create a new better object for the option field. */
+                        $field_option = (object) array_merge(
+                            (array) $field_option,
+                            [
+                                'order' => $field_option->identifier[3],
+                            ],
+                        );
+                        unset($field_option->identifier);
+                        $options_array[] = $field_option;
+                    }
+                }
+                /* Sorting the options_array by the value of the key 'order' in ascending order. */
+                array_multisort(
+                    array_column($options_array, 'order'),
+                    SORT_ASC,
+                    $options_array,
+                );
+
+                /* Merging in order to create a new better object for the fieldset. */
+                $field = (object) array_merge(
+                    (array) $field,
+                    (array) [
+                        'attribute_name' =>
+                            ($field->identifier[4] ?? null) === 'rb'
+                                ? $options_array[0]->attribute_name ?? null
+                                : null,
+                        'attribute_type' =>
+                            ($field->identifier[4] ?? null) === 'rb'
+                                ? $options_array[0]->attribute_type ?? null
+                                : null,
+                        'options_type' => $field->identifier[4],
+                        'options' => $options_array,
+                    ],
+                );
+            }
+
+            /* Checking if the field is a portal field and is not a option */
+            if (
+                ($field->identifier[0] ?? null) === 'portal' &&
+                ($field->identifier[1] ?? null) !== 'opc'
+            ) {
+                /* Merging in order to create a new better object for the fieldset. */
+                $portal_fields[] = (object) array_merge(
+                    (array) $field,
+                    (array) [
+                        'order' => $field->identifier[1],
+                    ],
+                );
+            }
+
+            /* Unsetting the identifier field from the portal fields array. */
+            unset($portal_fields[$field_key]->identifier);
+        }
+
+        /* Sorting the portal_fields by the value of the key 'order' in ascending order. */
+        array_multisort(
+            array_column($portal_fields, 'order'),
+            SORT_ASC,
+            $portal_fields,
+        );
+
+        return $portal_fields;
+    }
+}

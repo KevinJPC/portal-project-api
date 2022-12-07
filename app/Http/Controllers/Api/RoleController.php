@@ -18,31 +18,21 @@ class RoleController extends Controller
      */
     public function createRole(CreateRoleRequest $request)
     {
-        try {
-            $role = new Role();
-            $role->name = $request->name;
-            $role->name_slug = $request->name_slug;
-            $role->description = $request->description;
-            $role->state = 'A';
-            $role->save();
+        $role = new Role();
+        $role->name = $request->name;
+        $role->name_slug = $request->name_slug;
+        $role->description = $request->description;
+        $role->state = 'A';
+        $role->save();
 
-            return response()->json(
-                [
-                    'success' => true,
-                    'message' => 'Rol creado correctamente',
-                    'data' => ['role' => $role],
-                ],
-                200,
-            );
-        } catch (Exception $exception) {
-            response()->json(
-                [
-                    'success' => false,
-                    'message' => $exception->getMessage(),
-                ],
-                400,
-            );
-        }
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Rol creado correctamente',
+                'data' => ['role' => $role],
+            ],
+            200,
+        );
     }
 
     /**
@@ -52,28 +42,18 @@ class RoleController extends Controller
      */
     public function getInactiveRoles()
     {
-        try {
-            $roles = DB::table('roles')
-                ->where('state', 'I')
-                ->orderBy('name')
-                ->paginate(10);
+        $roles = DB::table('roles')
+            ->where('state', 'I')
+            ->orderBy('name')
+            ->paginate(10);
 
-            return response()->json(
-                [
-                    'success' => true,
-                    'data' => ['roles' => $roles],
-                ],
-                200,
-            );
-        } catch (Exception $exception) {
-            return response()->json(
-                [
-                    'success' => false,
-                    'message' => $exception->getMessage(),
-                ],
-                400,
-            );
-        }
+        return response()->json(
+            [
+                'success' => true,
+                'data' => ['roles' => $roles],
+            ],
+            200,
+        );
     }
 
     /**
@@ -83,29 +63,19 @@ class RoleController extends Controller
      */
     public function publicRoles()
     {
-        try {
-            $roles = DB::table('roles')
-                ->where('state', 'A')
-                ->where('name_slug', '!=', 'admin')
-                ->orderBy('name')
-                ->get();
+        $roles = DB::table('roles')
+            ->where('state', 'A')
+            ->where('name_slug', '!=', 'admin')
+            ->orderBy('name')
+            ->get();
 
-            return response()->json(
-                [
-                    'success' => true,
-                    'data' => ['roles' => $roles],
-                ],
-                200,
-            );
-        } catch (Exception $exception) {
-            return response()->json(
-                [
-                    'success' => false,
-                    'message' => $exception->getMessage(),
-                ],
-                400,
-            );
-        }
+        return response()->json(
+            [
+                'success' => true,
+                'data' => ['roles' => $roles],
+            ],
+            200,
+        );
     }
 
     /**
@@ -115,30 +85,18 @@ class RoleController extends Controller
      */
     public function getActiveRoles()
     {
-        try {
-            $roles = DB::table('roles')
-                ->where('state', 'A')
+        $roles = DB::table('roles')
+            ->where('state', 'A')
+            ->latest()
+            ->paginate(10);
 
-                ->where('name_slug', '!=', 'admin')
-                ->orderBy('name')
-                ->paginate(10);
-
-            return response()->json(
-                [
-                    'success' => true,
-                    'data' => ['roles' => $roles],
-                ],
-                200,
-            );
-        } catch (Exception $exception) {
-            return response()->json(
-                [
-                    'success' => false,
-                    'message' => $exception->getMessage(),
-                ],
-                400,
-            );
-        }
+        return response()->json(
+            [
+                'success' => true,
+                'data' => ['roles' => $roles],
+            ],
+            200,
+        );
     }
 
     /**
@@ -150,35 +108,25 @@ class RoleController extends Controller
      */
     public function inactivateRole(Role $role)
     {
-        try {
-            $hasUsers = DB::table('users')
-                ->where('role_id', $role->id)
-                ->first();
-            if (!$hasUsers) {
-                $role->state = 'I';
-                $role->save();
-                return response()->json(
-                    [
-                        'success' => true,
-                        'message' => 'Rol desactivado correctamente',
-                        'data' => ['role' => $role],
-                    ],
-                    200,
-                );
-            } else {
-                return response()->json(
-                    [
-                        'success' => false,
-                        'message' => 'Este rol tiene usuarios asignados',
-                    ],
-                    400,
-                );
-            }
-        } catch (Exception $exception) {
+        $hasUsers = DB::table('users')
+            ->where('role_id', $role->id)
+            ->first();
+        if (!$hasUsers) {
+            $role->state = 'I';
+            $role->save();
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'Rol desactivado correctamente',
+                    'data' => ['role' => $role],
+                ],
+                200,
+            );
+        } else {
             return response()->json(
                 [
                     'success' => false,
-                    'message' => $exception->getMessage(),
+                    'message' => 'Este rol tiene usuarios asignados',
                 ],
                 400,
             );
@@ -194,27 +142,17 @@ class RoleController extends Controller
      */
     public function activateRole(Role $role)
     {
-        try {
-            $role = Role::find($role->id);
-            $role->state = 'A';
-            $role->save();
-            return response()->json(
-                [
-                    'success' => true,
-                    'message' => 'Rol Activado correctamente',
-                    'data' => ['role' => $role],
-                ],
-                200,
-            );
-        } catch (Exception $exception) {
-            return response()->json(
-                [
-                    'success' => false,
-                    'message' => $exception->getMessage(),
-                ],
-                400,
-            );
-        }
+        $role = Role::find($role->id);
+        $role->state = 'A';
+        $role->save();
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Rol Activado correctamente',
+                'data' => ['role' => $role],
+            ],
+            200,
+        );
     }
 
     /**
@@ -224,20 +162,10 @@ class RoleController extends Controller
      */
     public function getRoleById(Role $role)
     {
-        try {
-            return response()->json(
-                ['success' => true, 'data' => ['role' => $role]],
-                200,
-            );
-        } catch (Exception $exception) {
-            return response()->json(
-                [
-                    'success' => false,
-                    'message' => $exception->getMessage(),
-                ],
-                400,
-            );
-        }
+        return response()->json(
+            ['success' => true, 'data' => ['role' => $role]],
+            200,
+        );
     }
 
     /**
@@ -248,32 +176,22 @@ class RoleController extends Controller
      */
     public function updateRole(ModifyRoleRequest $request, Role $role)
     {
-        try {
-            $role = Role::find($role->id);
-            $role->name = $request->name;
-            if (!($role->name_slug = $request->name_slug)) {
-                $role->name_slug = $request->name_slug;
-            }
-            $role->description = $request->description;
-            $role->save();
-
-            return response()->json(
-                [
-                    'success' => true,
-                    'message' => 'Rol modificado correctamente',
-                    'data' => ['role' => $role],
-                ],
-                200,
-            );
-        } catch (Exception $exception) {
-            return response()->json(
-                [
-                    'success' => false,
-                    'message' => $exception->getMessage(),
-                ],
-                400,
-            );
+        $role = Role::find($role->id);
+        $role->name = $request->name;
+        if (!($role->name_slug = $request->name_slug)) {
+            $role->name_slug = $request->name_slug;
         }
+        $role->description = $request->description;
+        $role->save();
+
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Rol modificado correctamente',
+                'data' => ['role' => $role],
+            ],
+            200,
+        );
     }
 
     /**
@@ -284,25 +202,15 @@ class RoleController extends Controller
      */
     public function searchRole($request)
     {
-        try {
-            $roles = DB::table('roles')
-                ->where('state', 'A')
-                ->where('name', 'ILIKE', $request . '%')
-                ->orwhere('name', 'ILIKE', '%' . $request . '%')
-                ->orwhere('name', 'ILIKE', '%' . $request)
-                ->paginate(10);
-            return response()->json(
-                ['success' => true, 'data' => ['roles' => $roles]],
-                200,
-            );
-        } catch (\Exception $exception) {
-            return response()->json(
-                [
-                    'success' => false,
-                    'message' => $exception->getMessage(),
-                ],
-                400,
-            );
-        }
+        $roles = DB::table('roles')
+            ->where('state', 'A')
+            ->where('name', 'ILIKE', $request . '%')
+            ->orwhere('name', 'ILIKE', '%' . $request . '%')
+            ->orwhere('name', 'ILIKE', '%' . $request)
+            ->paginate(10);
+        return response()->json(
+            ['success' => true, 'data' => ['roles' => $roles]],
+            200,
+        );
     }
 }

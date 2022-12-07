@@ -15,12 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
-        /*
-         * Running the command `php artisan passport:purge` every day.
-         * This command purge revoked and expired tokens and auth codes...
-         */
-        $schedule->command('passport:purge')->daily();
+        $schedule->command('sanctum:prune-expired --hours=24')->daily();
     }
 
     /**
