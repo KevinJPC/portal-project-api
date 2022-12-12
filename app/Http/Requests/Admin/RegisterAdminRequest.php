@@ -5,6 +5,7 @@ namespace App\Http\Requests\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\IsValidPassword;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Str;
 
 class RegisterAdminRequest extends FormRequest
 {
