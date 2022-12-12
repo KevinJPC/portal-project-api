@@ -117,7 +117,7 @@
     "method": "POST",
     "sortNum": 40000,
     "created": "2022-09-08T22:19:28.544Z",
-    "modified": "2022-12-07T04:47:32.651Z",
+    "modified": "2022-12-12T20:20:06.475Z",
     "headers": [
       {
         "name": "Accept",
@@ -138,7 +138,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"email\": \"kevin@gmail.com\",\n  \"password\": \"Kevin123.\"\n}",
+      "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"Kevin123.\"\n}",
       "form": []
     },
     "tests": [
@@ -485,7 +485,7 @@
     "method": "POST",
     "sortNum": 150000,
     "created": "2022-09-14T17:38:39.635Z",
-    "modified": "2022-11-02T16:00:55.649Z",
+    "modified": "2022-12-12T20:43:05.276Z",
     "headers": [
       {
         "name": "Accept",
@@ -501,7 +501,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"se_oid\": \"PO000009\",\n  \"name\": \"Proceso de prueba no visible PO000009\",\n  \"visible\": 1,\n  \"roles\": [2]\n}",
+      "raw": "{\n  \"se_oid\": \"PO000003\",\n  \"name\": \"Proceso de prueba\",\n  \"visible\": 1,\n  \"roles\": [1,2,3]\n}",
       "form": []
     },
     "auth": {
