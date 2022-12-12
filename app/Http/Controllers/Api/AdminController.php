@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -22,42 +23,27 @@ class AdminController extends Controller
      */
     public function registerAdmin(RegisterAdminRequest $request)
     {
-        try {
-            $role = DB::table('roles')
-                ->select('id')
-                ->where('name_slug', '=', 'admin')
-                ->first();
+        $user = User::create([
+            'name' => $request->name,
+            'first_last_name' => $request->first_last_name,
+            'second_last_name' => $request->second_last_name,
+            'dni' => $request->dni,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'state' => 'A',
+            'is_admin' => true,
+        ]);
 
-            $user = User::create([
-                'name' => $request->name,
-                'first_last_name' => $request->first_last_name,
-                'second_last_name' => $request->second_last_name,
-                'dni' => $request->dni,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'state' => 'A',
-                'role_id' => $role->id,
-            ]);
-
-            return response()->json(
-                [
-                    'success' => true,
-                    'message' => 'Registro exitoso',
-                    'data' => [
-                        'user' => $user,
-                    ],
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Registro exitoso',
+                'data' => [
+                    'user' => $user,
                 ],
-                200,
-            );
-        } catch (\Exception $exception) {
-            return response()->json(
-                [
-                    'success' => false,
-                    'message' => $exception->getMessage(),
-                ],
-                400,
-            );
-        }
+            ],
+            200,
+        );
     }
 
     /**
@@ -70,30 +56,20 @@ class AdminController extends Controller
      */
     public function updateAdmin(User $user, UpdateAdminRequest $request)
     {
-        try {
-            if (User::where('id', $user->id)->exists()) {
-                User::where('id', $user->id)->update([
-                    'name' => $request->name,
-                    'first_last_name' => $request->first_last_name,
-                    'second_last_name' => $request->second_last_name,
-                    'email' => $request->email,
-                ]);
+        if (User::where('id', $user->id)->exists()) {
+            User::where('id', $user->id)->update([
+                'name' => $request->name,
+                'first_last_name' => $request->first_last_name,
+                'second_last_name' => $request->second_last_name,
+                'email' => $request->email,
+            ]);
 
-                return response()->json(
-                    [
-                        'success' => true,
-                        'message' => 'Usuario modificado correctamente',
-                    ],
-                    200,
-                );
-            }
-        } catch (\Exception $exception) {
             return response()->json(
                 [
-                    'success' => false,
-                    'message' => $exception->getMessage(),
+                    'success' => true,
+                    'message' => 'Usuario modificado correctamente',
                 ],
-                400,
+                200,
             );
         }
     }
@@ -105,45 +81,31 @@ class AdminController extends Controller
      */
     public function getActiveAdmins()
     {
-        try {
-            $active_users = DB::table('users')
-                ->select(
-                    'users.id',
-                    'users.name',
-                    'users.dni',
-                    'users.first_last_name',
-                    'users.second_last_name',
-                    'users.email',
-                    'users.created_at',
-                    'users.updated_at',
-                )
-                ->where('users.id', '!=', Auth::user()->id)
-                ->join('roles', function ($join) {
-                    $join
-                        ->on('users.role_id', '=', 'roles.id')
-                        ->where('roles.name_slug', '=', 'admin');
-                })
-                ->where('users.state', '=', 'A')
-                ->paginate(10);
+        $active_users = DB::table('users')
+            ->select(
+                'users.id',
+                'users.name',
+                'users.dni',
+                'users.first_last_name',
+                'users.second_last_name',
+                'users.email',
+                'users.created_at',
+                'users.updated_at',
+            )
+            ->where('users.id', '!=', Auth::user()->id)
+            ->where('is_admin', '=', true)
+            ->where('users.state', '=', 'A')
+            ->paginate(10);
 
-            return response()->json(
-                [
-                    'success' => true,
-                    'data' => [
-                        'active_users' => $active_users,
-                    ],
+        return response()->json(
+            [
+                'success' => true,
+                'data' => [
+                    'active_users' => $active_users,
                 ],
-                200,
-            );
-        } catch (\Exception $exception) {
-            return response()->json(
-                [
-                    'success' => false,
-                    'message' => $exception->getMessage(),
-                ],
-                400,
-            );
-        }
+            ],
+            200,
+        );
     }
 
     /**
@@ -153,44 +115,30 @@ class AdminController extends Controller
      */
     public function getInactiveAdmins()
     {
-        try {
-            $inactive_users = DB::table('users')
-                ->select(
-                    'users.id',
-                    'users.name',
-                    'users.dni',
-                    'users.first_last_name',
-                    'users.second_last_name',
-                    'users.email',
-                    'users.created_at',
-                    'users.updated_at',
-                )
-                ->join('roles', function ($join) {
-                    $join
-                        ->on('users.role_id', '=', 'roles.id')
-                        ->where('roles.name_slug', '=', 'admin');
-                })
-                ->where('users.state', '=', 'I')
-                ->paginate(10);
+        $inactive_users = DB::table('users')
+            ->select(
+                'users.id',
+                'users.name',
+                'users.dni',
+                'users.first_last_name',
+                'users.second_last_name',
+                'users.email',
+                'users.created_at',
+                'users.updated_at',
+            )
+            ->where('users.state', '=', 'I')
+            ->where('is_admin', '=', true)
+            ->paginate(10);
 
-            return response()->json(
-                [
-                    'success' => true,
-                    'data' => [
-                        'inactive_users' => $inactive_users,
-                    ],
+        return response()->json(
+            [
+                'success' => true,
+                'data' => [
+                    'inactive_users' => $inactive_users,
                 ],
-                200,
-            );
-        } catch (\Exception $exception) {
-            return response()->json(
-                [
-                    'success' => false,
-                    'message' => $exception->getMessage(),
-                ],
-                400,
-            );
-        }
+            ],
+            200,
+        );
     }
 
     /**
@@ -202,27 +150,20 @@ class AdminController extends Controller
      */
     public function inactivateAdmin(User $user)
     {
-        try {
-            User::where('id', $user->id)->update([
+        User::where('id', $user->id)
+            ->where('is_admin', true)
+            ->where('state', 'A')
+            ->update([
                 'state' => 'I',
             ]);
 
-            return response(
-                [
-                    'success' => true,
-                    'message' => 'Usuario inactivado correctamente',
-                ],
-                200,
-            );
-        } catch (\Exception $exception) {
-            return response()->json(
-                [
-                    'success' => false,
-                    'message' => $exception->getMessage(),
-                ],
-                400,
-            );
-        }
+        return response(
+            [
+                'success' => true,
+                'message' => 'Usuario inactivado correctamente',
+            ],
+            200,
+        );
     }
 
     /**
@@ -234,72 +175,57 @@ class AdminController extends Controller
      */
     public function activateAdmin(User $user)
     {
-        try {
-            User::where('id', $user->id)->update([
+        User::where('id', $user->id)
+            ->where('is_admin', true)
+            ->where('state', 'I')
+            ->update([
                 'state' => 'A',
             ]);
 
-            return response(
-                [
-                    'success' => true,
-                    'message' => 'Usuario activado correctamente',
-                ],
-                200,
-            );
-        } catch (\Exception $exception) {
-            return response()->json(
-                [
-                    'success' => false,
-                    'message' => $exception->getMessage(),
-                ],
-                400,
-            );
-        }
+        return response(
+            [
+                'success' => true,
+                'message' => 'Usuario activado correctamente',
+            ],
+            200,
+        );
     }
 
+    /**
+     * Search for users with the role of admin, search by name, dni, and email.
+     *
+     * @param request "admin"
+     * @return JSON response
+     */
     public function searchAdmin($request)
     {
-        try {
-            $search_users = DB::table('users')
-                ->select(
-                    'users.id',
-                    'users.name',
-                    'users.dni',
-                    'users.first_last_name',
-                    'users.second_last_name',
-                    'users.email',
-                    'users.created_at',
-                    'users.updated_at',
-                )
-                ->where('users.id', '!=', Auth::user()->id)
-                ->join('roles', function ($join) {
-                    $join
-                        ->on('users.role_id', '=', 'roles.id')
-                        ->where('roles.name_slug', '=', 'admin');
-                })
-                ->where('users.state', '=', 'A')
-                ->where('users.name', 'ILIKE', $request . '%')
-                ->orWhere('users.dni', 'ILIKE', $request . '%')
-                ->orWhere('users.email', 'ILIKE', $request . '%')
-                ->paginate(10);
+        $search_users = DB::table('users')
+            ->select(
+                'users.id',
+                'users.name',
+                'users.dni',
+                'users.first_last_name',
+                'users.second_last_name',
+                'users.email',
+                'users.created_at',
+                'users.updated_at',
+            )
+            ->where('users.id', '!=', Auth::user()->id)
+            ->where('users.is_admin', '=', true)
+            ->where('users.state', '=', 'A')
+            ->where('users.name', 'ILIKE', $request . '%')
+            ->orWhere('users.dni', 'ILIKE', $request . '%')
+            ->orWhere('users.email', 'ILIKE', $request . '%')
+            ->paginate(10);
 
-            return response()->json(
-                [
-                    'success' => true,
-                    'data' => [
-                        'search_users' => $search_users,
-                    ],
+        return response()->json(
+            [
+                'success' => true,
+                'data' => [
+                    'search_users' => $search_users,
                 ],
-                200,
-            );
-        } catch (\Exception $exception) {
-            return response()->json(
-                [
-                    'success' => false,
-                    'message' => $exception->getMessage(),
-                ],
-                400,
-            );
-        }
+            ],
+            200,
+        );
     }
 }

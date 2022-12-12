@@ -17,63 +17,42 @@ class RoleshasProcessesController extends Controller
      */
     public function allRolesHasProcesses()
     {
-        try {
-            $rolehasprocesses = DB::table('roles_has_processes')
-                ->latest()
-                ->paginate(10);
-            return response()->json(
-                [
-                    'rolehasprocesses' => $rolehasprocesses,
-                ],
-                200,
-            );
-        } catch (Exception $exception) {
-            response()->json(
-                [
-                    'success' => false,
-                    'message' => $exception->getMessage(),
-                ],
-                400,
-            );
-        }
+        $rolehasprocesses = DB::table('roles_has_processes')
+            ->latest()
+            ->paginate(10);
+        return response()->json(
+            [
+                'rolehasprocesses' => $rolehasprocesses,
+            ],
+            200,
+        );
     }
 
     /**
-     * I'm trying to create a new row in the table "role_has_processes" for each element in the array
+     * It creates a new rolehasprocesses object and saves it to the database
      *
-     *
-     * @param array
+     * @param array [ids]
      * @param idProcess
      *
-     * @return The response is a JSON object
+     * @return The response is a JSON object with the following structure:
      */
     public function createRolehasProcesses($array, $idProcess)
     {
-        try {
-            for ($i = 0; $i <= count($array); $i++) {
-                $rolehasprocesses = new RolesHasProcess();
-                $rolehasprocesses->role_id = $array[$i];
-                $rolehasprocesses->process_id = $idProcess;
-                $rolehasprocesses->save();
-            }
-
-            return response()->json(
-                [
-                    'success' => true,
-                    'message' => 'Roles creados correctamente',
-                    'data' => ['RoleHasProcesses' => $rolehasprocesses],
-                ],
-                200,
-            );
-        } catch (Exception $exception) {
-            response()->json(
-                [
-                    'success' => false,
-                    'message' => $exception->getMessage(),
-                ],
-                400,
-            );
+        for ($i = 0; $i <= count($array); $i++) {
+            $rolehasprocesses = new RolesHasProcess();
+            $rolehasprocesses->role_id = $array[$i];
+            $rolehasprocesses->process_id = $idProcess;
+            $rolehasprocesses->save();
         }
+
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Roles creados correctamente',
+                'data' => ['RoleHasProcesses' => $rolehasprocesses],
+            ],
+            200,
+        );
     }
 
     /**
@@ -85,66 +64,57 @@ class RoleshasProcessesController extends Controller
      */
     public function getRoleHasProcesses($id)
     {
-        try {
-            $roles = DB::table('roles')
-                ->select('roles.id', 'roles.name')
-                ->join('roles_has_processes', function ($join) {
-                    $join->on('roles.id', '=', 'roles_has_processes.role_id');
-                })
-                ->where('roles_has_processes.process_id', '=', $id)
-                ->get();
+        $roles = DB::table('roles')
+            ->select('roles.id', 'roles.name')
+            ->join('roles_has_processes', function ($join) {
+                $join->on('roles.id', '=', 'roles_has_processes.role_id');
+            })
+            ->where('roles_has_processes.process_id', '=', $id)
+            ->get();
 
-            return $roles;
-        } catch (Exception $exception) {
-        }
+        return $roles;
     }
 
     /**
-     * I have a table called roles_has_processes, which has two columns: role_id and process_id. I want
-     * to compare the values of the column role_id with an array that I receive from the frontend, and
-     * if the values of the array are less than the values of the column, I want to add the values of
-     * the array to the column, and if the values of the array are more than the values of the column, I
-     * want to delete the values of the column that are not in the array
+     * Modify the roles that are linked to the process, they are eliminated
+     * if they were removed or new ones are added
      *
-     * @param array the array of roles that the user has selected
-     * @param idProcess The id of the process
+     * @param array [ids]
+     * @param idProcess
      *
-     * @return a JSON response.
+     * @return JSON response with the data of the rolehasprocesses object.
      */
     public function modifyRolehasProcesses($array, $idProcess)
     {
-        try {
-            
-            $arraynow = DB::table('roles_has_processes')
-            ->where('process_id','=',$idProcess)->groupBy('role_id')
+        $arraynow = DB::table('roles_has_processes')
+            ->where('process_id', '=', $idProcess)
+            ->groupBy('role_id')
             ->pluck('role_id');
-            $arraynow = $arraynow -> toArray();
-            for ($i=0; $i < count($array); $i++) { 
-                if (!in_array($array[$i], $arraynow)) {
-                    $rolehasprocesses = new RolesHasProcess();
-                    $rolehasprocesses->role_id = $array[$i];
-                    $rolehasprocesses->process_id = $idProcess;
-                    $rolehasprocesses->save();
-                }
+        $arraynow = $arraynow->toArray();
+        for ($i = 0; $i < count($array); $i++) {
+            /* Checking if the role_id is in the array of roles that the process has, if it is not,
+             it is adding it to the process. */
+            if (!in_array($array[$i], $arraynow)) {
+                $rolehasprocesses = new RolesHasProcess();
+                $rolehasprocesses->role_id = $array[$i];
+                $rolehasprocesses->process_id = $idProcess;
+                $rolehasprocesses->save();
             }
-            for ($i=0; $i < count($arraynow); $i++) { 
-                if (!in_array($arraynow[$i],$array)) {
-                    RolesHasProcess::where('role_id', $arraynow[$i])->delete();
-                } 
-            }
-                return response()->json([
-                    "success" => true,
-                    "message" => "Roles Modificados correctamente",
-                    "data" => ["RoleHasProcesses" => $rolehasprocesses]
-            ],200);            
-        } catch (Exception $exception) {
-            response()->json(
-                [
-                    'success' => false,
-                    'message' => $exception->getMessage(),
-                ],
-                400,
-            );
         }
+        for ($i = 0; $i < count($arraynow); $i++) {
+            /* Deleting the roles that are in the array that the process has but are not in the
+             array that I have. */
+            if (!in_array($arraynow[$i], $array)) {
+                RolesHasProcess::where('role_id', $arraynow[$i])->delete();
+            }
+        }
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Roles modificados correctamente',
+                'data' => ['RoleHasProcesses' => $rolehasprocesses],
+            ],
+            200,
+        );
     }
 }

@@ -6,17 +6,9 @@ Route::post('/register', [AuthController::class, 'register']);
 
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::middleware('auth:api')->post('/reconnect', [
-    AuthController::class,
-    'reconnect',
-]);
+Route::middleware('auth:sanctum')->group(function () {
+    //Note: Changes route to /user instead /reconnect
+    Route::post('/reconnect', [AuthController::class, 'reconnect']);
 
-Route::middleware('auth:api')->post('/logout', [
-    AuthController::class,
-    'logout',
-]);
-
-//route to test protected routes
-Route::middleware('auth:api')->get('/user', function () {
-    return Auth::user();
+    Route::post('/logout', [AuthController::class, 'logout']);
 });

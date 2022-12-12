@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\SeSuiteController;
 |
 */
 
+// Route::middleware('web')->group(function () {
 Route::prefix('/roles')->group(base_path('routes/api/v1/roleRoutes.php'));
 
 Route::prefix('/roles-has-process')->group(

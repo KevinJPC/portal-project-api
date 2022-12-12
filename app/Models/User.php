@@ -3,7 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Laravel\Passport\HasApiTokens;
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\ResetPasswordNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -30,6 +30,7 @@ class User extends Authenticatable
         'password',
         'role_id',
         'state',
+        'is_admin',
     ];
 
     /**
@@ -37,7 +38,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = ['password', 'remember_token', 'state', 'role_id'];
 
     /**
      * The attributes that should be cast.
@@ -50,10 +51,10 @@ class User extends Authenticatable
 
     public function sendPasswordResetNotification($token)
     {
-        $baseUrl = 'https://spa.test';
+        $baseUrl = env('FRONTEND_URL');
         $url =
             $baseUrl .
-            '/reset-password?token=' .
+            '/restablecer-contrasena/confirmar?token=' .
             $token .
             '&email=' .
             $this->email;

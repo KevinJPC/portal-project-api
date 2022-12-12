@@ -3,7 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\RoleshasProcessesController;
-Route::middleware('auth:api')->group(function () {
+
+Route::middleware(['auth:sanctum', 'restrictTo:admin'])->group(function () {
     Route::post('/register', [
         RoleshasProcessesController::class,
         'createRolehasProcesses',

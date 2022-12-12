@@ -3,23 +3,27 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProcessController;
 
-Route::middleware('auth:api')->get('/visibles', [
+Route::middleware(['auth:sanctum', 'restrictTo:user'])->get('/visibles', [
     ProcessController::class,
     'getVisiblesProcesses',
 ]);
 
-Route::middleware('auth:api')->get('/inactives', [
+Route::middleware(['auth:sanctum', 'restrictTo:user'])->get(
+    '/visibles/{process:name}',
+    [ProcessController::class, 'getSearchVisiblesProcesses'],
+);
+
+Route::middleware(['auth:sanctum', 'restrictTo:admin'])->get('/inactives', [
     ProcessController::class,
     'getInactiveProcesses',
 ]);
 
-Route::middleware('auth:api')->get('/actives', [
+Route::middleware(['auth:sanctum', 'restrictTo:admin'])->get('/actives', [
     ProcessController::class,
     'getActiveProcesses',
 ]);
 
-Route::middleware('auth:api')->group(function () {
-    
+Route::middleware(['auth:sanctum', 'restrictTo:admin'])->group(function () {
     Route::get('/sesuite', [ProcessController::class, 'getSeSuiteProcesses']);
     Route::post('/register', [ProcessController::class, 'registerProcess']);
     Route::get('/{process:id}', [ProcessController::class, 'getProcessById']);
@@ -40,9 +44,5 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/search/{process:name}', [
         ProcessController::class,
         'searchProcess',
-    ]);
-    Route::get('/visibles/{process:name}', [
-        ProcessController::class,
-        'getSearchVisiblesProcesses',
     ]);
 });

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Api\Controller;
 use Illuminate\Support\Facades\Password;
@@ -24,22 +26,28 @@ class PasswordResetController extends Controller
     {
         $status = Password::sendResetLink($request->only('email'));
 
-        if ($status === Password::RESET_LINK_SENT) {
-            return response()->json(
-                [
-                    'success' => true,
-                    'message' => __($status),
-                ],
-                200,
-            );
+        return response()->json(
+            [
+                'success' => true,
+                'message' => __(Password::RESET_LINK_SENT),
+            ],
+            200,
+        );
+    }
+
+    public function validateResetToken(Request $request)
+    {
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user || !Password::tokenExists($user, $request->token)) {
+            abort(410, __(Password::INVALID_TOKEN));
         }
 
         return response()->json(
             [
-                'success' => false,
-                'message' => __($status),
+                'success' => true,
             ],
-            400,
+            200,
         );
     }
 
@@ -70,22 +78,16 @@ class PasswordResetController extends Controller
             },
         );
 
-        if ($status === Password::PASSWORD_RESET) {
-            return response()->json(
-                [
-                    'success' => true,
-                    'message' => __($status),
-                ],
-                200,
-            );
+        if ($status !== Password::PASSWORD_RESET) {
+            abort(410, __(Password::INVALID_TOKEN));
         }
 
         return response()->json(
             [
-                'success' => false,
-                'message' => [__($status)],
+                'success' => true,
+                'message' => __(Password::PASSWORD_RESET),
             ],
-            400,
+            200,
         );
     }
 }
