@@ -8,7 +8,7 @@
     "method": "POST",
     "sortNum": 30000,
     "created": "2022-09-08T17:02:32.795Z",
-    "modified": "2022-10-31T22:42:23.681Z",
+    "modified": "2022-12-12T20:04:02.619Z",
     "headers": [
       {
         "name": "Accept",
@@ -24,7 +24,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Bodega\",\n  \"name_slug\": \"bodega\",\n  \"description\": \"Rol de bodega\"\n}",
+      "raw": "{\n  \"name\": \"Admin\",\n  \"name_slug\": \"admin\",\n  \"description\": \"Rol del Admin\"\n}",
       "form": []
     },
     "auth": {
@@ -76,7 +76,7 @@
     "method": "POST",
     "sortNum": 20000,
     "created": "2022-09-08T18:54:51.258Z",
-    "modified": "2022-11-28T18:01:33.679Z",
+    "modified": "2022-12-12T20:04:34.792Z",
     "headers": [
       {
         "name": "Accept",
@@ -92,7 +92,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Kevin\",\n  \"dni\": \"604680943\",\n  \"first_last_name\": \"Pitti\",\n  \"second_last_name\": \"Castro\",\n  \"email\": \"kevin@gmail.com\",\n  \"password\": \"Kevin123.\",\n  \"password_confirmation\": \"Kevin123.\",\n  \"role_id\": 1\n}",
+      "raw": "{\n  \"name\": \"Jhon\",\n  \"dni\": \"60461890\",\n  \"first_last_name\": \"Pedro\",\n  \"second_last_name\": \"Castro\",\n  \"email\": \"JPC@gmail.com\",\n  \"password\": \"Tony2106.\",\n  \"password_confirmation\": \"Tony2106.\",\n  \"role_id\": 2\n}",
       "form": []
     },
     "auth": {
@@ -117,7 +117,7 @@
     "method": "POST",
     "sortNum": 40000,
     "created": "2022-09-08T22:19:28.544Z",
-    "modified": "2022-12-07T04:47:32.651Z",
+    "modified": "2022-12-12T20:54:38.568Z",
     "headers": [
       {
         "name": "Accept",
@@ -138,7 +138,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"email\": \"kevin@gmail.com\",\n  \"password\": \"Kevin123.\"\n}",
+      "raw": "{\n  \"email\": \"JPC@gmail.com\",\n  \"password\": \"Tony2106.\"\n}",
       "form": []
     },
     "tests": [
@@ -485,7 +485,7 @@
     "method": "POST",
     "sortNum": 150000,
     "created": "2022-09-14T17:38:39.635Z",
-    "modified": "2022-11-02T16:00:55.649Z",
+    "modified": "2022-12-12T20:10:50.658Z",
     "headers": [
       {
         "name": "Accept",
@@ -501,7 +501,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"se_oid\": \"PO000009\",\n  \"name\": \"Proceso de prueba no visible PO000009\",\n  \"visible\": 1,\n  \"roles\": [2]\n}",
+      "raw": "{\n  \"se_oid\": \"PO000003\",\n  \"name\": \"Proceso de prueba visible PO000003\",\n  \"visible\": 1,\n  \"roles\": [2,3]\n}",
       "form": []
     },
     "auth": {
@@ -1003,12 +1003,15 @@
     "method": "GET",
     "sortNum": 330000,
     "created": "2022-10-31T21:38:38.725Z",
-    "modified": "2022-11-01T22:14:54.124Z",
+    "modified": "2022-12-12T21:10:18.138Z",
     "headers": [
       {
         "name": "Accept",
-        "value": "*/*",
-        "isDisabled": true
+        "value": "application/json"
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/json"
       },
       {
         "name": "User-Agent",
@@ -1016,7 +1019,8 @@
         "isDisabled": true
       }
     ],
-    "params": []
+    "params": [],
+    "tests": []
   },
   {
     "_id": "50a8c7c4-c7fa-46ea-9618-0cd929be9bb7",

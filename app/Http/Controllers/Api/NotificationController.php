@@ -74,9 +74,11 @@ class NotificationController extends Controller
         $notifications = [];
         foreach ($se_processes as $key_se => $se_process) {
             $se_process->dsstruct = json_decode($se_process->dsstruct);
+            
             foreach ($user_processes as $key_user => $user_process) {
                 /* Comparing the user's processes from the database with the user's processes from
                  the SE. */
+
                 if (
                     $se_process->idprocess === $user_process->se_oid &&
                     $se_process->dsstruct?->ejecportal
@@ -97,7 +99,7 @@ class NotificationController extends Controller
             [
                 'success' => true,
                 'message' => 'Nueva notificación',
-                'data' => ['notifications' => $notifications],
+                'data' => ['results' =>sizeof($notifications) , 'notifications' => $notifications],
             ],
             200,
         );
