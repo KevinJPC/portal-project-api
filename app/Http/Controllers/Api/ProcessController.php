@@ -256,6 +256,8 @@ class ProcessController extends Controller
             ->whereNotNull('pmactivity.idactivity')
             ->get();
 
+        // dd($sesuite_processes);
+
         $processes_configured = [];
 
         /* Looping through the SE Suite processes */
