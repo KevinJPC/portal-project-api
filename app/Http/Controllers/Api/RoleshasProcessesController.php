@@ -38,18 +38,21 @@ class RoleshasProcessesController extends Controller
      */
     public function createRolehasProcesses($array, $idProcess)
     {
-        for ($i = 0; $i <= count($array); $i++) {
-            $rolehasprocesses = new RolesHasProcess();
-            $rolehasprocesses->role_id = $array[$i];
-            $rolehasprocesses->process_id = $idProcess;
-            $rolehasprocesses->save();
+        $roles = [];
+        foreach ($array as $role_key => $role_id) {
+            $roles[] = [
+                'process_id' => $idProcess,
+                'role_id' => $role_id,
+            ];
         }
+
+        RolesHasProcess::insert($roles);
 
         return response()->json(
             [
                 'success' => true,
                 'message' => 'Roles creados correctamente',
-                'data' => ['RoleHasProcesses' => $rolehasprocesses],
+                'data' => ['RoleHasProcesses' => $roles],
             ],
             200,
         );
