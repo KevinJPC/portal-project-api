@@ -138,7 +138,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"Kevin123.\"\n}",
+      "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"Password123.\"\n}",
       "form": []
     },
     "tests": [
@@ -1073,5 +1073,89 @@
       "type": "bearer",
       "bearer": "{{token}}"
     }
+  },
+  {
+    "_id": "7d6fa6e6-a75c-4c4f-ba2a-34fe72aa20cd",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "57155924-dd15-463b-a596-1e436a9958f0",
+    "name": "activateRole",
+    "url": "http://127.0.0.1:8000/api/v1/roles/4/activate",
+    "method": "PATCH",
+    "sortNum": 350000,
+    "created": "2022-12-13T13:07:46.950Z",
+    "modified": "2022-12-13T13:21:02.213Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "272496a6-d9e1-436e-a2cd-27508dadd3d2",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "57155924-dd15-463b-a596-1e436a9958f0",
+    "name": "inactivateRole",
+    "url": "http://127.0.0.1:8000/api/v1/roles/4/inactivate",
+    "method": "PATCH",
+    "sortNum": 360000,
+    "created": "2022-12-13T13:19:03.311Z",
+    "modified": "2022-12-13T13:20:24.627Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "d5bd0938-7a36-4c6f-92fc-fd9c00af895b",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "57155924-dd15-463b-a596-1e436a9958f0",
+    "name": "getRoleBy ID",
+    "url": "http://127.0.0.1:8000/api/v1/roles/4",
+    "method": "GET",
+    "sortNum": 370000,
+    "created": "2022-12-13T13:21:26.126Z",
+    "modified": "2022-12-13T13:21:51.434Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{token}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "79e2e3c4-1392-4a10-8d21-60ea422f7ac3",
+    "colId": "4088c0eb-b478-4155-a53f-bf11b8c4df42",
+    "containerId": "57155924-dd15-463b-a596-1e436a9958f0",
+    "name": "updateRole",
+    "url": "http://127.0.0.1:8000/api/v1/roles/4",
+    "method": "PATCH",
+    "sortNum": 400000,
+    "created": "2022-12-13T13:22:49.243Z",
+    "modified": "2022-12-13T13:24:58.248Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"General\",\n  \"name_slug\": \"general\",\n  \"description\": \"Rol General\"\n}",
+      "form": []
+    },
+    "tests": []
   }
 ]
