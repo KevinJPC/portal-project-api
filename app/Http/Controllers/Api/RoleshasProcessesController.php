@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use Exception;
-use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use App\Models\Role;
 use App\Models\Process;
 use Illuminate\Support\Arr;
-use App\Models\Role;
 use App\Models\RolesHasProcess;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\RoleHasProceces\RoleHasProcesCreateRequest;
 
 class RoleshasProcessesController extends Controller
@@ -43,6 +44,8 @@ class RoleshasProcessesController extends Controller
             $roles[] = [
                 'process_id' => $idProcess,
                 'role_id' => $role_id,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ];
         }
 
@@ -115,7 +118,7 @@ class RoleshasProcessesController extends Controller
             [
                 'success' => true,
                 'message' => 'Roles modificados correctamente',
-                'data' => ['RoleHasProcesses' => $rolehasprocesses],
+                // 'data' => ['RoleHasProcesses' => $rolehasprocesses],
             ],
             200,
         );
