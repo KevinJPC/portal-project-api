@@ -218,10 +218,10 @@ class UserHasProcessController extends Controller
                 $enabled_activity_order = $struct->nrorder;
             }
         }
-
+        // dd(sizeOf($activities));
         /* Calculating the percentage of advance of the process. */
         $percentage_advance = round(
-            ($enabled_activity_order - 1) / (sizeOf($activities) + 1),
+            ($enabled_activity_order - 1) / sizeOf($activities),
             2,
         );
 
