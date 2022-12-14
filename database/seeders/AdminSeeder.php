@@ -22,7 +22,7 @@ class AdminSeeder extends Seeder
             'dni' => '000000000',
             'first_last_name' => 'Admin',
             'second_last_name' => 'Admin',
-            'email' => 'admin@example.com',
+            'email' => 'admin@gmail.com',
             'password' => Hash::make('Password123.'),
             'state' => 'A',
             'is_admin' => true,
