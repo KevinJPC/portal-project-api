@@ -117,7 +117,7 @@
     "method": "POST",
     "sortNum": 40000,
     "created": "2022-09-08T22:19:28.544Z",
-    "modified": "2022-12-13T13:16:13.071Z",
+    "modified": "2022-12-12T20:20:06.475Z",
     "headers": [
       {
         "name": "Accept",
@@ -485,7 +485,7 @@
     "method": "POST",
     "sortNum": 150000,
     "created": "2022-09-14T17:38:39.635Z",
-    "modified": "2022-12-12T20:10:50.658Z",
+    "modified": "2022-12-12T20:43:05.276Z",
     "headers": [
       {
         "name": "Accept",
@@ -501,7 +501,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"se_oid\": \"PO000003\",\n  \"name\": \"Proceso de prueba visible PO000003\",\n  \"visible\": 1,\n  \"roles\": [2,3]\n}",
+      "raw": "{\n  \"se_oid\": \"PO000003\",\n  \"name\": \"Proceso de prueba\",\n  \"visible\": 1,\n  \"roles\": [1,2,3]\n}",
       "form": []
     },
     "auth": {
