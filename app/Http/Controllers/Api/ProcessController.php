@@ -168,6 +168,7 @@ class ProcessController extends Controller
                     );
             })
             ->where('processes.visible', '=', 1)
+            ->where('processes.state', '=', 'A')
             ->paginate(10);
 
         return response()->json(
